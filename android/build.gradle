@@ -1,6 +1,6 @@
 android {
     namespace "com.mygdx.game"
-    buildToolsVersion "33.0.2"
+    buildToolsVersion "23.0.1"
     compileSdkVersion 33
     sourceSets {
         main {
