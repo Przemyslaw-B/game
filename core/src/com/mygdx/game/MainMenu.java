@@ -37,7 +37,6 @@ public class MainMenu extends ApplicationAdapter{
         //this.playButton = new TextButton("Play", new Skin(), "small");
         //playButton.setSize(200, 60);
         //playButton.setPosition((width/2)-100,height-200);
-
     }
 
 
