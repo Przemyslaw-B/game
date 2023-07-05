@@ -47,19 +47,19 @@ public class Stars {
         int tempHeight = 0;
         int tempWidth = 0;
         for(int i=0; i<starsAmount; i++){
-                int val = rand.nextInt(100);
-                if(val < chance) {
-                    skyMap[i][0] = rand.nextInt(pieceWidth) + tempWidth;    // x location of star
-                    skyMap[i][1] = rand.nextInt(pieceHeight) + tempHeight;  // y location of star
-                } else {
-                    skyMap[i][0] = -1;    // x location of star
-                    skyMap[i][1] = -1;  // y location of star
-                }
-                tempWidth += pieceWidth;
-                if(tempWidth > width){
-                    tempWidth = 0;
-                    tempHeight += pieceHeight;
-                }
+            int val = rand.nextInt(100);
+            if(val < chance) {
+                skyMap[i][0] = rand.nextInt(pieceWidth) + tempWidth;    // x location of star
+                skyMap[i][1] = rand.nextInt(pieceHeight) + tempHeight;  // y location of star
+            } else {
+                skyMap[i][0] = -1;    // x location of star
+                skyMap[i][1] = -1;  // y location of star
+            }
+            tempWidth += pieceWidth;
+            if(tempWidth > width){
+                tempWidth = 0;
+                tempHeight += pieceHeight;
+            }
         }
         return skyMap;
     }

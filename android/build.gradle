@@ -40,7 +40,6 @@ android {
 // so they get packed with the APK.
 tasks.register('copyAndroidNatives') {
     doFirst {
-        file("libs/armeabi-v7a/").mkdirs()
         file("libs/arm64-v8a/").mkdirs()
         file("libs/x86_64/").mkdirs()
         file("libs/x86/").mkdirs()
