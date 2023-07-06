@@ -1,3 +1,4 @@
+/*
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -21,7 +22,7 @@ public class MainMenu extends ApplicationAdapter{
     int height;
     int width;
     int[][] skyMap;
-    Button playButton;
+    TextButton playButton;
     Skin skin;
 
 
@@ -34,7 +35,7 @@ public class MainMenu extends ApplicationAdapter{
         Stars stars = new Stars(width, height);
         this.skyMap = stars.createSkyMap(5);
         //this.skin=new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        //this.playButton = new TextButton("Play", new Skin(), "small");
+        //this.playButton = new TextButton("Play", , "small");
         //playButton.setSize(200, 60);
         //playButton.setPosition((width/2)-100,height-200);
     }
@@ -46,7 +47,9 @@ public class MainMenu extends ApplicationAdapter{
     @Override
     public void render() {
         ScreenUtils.clear(0, 0, 0, 1);  //black background
+
         batch.begin();
+
         for(int i=0; i<skyMap.length; i++){
             batch.draw(star, skyMap[i][0], skyMap[i][1]);
         }
@@ -75,3 +78,5 @@ public class MainMenu extends ApplicationAdapter{
         batch.dispose();
     }
 }
+
+ */

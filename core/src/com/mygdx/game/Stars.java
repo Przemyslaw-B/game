@@ -39,9 +39,9 @@ public class Stars {
         setStarsAmount(amount);
     }
 
-    public int[][] createSkyMap(int density){
+    public float[][] createSkyMap(int density){
         divide(density);
-        int[][] skyMap = new int[starsAmount][2];
+        float[][] skyMap = new float[starsAmount][2];
         int pieceHeight = height/starsLines;
         int pieceWidth = width/rowStarsAmount;
         int tempHeight = 0;
