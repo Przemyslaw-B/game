@@ -38,16 +38,13 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         time += delta;
         game.batch.begin();
-        System.out.println("width: "+width + ", height: "+height);
-        System.out.println("BEFORE");
-        System.out.println("skyMap[i][0]: "+skyMap[20][0] + ", skyMap[i][1]: "+skyMap[20][1]);
         for(int i=0; i<skyMap.length; i++){
             game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-            skyMap[i][0] += positionPerSec*delta;
-            //skyMap[i][1] += positionPerSec*delta;
+            skyMap[i][1] -= positionPerSec*delta;
+            if(skyMap[i][1] <= 0){
+                skyMap[i][1] = height;
+            }
         }
-        System.out.println("AFTER");
-        System.out.println("skyMap[i][0]: "+skyMap[20][0] + ", skyMap[i][1]: "+skyMap[20][1]);
         game.batch.end();
 
         if (Gdx.input.isTouched() && time>1) {

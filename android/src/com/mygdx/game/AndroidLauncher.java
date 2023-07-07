@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;

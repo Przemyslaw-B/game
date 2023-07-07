@@ -39,7 +39,9 @@ public class MainMenuScreen extends Game implements Screen {
         this.skin = new Skin();
         skin.add("play", new Texture("button.png"));
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1000, 600);
+        camera.setToOrtho(false, width, height);
+
+        //camera.setToOrtho(false, 1000, 600);
 
         myTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
         myTextureRegion = new TextureRegion(myTexture);
@@ -48,7 +50,7 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.setWidth(height/5);
         playButton.setHeight(height/5);
 
-        playButton.setPosition(width-(width/10), height/2, Align.center);
+        playButton.setPosition( width/2,height/2, Align.center);
         stage = new Stage(new ScreenViewport()); //Set up a stage for the ui
         stage.addActor(playButton); //Add the button to the stage to perform rendering and take input.
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
@@ -79,7 +81,7 @@ public class MainMenuScreen extends Game implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(star, 0,0,100,100,200,200,1,1,90,0,0,250,250,false,false);
+        game.batch.draw(star, 0,0,100,100,200,200,1,1,0,0,0,250,250,false,false);
         //game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 100);
         //game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.end();
