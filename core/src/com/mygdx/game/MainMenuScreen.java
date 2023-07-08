@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import box2dLight.ChainLight;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -23,30 +22,46 @@ public class MainMenuScreen extends Game implements Screen {
     int height;
     OrthographicCamera camera;
     Texture star;
+    Texture ship;
     Skin skin;
     Stage stage;
     private Texture myTexture;
-    private TextureRegion myTextureRegion;
-    private TextureRegionDrawable myTexRegionDrawable;
+    private TextureRegion shipMyTextureRegion;
+    private TextureRegionDrawable shipMyTexRegionDrawable;
     private ImageButton playButton;
+    private float skyMap[][];
+    private Stars sky;
+    private float time=0f;
+    private float positionPerSec=50f;
+
+    public MainMenuScreen(final Drop game, float skyMap[][]){
+        this.game=game;
+        this.width = Gdx.graphics.getWidth();
+        this.height = Gdx.graphics.getHeight();
+        this.sky = new Stars(width, height);
+        this.skyMap = skyMap;
+        createInterface();
+    }
 
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
-        this.star = new Texture("badlogic.jpg");
-        this.skin = new Skin();
-        skin.add("play", new Texture("button.png"));
+        this.sky = new Stars(width, height);
+        skyMap = sky.createSkyMap(5);
+        createInterface();
+    }
+
+    private void createInterface(){
+        this.star = new Texture("star.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
 
-        //camera.setToOrtho(false, 1000, 600);
-
-        myTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
-        myTextureRegion = new TextureRegion(myTexture);
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        playButton = new ImageButton(myTexRegionDrawable);
+        ship = new Texture(Gdx.files.internal("butYel.png"));
+        shipMyTextureRegion = new TextureRegion(ship);
+        shipMyTexRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
+        playButton = new ImageButton(shipMyTexRegionDrawable);
         playButton.setWidth(height/5);
         playButton.setHeight(height/5);
 
@@ -58,12 +73,11 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, skyMap));
                 dispose();
                 return false;
             }
         });
-
     }
 
 
@@ -76,15 +90,22 @@ public class MainMenuScreen extends Game implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         stage.act(Gdx.graphics.getDeltaTime()); //Perform ui logic
-        stage.draw(); //Draw the ui
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(star, 0,0,100,100,200,200,1,1,0,0,0,250,250,false,false);
-        //game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 100);
-        //game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+        //game.batch.draw(star, 0,0,100,100,200,200,1,1,0,0,0,250,250,false,false);
+
+        for(int i=0; i<skyMap.length; i++){
+            game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
+            skyMap[i][1] -= positionPerSec*delta;
+            if(skyMap[i][1] <= 0){
+                skyMap[i][1] = height;
+            }
+        }
         game.batch.end();
+        stage.draw(); //Draw the ui
+
 
         /*
         if (Gdx.input.isTouched()) {
