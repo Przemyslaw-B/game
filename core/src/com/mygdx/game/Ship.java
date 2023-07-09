@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ship {
     private int health;
+    private int horizontalAccelerate;
+    private int veritcalAccelerate;
     private int bulletType;
     private int bulletAmount;
     private int sideBulletAmount;
@@ -30,8 +32,87 @@ public class Ship {
         this.shipLength = shipMyTextureRegion.getRegionHeight();
         this.shipX = width/2;
         this.shipY = height/2;
+        this.horizontalAccelerate = setDefaultHorizontalAccelerate();    //default accelerate
+        this.veritcalAccelerate = setDefaultVerticalAccelerate();
     }
 
+    private int[] fireFromGuns(float delta){
+
+    return null;    //TODO generowanie pocisków
+    }
+
+
+
+    public void shipControl(int inputX, int inputY, float delta){    //TODO kontrola statku
+        inputY = height-inputY;
+        int differenceX = inputX-shipX;
+        int differenceY = inputY-shipY;
+
+        //moving X
+        if(differenceX > 0){    //move to the right
+            if(differenceX < horizontalAccelerate){
+                this.shipX = inputX;
+            } else{
+                this.shipX += horizontalAccelerate;
+            }
+        } else if(differenceX < 0){ //move to the left
+            if(-1*differenceX < horizontalAccelerate){
+                this.shipX = inputX;
+            } else {
+                this.shipX -= horizontalAccelerate;
+            }
+        } else{ //move straight
+        }
+
+        //moving Y
+        if(differenceY > 0){    //move up
+            if(differenceY < veritcalAccelerate){
+                this.shipY = inputY;
+            } else{
+                this.shipY += veritcalAccelerate;
+            }
+        } else if(differenceY < 0){ //move down
+            if(-differenceY < veritcalAccelerate){
+                this.shipY = inputY;
+            } else {
+                this.shipY -= veritcalAccelerate;
+            }
+        } else{ // stay still
+        }
+
+    }
+    public void setShipHorizontalAccelerate(int accelerate){
+        this.horizontalAccelerate = accelerate;
+    }
+    public int getShipHorizontalAccelerate(){
+        return horizontalAccelerate;
+    }
+
+    public void addShipHorizontalAccelerate(){
+        horizontalAccelerate += 1;
+    }
+
+    private int setDefaultHorizontalAccelerate(){
+        int value = 10;
+        return value;
+    }
+
+    private int setDefaultVerticalAccelerate(){
+        int value = 15;
+        return value;
+    }
+
+    public int getShipVerticalAccelerate(){
+        return veritcalAccelerate;
+    }
+
+    public void setShipVerticalAccelerate(int accelerate){
+        this.veritcalAccelerate = accelerate;
+    }
+
+    public void addShipVerticalAccelerate(){
+        this.veritcalAccelerate+=1;
+    }
     public void setShipX(int x){
         this.shipX=x;
     }

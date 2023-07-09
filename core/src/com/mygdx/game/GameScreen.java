@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.collision.GdxCollisionObjectBridge;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -21,6 +23,7 @@ public class GameScreen implements Screen {
     boolean deadFlag=false;
     private Ship ship;
 
+    private Vector3 touchPoint;
 
 
     public GameScreen(final Drop game, float skyMap[][]) {
@@ -33,7 +36,7 @@ public class GameScreen implements Screen {
         Stars stars = new Stars(width, height);
         this.skyMap = skyMap;
         this.ship=new Ship();
-
+        this.touchPoint = new Vector3();
     }
 
     @Override
@@ -55,8 +58,8 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         time += delta;
 
-        System.out.println("Speed: " + positionPerSec);
-        System.out.println("Position: " + ship.getShipY());
+        //System.out.println("Speed: " + positionPerSec);
+        //System.out.println("Position: " + ship.getShipY());
         game.batch.begin();
         if(exitFlag==true){ //exit to main menu
             for (int i = 0; i < skyMap.length; i++) {
@@ -83,7 +86,7 @@ public class GameScreen implements Screen {
                 moveSky(delta, positionPerSec);
             }
             if(ship.getShipY() >= 0-ship.getShipLength()/2){
-                ship.setShipY(ship.getShipY()-5);
+                ship.setShipY(ship.getShipY()-7);
                 moveSky(delta, positionPerSec);
             }
         } else{
@@ -94,7 +97,13 @@ public class GameScreen implements Screen {
                 moveSky(delta, positionPerSec);
                 //here add level
 
+                //Ship Control
+                if(Gdx.input.isTouched() && ship.isAlive()){
+                    ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
+                }
+                //End of Ship Control
 
+                //level end
             } else if(time <= 2){   //speed up to enter level
                 positionPerSec += 20;
                 for (int i = 0; i < skyMap.length; i++) {
@@ -124,7 +133,8 @@ public class GameScreen implements Screen {
         game.batch.end();
 
             if (Gdx.input.isTouched() && time>0.1) {    //press anywhere to quit level
-                exitFlag = true;
+                touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+                //exitFlag = true;
             }
     }
 
