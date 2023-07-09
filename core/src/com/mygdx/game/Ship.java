@@ -10,7 +10,8 @@ public class Ship {
     private Texture shipTexture;
     public Ship(){
         setHealthAmount(1);
-
+        setBulletAmount(1);
+        setShipTexture("ship.png");
     }
 
     public boolean isAlive(){
@@ -22,6 +23,12 @@ public class Ship {
     }
 
     private void setShipTexture(String shipTextureName){
+        shipTextureName = "ship.png";
+        this.shipTexture = new Texture(shipTextureName);
+    }
+
+    public Texture getShipTexture(){
+        return shipTexture;
     }
 
     private void setHealthAmount(int amount){

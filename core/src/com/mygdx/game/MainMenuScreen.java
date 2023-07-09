@@ -27,7 +27,7 @@ public class MainMenuScreen extends Game implements Screen {
     Stage stage;
     private Texture myTexture;
     private TextureRegion shipMyTextureRegion;
-    private TextureRegionDrawable shipMyTexRegionDrawable;
+    private TextureRegionDrawable shipMyTextureRegionDrawable;
     private ImageButton playButton;
     private float skyMap[][];
     private Stars sky;
@@ -58,10 +58,10 @@ public class MainMenuScreen extends Game implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
 
-        ship = new Texture(Gdx.files.internal("butYel.png"));
+        ship = new Texture(Gdx.files.internal("ship.png"));
         shipMyTextureRegion = new TextureRegion(ship);
-        shipMyTexRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
-        playButton = new ImageButton(shipMyTexRegionDrawable);
+        shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
+        playButton = new ImageButton(shipMyTextureRegionDrawable);
         playButton.setWidth(height/5);
         playButton.setHeight(height/5);
 
