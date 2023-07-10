@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.util.*;
 
 public class Ship {
     private int health;
@@ -21,6 +22,13 @@ public class Ship {
     private int shipX;
     private int shipY;
 
+
+    //TODO bullet do wywalenia z klasy Ship
+    List<List<Integer>> bullets;
+    int bulletX;
+    int bulletY;
+    int bulletAccelerate=30;
+
     public Ship(){
         setHealthAmount(1);
         setBulletAmount(1);
@@ -34,11 +42,16 @@ public class Ship {
         this.shipY = height/2;
         this.horizontalAccelerate = setDefaultHorizontalAccelerate();    //default accelerate
         this.veritcalAccelerate = setDefaultVerticalAccelerate();
+        this.bullets = new ArrayList<List<Integer>>();
     }
 
     private int[] fireFromGuns(float delta){
 
     return null;    //TODO generowanie pocisków
+    }
+
+    public void moveBullet(){
+        this.bulletY += bulletAccelerate;
     }
 
 
@@ -79,7 +92,6 @@ public class Ship {
             }
         } else{ // stay still
         }
-
     }
     public void setShipHorizontalAccelerate(int accelerate){
         this.horizontalAccelerate = accelerate;
