@@ -1,4 +1,5 @@
 package com.mygdx.game;
+import com.mygdx.game.bullets.Bullet;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +8,7 @@ import java.util.*;
 
 public class Ship {
     private int health;
+
     private int horizontalAccelerate;
     private int veritcalAccelerate;
     private int bulletType;
@@ -18,10 +20,10 @@ public class Ship {
     private int height;
     private int shipWidth;
     private int shipLength;
-
     private int shipX;
     private int shipY;
 
+    private Bullet myBullet;
 
     //TODO bullet do wywalenia z klasy Ship
     List<List<Integer>> bullets;
@@ -42,7 +44,7 @@ public class Ship {
         this.shipY = height/2;
         this.horizontalAccelerate = setDefaultHorizontalAccelerate();    //default accelerate
         this.veritcalAccelerate = setDefaultVerticalAccelerate();
-        this.bullets = new ArrayList<List<Integer>>();
+        this.myBullet = new Bullet(shipX+shipLength/2, shipY, 1);
     }
 
     private int[] fireFromGuns(float delta){
