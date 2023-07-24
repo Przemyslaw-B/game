@@ -27,9 +27,10 @@ public class Ship {
 
     //TODO bullet do wywalenia z klasy Ship
     List<List<Integer>> bullets;
-    int bulletX;
-    int bulletY;
-    int bulletAccelerate=30;
+    private int bulletX;
+    private int bulletY;
+    private int bulletAccelerateX=0;
+    private int bulletAccelerateY=30;
 
     public Ship(){
         setHealthAmount(1);
@@ -53,7 +54,16 @@ public class Ship {
     }
 
     public void moveBullet(){
-        this.bulletY += bulletAccelerate;
+        this.bulletX += bulletAccelerateX;
+        this.bulletY += bulletAccelerateY;
+    }
+
+    public int getBulletAccelerateX(){
+        return this.bulletAccelerateX;
+    }
+
+    public int getBulletAccelerateY(){
+        return this.bulletAccelerateY;
     }
 
 

@@ -18,10 +18,9 @@ public class Bullet {
     private int bulletLength;
     private int bulletWidth;
 
-    private TextureRegion bulletTextureRegion;
+    private int id;
 
-    List<List<Integer>> bullets = new ArrayList<List<Integer>>();;
-    List<Integer> bullet = new ArrayList<Integer>();
+    private TextureRegion bulletTextureRegion;
 
     /*
     bullets podwójna lista
@@ -37,6 +36,14 @@ public class Bullet {
         setBulletTexture(id);
     }
 
+    public Bullet(int x, int y, int bulletAccelerateX, int bulletAccelerateY, boolean friendlyFire){
+        this.x=x;
+        this.y = y;
+        this.accelerateX=bulletAccelerateX;
+        this.accelerateY = bulletAccelerateY;
+        this.friendlyFire = friendlyFire;
+    }
+
     private void setFriendlyFire(int id){
         if(id>1){
             this.friendlyFire = true;
@@ -44,6 +51,7 @@ public class Bullet {
             this.friendlyFire = false;
         }
     }
+
 
     public boolean getFriendlyFire(){
         return friendlyFire;
