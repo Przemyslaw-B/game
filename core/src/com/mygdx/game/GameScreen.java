@@ -3,10 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.bullet.collision.GdxCollisionObjectBridge;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
@@ -60,14 +57,12 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         time += delta;
 
-        //System.out.println("Speed: " + positionPerSec);
-        //System.out.println("Position: " + ship.getShipY());
         game.batch.begin();
-        if(exitFlag==true){ //exit to main menu
+        if(exitFlag){ //exit to main menu
             for (int i = 0; i < skyMap.length; i++) {
                 game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
             }
-            if(positionPerSec <= 50 && ship.getShipY() < 0-ship.getShipLength()/2){
+            if(positionPerSec <= 50 && ship.getShipY() < -ship.getShipLength()/2){
                 game.setScreen(new MainMenuScreen(game, skyMap)); //enter menu
                 dispose();
             }
@@ -87,7 +82,7 @@ public class GameScreen implements Screen {
                 }
                 moveSky(delta, positionPerSec);
             }
-            if(ship.getShipY() >= 0-ship.getShipLength()/2){
+            if(ship.getShipY() >= -ship.getShipLength()/2){
                 ship.setShipY(ship.getShipY()-7);
                 moveSky(delta, positionPerSec);
             }

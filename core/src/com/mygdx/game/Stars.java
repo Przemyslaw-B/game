@@ -2,9 +2,9 @@ package com.mygdx.game;
 import java.util.Random;
 
 public class Stars {
-    private int width;
+    private final int width;
     final int rowStarsAmount;
-    private int height;
+    private final int height;
     private int starsAmount;
     private int starsLines;
     Random rand;
