@@ -45,30 +45,9 @@ public class Ship {
         this.shipY = height/2;
         this.horizontalAccelerate = setDefaultHorizontalAccelerate();    //default accelerate
         this.veritcalAccelerate = setDefaultVerticalAccelerate();
-        this.myBullet = new Bullet(shipX+shipLength/2, shipY, 1);
     }
 
-    private int[] fireFromGuns(float delta){
-
-    return null;    //TODO generowanie pocisków
-    }
-
-    public void moveBullet(){
-        this.bulletX += bulletAccelerateX;
-        this.bulletY += bulletAccelerateY;
-    }
-
-    public int getBulletAccelerateX(){
-        return this.bulletAccelerateX;
-    }
-
-    public int getBulletAccelerateY(){
-        return this.bulletAccelerateY;
-    }
-
-
-
-    public void shipControl(int inputX, int inputY, float delta){    //TODO kontrola statku
+    public void shipControl(int inputX, int inputY, float delta){
         inputY = height-inputY;
         int differenceX = inputX-shipX;
         int differenceY = inputY-shipY;

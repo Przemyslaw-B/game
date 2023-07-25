@@ -1,89 +1,106 @@
 package com.mygdx.game.bullets;
 
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Bullet implements Bullets{
 
-public class Bullet {
-
-    private int damage;
-    private int accelerateX;
-    private int accelerateY;
+    private int shipId;
     private int x;
     private int y;
+    private int screenX;
+    private int screenY;
+    private int speedX;
+    private int speedY;
+    private Texture texture;
     private boolean friendlyFire;
-    private Texture bulletTexture;
-    private int bulletLength;
-    private int bulletWidth;
-
-    private int id;
-
-    private TextureRegion bulletTextureRegion;
-
-    /*
-    bullets podwójna lista
-   najpierw lista pocisków
-   druga lista bullet liście bullets
-   bullet (x,y, accelerateX, accelerateY, FriendlyFire, idKtoWystrzelił, String textura);
-     */
 
     public Bullet(int x, int y, int id){
-        this.x=x;
+        setBulletX(x);
+        setBulletY(y);
+        this.shipId = id;
+        this.screenX = Gdx.app.getGraphics().getWidth();
+        this.screenY = Gdx.app.getGraphics().getHeight();
+    }
+    @Override
+    public int getBulletX() {
+        return x;
+    }
+
+    @Override
+    public void setBulletX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public int getBulletY() {
+        return y;
+    }
+
+    @Override
+    public void setBulletY(int y) {
         this.y=y;
-        setFriendlyFire(id);
-        setBulletTexture(id);
     }
 
-    public Bullet(int x, int y, int bulletAccelerateX, int bulletAccelerateY, boolean friendlyFire){
-        this.x=x;
-        this.y = y;
-        this.accelerateX=bulletAccelerateX;
-        this.accelerateY = bulletAccelerateY;
-        this.friendlyFire = friendlyFire;
+    @Override
+    public int getSpeedX() {
+        return speedX;
     }
 
-    private void setFriendlyFire(int id){
-        if(id>1){
-            this.friendlyFire = true;
-        } else{
-            this.friendlyFire = false;
-        }
+    @Override
+    public void setSpeedX(int speedX) {
+        this.speedX=speedX;
     }
 
+    @Override
+    public int getSpeedY() {
+        return speedY;
+    }
 
-    public boolean getFriendlyFire(){
+    @Override
+    public void setSpeedY(int speedY) {
+        this.speedY = speedY;
+    }
+
+    @Override
+    public Texture getBulletTexture() {
+        return texture;
+    }
+
+    @Override
+    public void setBulletTexture(Texture texture) {
+    //TODO wczytywanie textury z bazy
+
+    //this.texture=
+    }
+
+    @Override
+    public void moveBullet() {
+        x += speedX;
+        y += speedY;
+    }
+
+    @Override
+    public boolean getFriendlyFire() {
         return friendlyFire;
     }
 
-    private void setBulletTexture(int id){
-        String bulletTextureName="but.png";
-        this.bulletTexture= new Texture(bulletTextureName);
-        this.bulletTextureRegion = new TextureRegion(bulletTexture);
-        this.bulletWidth = bulletTextureRegion.getRegionWidth();
-        this.bulletLength = bulletTextureRegion.getRegionHeight();
-    } //TODO DODAĆ TEXTURĘ POCISKU
-
-    public Texture getBulletTexture(){
-        return bulletTexture;
+    @Override
+    public void setFriendlyFire(int id) {
+        if(id == 1){
+            this.friendlyFire = false;
+        } else {
+            this.friendlyFire = true;
+        }
     }
 
-    private void setBulletAccelerate(int id){
-        this.accelerateX = 0;
-        this.accelerateY = 20;
-    }
-
-    public void moveBullet(){
-        this.x += accelerateX;
-        this.y += accelerateY;
-    }
-
-    public int getBulletX(){
-        return this.x;
-    }
-
-    public int getBulletY(){
-        return this.y;
+    @Override
+    public boolean isOnScreen() {
+        if(x > screenX || y > screenY){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
