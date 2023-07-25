@@ -3,6 +3,8 @@ package com.mygdx.game.enemies;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.bullets.*;
 
+import java.util.ArrayList;
+
 public interface Enemies {
 
     public void setEnemyId(int id);
@@ -24,5 +26,6 @@ public interface Enemies {
     public void shot(float delta);
     public void setDamage();
     public float getDamage();
+    public ArrayList<Bullet> getBulletArrayList();
 
 }

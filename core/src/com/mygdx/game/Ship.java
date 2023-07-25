@@ -23,15 +23,6 @@ public class Ship {
     private int shipX;
     private int shipY;
 
-    private Bullet myBullet;
-
-    //TODO bullet do wywalenia z klasy Ship
-    List<List<Integer>> bullets;
-    private int bulletX;
-    private int bulletY;
-    private int bulletAccelerateX=0;
-    private int bulletAccelerateY=30;
-
     public Ship(){
         setHealthAmount(1);
         setBulletAmount(1);

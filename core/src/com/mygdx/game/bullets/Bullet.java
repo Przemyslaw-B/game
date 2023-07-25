@@ -20,8 +20,6 @@ public class Bullet implements Bullets{
         setBulletX(x);
         setBulletY(y);
         this.shipId = id;
-        this.screenX = Gdx.app.getGraphics().getWidth();
-        this.screenY = Gdx.app.getGraphics().getHeight();
     }
     @Override
     public int getBulletX() {

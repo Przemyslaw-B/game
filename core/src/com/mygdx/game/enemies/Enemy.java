@@ -1,6 +1,7 @@
 package com.mygdx.game.enemies;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.bullets.*;
 
 import java.util.ArrayList;
@@ -13,16 +14,19 @@ public class Enemy implements Enemies{
     private int speedX;
     private int speedY;
     private Texture texture;
+    private TextureRegion textureRegion;
     private int health;
     private Bullet bullet;
     private float damage;
     private float attackSpeed;
     float time;
+    private static ArrayList<Bullet> bulletsArray;
 
-    private ArrayList<Bullet> bulletsArray;
 
-
-    public Enemy(){
+    public Enemy(int x, int y, int id){
+        this.x = x;
+        this.y=y;
+        this.id = id;
         this.bulletsArray=new ArrayList<Bullet>();
         this.time=0f;
     }
@@ -132,5 +136,10 @@ public class Enemy implements Enemies{
     @Override
     public float getDamage() {
         return damage;
+    }
+
+    @Override
+    public ArrayList<Bullet> getBulletArrayList() {
+        return bulletsArray;
     }
 }

@@ -24,6 +24,7 @@ public class GameScreen implements Screen {
     private Ship ship;
 
     private Vector3 touchPoint;
+    private Combat combat;
 
 
     public GameScreen(final Drop game, float skyMap[][]) {
@@ -36,6 +37,7 @@ public class GameScreen implements Screen {
         Stars stars = new Stars(width, height);
         this.skyMap = skyMap;
         this.ship=new Ship();
+        this.combat = new Combat(ship);
         this.touchPoint = new Vector3();
     }
 
