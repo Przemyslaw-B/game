@@ -65,4 +65,19 @@ public class Combat {
         this.time += delta;
         enemyMove(delta);
     }
+
+    public boolean checkUserCollision(){
+        //TODO sprawdzenie czy statek użytkownika nie zderzył się ze statkiem wroga
+        return false;
+    }
+
+    public boolean checkEnemyHit(){
+        //TODO sprawdzenie czy pocisk przeciwnika trafił statek użytkownika
+        return false;
+    }
+
+    public boolean checkUserBulletHit(){
+        //TODO sprawdzenie czy pocisk gracza trafił jakiś statek przeciwnika
+        return false;
+    }
 }
