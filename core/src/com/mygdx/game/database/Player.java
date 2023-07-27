@@ -8,4 +8,12 @@ public class Player {
     public Player(Connection con){
         this.con=con;
     }
+
+    public int getPlayerHealth(){
+    int health=1;
+    try{
+     String statement = "";
+    }
+    return health;
+    }
 }
