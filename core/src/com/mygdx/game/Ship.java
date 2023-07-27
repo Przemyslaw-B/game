@@ -4,6 +4,8 @@ import com.mygdx.game.bullets.Bullet;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.database.Database;
+
 import java.util.*;
 
 public class Ship {
@@ -22,11 +24,13 @@ public class Ship {
     private int shipLength;
     private int shipX;
     private int shipY;
+    private Database db;
 
-    public Ship(){
+    public Ship(Database db){
         setHealthAmount(1);
         setBulletAmount(1);
         setShipTexture("ship.png");
+        this.db = db;
         this.height = Gdx.app.getGraphics().getHeight(); //user device
         this.width = Gdx.app.getGraphics().getWidth();   //user device
         this.shipMyTextureRegion = new TextureRegion(shipTexture);

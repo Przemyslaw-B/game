@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connect{
-    private Connection con;
+    private static Connection con;
     private Statement  stat;
     private static final String URL = "jdbc:sqlite:game.core.main.core/src.mygdx.game.database.DB";
+    private static final String Driver = "org.sqlite.JDBC";
 
     public Connect(){
         try{
@@ -16,6 +17,10 @@ public class Connect{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Connection getCon(){
+        return con;
     }
 
 

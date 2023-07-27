@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.database.Database;
 
 public class GameScreen implements Screen {
 
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
+    private Database db;
 
 
     public GameScreen(final Drop game, float skyMap[][]) {
@@ -33,7 +35,8 @@ public class GameScreen implements Screen {
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         Stars stars = new Stars(width, height);
         this.skyMap = skyMap;
-        this.ship=new Ship();
+        this.db = new Database();
+        this.ship=new Ship(db);
         this.combat = new Combat(ship);
         this.touchPoint = new Vector3();
     }
