@@ -1,10 +1,15 @@
-package com.mygdx.game;
+package com.mygdx.game.display;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.display.Drop;
+import com.mygdx.game.display.gui.MainMenuScreen;
+import com.mygdx.game.player.Ship;
+import com.mygdx.game.background.Stars;
+import com.mygdx.game.combat.Combat;
 import com.mygdx.game.database.Database;
 
 public class GameScreen implements Screen {
@@ -35,7 +40,8 @@ public class GameScreen implements Screen {
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         Stars stars = new Stars(width, height);
         this.skyMap = skyMap;
-        this.db = new Database();
+        //this.db = new Database();
+        this.db=null;   //TODO TEMPORARRY NULLS
         this.ship=new Ship(db);
         this.combat = new Combat(ship);
         this.touchPoint = new Vector3();

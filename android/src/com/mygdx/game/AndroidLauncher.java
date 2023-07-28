@@ -1,10 +1,10 @@
 package com.mygdx.game;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.mygdx.game.display.Drop;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

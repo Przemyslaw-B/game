@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.background;
 import java.util.Random;
 
 public class Stars {

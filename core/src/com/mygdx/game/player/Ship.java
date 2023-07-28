@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.player;
 import com.mygdx.game.bullets.Bullet;
 
 import com.badlogic.gdx.Gdx;

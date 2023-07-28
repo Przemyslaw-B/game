@@ -11,9 +11,7 @@ public class Player {
 
     public int getPlayerHealth(){
     int health=1;
-    try{
-     String statement = "";
-    }
+
     return health;
     }
 }

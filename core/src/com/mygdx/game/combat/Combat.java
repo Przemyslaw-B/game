@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
 
