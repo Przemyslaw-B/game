@@ -2,10 +2,10 @@ package com.mygdx.game.database;
 
 import java.sql.Connection;
 
-public class Ship {
+public class PlayerShip {
     private Connection con;
 
-    public Ship(Connection con){
+    public PlayerShip(Connection con){
         this.con=con;
     }
 }

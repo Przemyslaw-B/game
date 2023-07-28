@@ -28,8 +28,6 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
-    private Database db;
-
 
     public GameScreen(final Drop game, float skyMap[][]) {
 
@@ -41,8 +39,8 @@ public class GameScreen implements Screen {
         Stars stars = new Stars(width, height);
         this.skyMap = skyMap;
         //this.db = new Database();
-        this.db=null;   //TODO TEMPORARRY NULLS
-        this.ship=new Ship(db);
+        //this.db=null;   //TODO TEMPORARRY NULLS
+        this.ship=new Ship();
         this.combat = new Combat(ship);
         this.touchPoint = new Vector3();
     }
@@ -104,7 +102,7 @@ public class GameScreen implements Screen {
                 //here add level
 
                 //Ship Control
-                if(Gdx.input.isTouched() && ship.isAlive()){
+                if(Gdx.input.isTouched() && ship.statistics.isAlive()){
                     ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
                 }
                 //End of Ship Control
