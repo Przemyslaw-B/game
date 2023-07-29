@@ -2,13 +2,13 @@ package com.mygdx.game.player;
 
 import com.badlogic.gdx.Gdx;
 
-public class Position extends Ship{
+public class Position extends Statistics{
     private static int shipX;
     private static int shipY;
 
     public Position(){  //starting position is in the middle of the screen
-        shipX = Gdx.app.getGraphics().getHeight()/2;
-        shipY = Gdx.app.getGraphics().getWidth()/2;
+        shipX = Gdx.app.getGraphics().getWidth()/2;
+        shipY = Gdx.app.getGraphics().getHeight()/2;
     }
 
     public int getShipPositionX(){
@@ -16,7 +16,7 @@ public class Position extends Ship{
     }
 
     public void setShipPositionX(int shipX){
-        Position.shipX =shipX;
+        this.shipX =shipX;
     }
 
     public int getShipPositionY(){
@@ -24,7 +24,7 @@ public class Position extends Ship{
     }
 
     public void setShipPositionY(int shipY){
-        Position.shipY=shipY;
+        this.shipY=shipY;
     }
 
 }

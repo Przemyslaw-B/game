@@ -108,6 +108,7 @@ public class GameScreen implements Screen {
                 //Ship Control
                 if(Gdx.input.isTouched() && ship.statistics.isAlive()){
                     //ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
+                    System.out.println("Ship is ALIVE!, let's move");
                     ship.movement.shipControl();
                 }
                 //End of Ship Control
@@ -143,7 +144,7 @@ public class GameScreen implements Screen {
             }
         }
         //game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
-        //game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
+        game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
         game.batch.end();
 
             if (Gdx.input.isTouched() && time>0.1) {    //press anywhere to quit level

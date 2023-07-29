@@ -2,12 +2,12 @@ package com.mygdx.game.player;
 
 import com.badlogic.gdx.Gdx;
 
-public class Movement extends Ship{
+public class Movement extends Position{
 
     public Movement(){}
 
     private void moveVertical(int inputY){
-        int differenceY = inputY - Ship.position.getShipPositionY();
+        int differenceY = inputY - getShipPositionY();
         if(differenceY > 0){
             moveForward(inputY, differenceY);    //move forward
         } else if( differenceY < 0){
@@ -17,7 +17,7 @@ public class Movement extends Ship{
     }
 
     private void moveHorizontal(int inputX){
-        int differenceX = inputX - Ship.position.getShipPositionX();
+        int differenceX = inputX - getShipPositionX();
         if(differenceX > 0){
             moveRight(inputX, differenceX);
         } else if(differenceX < 0){
@@ -26,49 +26,50 @@ public class Movement extends Ship{
     }
 
     private void moveForward(int inputY, int differenceY){
-        int positionY = Ship.position.getShipPositionY();   //get current ship position
-        if(differenceY < Ship.statistics.getSpeedForward()){
+        int positionY = getShipPositionY();   //get current ship position
+        if(differenceY < getSpeedForward()){
             positionY = inputY;
         } else {
-            positionY += Ship.statistics.getSpeedForward();     //change position
+            positionY += getSpeedForward();     //change position
         }
-        Ship.position.setShipPositionY(positionY);          //save new position
+        setShipPositionY(positionY);          //save new position
     }
 
     private void moveBackward(int inputY, int differenceY){
-        int positionY=Ship.position.getShipPositionY(); //get current ship position
-        if(differenceY < Ship.statistics.getSpeedForward()){
+        int positionY= getShipPositionY(); //get current ship position
+        if(-differenceY < getSpeedForward()){
             positionY = inputY;
         } else {
-            positionY -= Ship.statistics.getSpeedForward(); //change position
+            positionY -= getSpeedForward(); //change position
         }
-        Ship.position.setShipPositionY(positionY);      //save new position
+        setShipPositionY(positionY);      //save new position
     }
 
     private void moveRight(int inputX, int differenceX){
-        int positionX = Ship.position.getShipPositionX();   //Read current position of player ship
-        if(differenceX < Ship.statistics.getSpeedSideways()){
+        int positionX = getShipPositionX();   //Read current position of player ship
+        if(differenceX < getSpeedSideways()){
             positionX = inputX;
         } else {
-            positionX += Ship.statistics.getSpeedSideways();    //change position
+            positionX += getSpeedSideways();    //change position
         }
-        Ship.position.setShipPositionX(positionX);          //save position
+        setShipPositionX(positionX);          //save position
     }
 
     private void moveLeft(int inputX, int differenceX){
-        int positionX = Ship.position.getShipPositionX();   //Read current position of player ship
-        if(differenceX < Ship.statistics.getSpeedSideways()){
+        int positionX = getShipPositionX();   //Read current position of player ship
+        if(-differenceX < getSpeedSideways()){
             positionX = inputX;
         } else {
-            positionX -= Ship.statistics.getSpeedSideways();    //change position
+            positionX -= getSpeedSideways();    //change position
         }
-        Ship.position.setShipPositionX(positionX);          //save position
+        setShipPositionX(positionX);          //save position
     }
 
     public void shipControl(){
-        //inputY = Gdx.app.getGraphics().getHeight() - inputY;
         int inputX = Gdx.input.getX();
         int inputY = Gdx.input.getY();
+        inputY = Gdx.app.getGraphics().getHeight() - inputY;
+        System.out.println("input x: " +inputX + "input y: " + inputY);
         moveHorizontal(inputX);
         moveVertical(inputY);
     }

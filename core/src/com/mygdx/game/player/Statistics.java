@@ -1,17 +1,17 @@
 package com.mygdx.game.player;
 
-public class Statistics extends Ship{
+public class Statistics extends Skin{
 
-    private int shipWidth;
-    private int shipHeight;
-    private int health;
-    private int speedForward;
-    private int speedSideways;
+    private static int shipWidth;
+    private static int shipHeight;
+    private static int health;
+    private static int speedForward;
+    private static int speedSideways;
 
 
     public Statistics(){
-        shipWidth = Ship.skin.getShipWidth();
-        shipHeight = Ship.skin.getShipHeight();
+        shipWidth = super.getShipWidth();
+        shipHeight = super.getShipHeight();
         speedForward = 10; //default value
         speedSideways = 10; //default value
         health = 1; //default value

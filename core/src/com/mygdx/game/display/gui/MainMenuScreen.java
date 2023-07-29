@@ -22,7 +22,7 @@ import com.mygdx.game.player.*;
 public class MainMenuScreen extends Game implements Screen {
 
     final Drop game;
-    private Ship ship;
+    private static Ship ship;
     int width;
     int height;
     OrthographicCamera camera;
@@ -68,9 +68,9 @@ public class MainMenuScreen extends Game implements Screen {
         shipT = new Texture(Gdx.files.internal("ship.png"));
         shipMyTextureRegion = new TextureRegion(shipT);
         shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
-        playButton = new ImageButton(shipMyTextureRegionDrawable);
+        //playButton = new ImageButton(shipMyTextureRegionDrawable);
         //
-        //playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
+        playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
         playButton.setWidth(height/5);
         playButton.setHeight(height/5);
 

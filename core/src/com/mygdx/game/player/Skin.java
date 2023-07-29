@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class Skin extends Ship{
-    private Texture shipTexture;
-    private TextureRegion shipMyTextureRegion;
-    private TextureRegionDrawable shipMyTextureRegionDrawable;
+public class Skin{
+    private static Texture shipTexture;
+    private static TextureRegion shipMyTextureRegion;
+    private static TextureRegionDrawable shipMyTextureRegionDrawable;
 
     public Skin(){
         shipTexture = new Texture(Gdx.files.internal("ship.png"));
@@ -36,6 +36,7 @@ public class Skin extends Ship{
     public TextureRegionDrawable getShipMyTextureRegionDrawable(){
         return shipMyTextureRegionDrawable;
     }
+
 
 
 }
