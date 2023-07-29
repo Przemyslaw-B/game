@@ -1,7 +1,9 @@
 package com.mygdx.game.background;
-import java.util.Random;
 
+import java.util.Random;
+import com.badlogic.gdx.graphics.Texture;
 public class Stars {
+    private Texture starTexture;
     private final int width;
     final int rowStarsAmount;
     private final int height;
@@ -16,6 +18,16 @@ public class Stars {
         this.rowStarsAmount = 10;
         rand = new Random();
     }
+
+    public Stars(){}
+
+    public void setTexture(Texture starTexture){
+        this.starTexture = starTexture;
+    }
+    public Texture getStarTexture(){
+        return starTexture;
+    }
+
 
     public void setStarsAmount(int starsAmount) {
         if(starsAmount > 0) {
