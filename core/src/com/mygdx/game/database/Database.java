@@ -7,13 +7,13 @@ public class Database {
     private Connect connect;
     protected Player player;
     protected Enemy enemy;
-    protected PlayerShip ship;
+    protected Ship ship;
     public Database(){
         this.connect = new Connect();
         this.con=connect.getCon();
         this.player = new Player(con);
         this.enemy = new Enemy(con);
-        this.ship = new PlayerShip(con);
+        this.ship = new Ship(con);
     }
 
 }

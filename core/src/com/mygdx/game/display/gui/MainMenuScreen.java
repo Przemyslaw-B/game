@@ -17,16 +17,18 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
+import com.mygdx.game.player.*;
 
 public class MainMenuScreen extends Game implements Screen {
 
     final Drop game;
+    private Ship ship;
     int width;
     int height;
     OrthographicCamera camera;
     Texture star;
-    Texture ship;
-    Skin skin;
+    Texture shipT;
+    //Skin skin;
     Stage stage;
     private Texture myTexture;
     private TextureRegion shipMyTextureRegion;
@@ -39,6 +41,7 @@ public class MainMenuScreen extends Game implements Screen {
 
     public MainMenuScreen(final Drop game, float skyMap[][]){
         this.game=game;
+        ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         this.sky = new Stars(width, height);
@@ -49,6 +52,7 @@ public class MainMenuScreen extends Game implements Screen {
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
+        ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         this.sky = new Stars(width, height);
@@ -60,11 +64,13 @@ public class MainMenuScreen extends Game implements Screen {
         this.star = new Texture("star.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
-
-        ship = new Texture(Gdx.files.internal("ship.png"));
-        shipMyTextureRegion = new TextureRegion(ship);
+        //
+        shipT = new Texture(Gdx.files.internal("ship.png"));
+        shipMyTextureRegion = new TextureRegion(shipT);
         shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
         playButton = new ImageButton(shipMyTextureRegionDrawable);
+        //
+        //playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
         playButton.setWidth(height/5);
         playButton.setHeight(height/5);
 
@@ -76,7 +82,7 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                game.setScreen(new GameScreen(game, skyMap));
+                game.setScreen(new GameScreen(game, skyMap, ship));
                 dispose();
                 return false;
             }

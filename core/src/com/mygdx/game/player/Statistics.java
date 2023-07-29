@@ -39,4 +39,12 @@ public class Statistics extends Ship{
     public int getSpeedSideways(){
         return speedSideways;
     }
+
+    public int getShipWidth(){
+        return shipWidth;
+    }
+
+    public int getShipHeight(){
+        return shipHeight;
+    }
 }

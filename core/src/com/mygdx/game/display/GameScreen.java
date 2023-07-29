@@ -29,9 +29,10 @@ public class GameScreen implements Screen {
     private Vector3 touchPoint;
     private Combat combat;
 
-    public GameScreen(final Drop game, float skyMap[][]) {
+    public GameScreen(final Drop game, float skyMap[][], Ship ship) {
 
         this.game=game;
+        this.ship = ship;
         this.time=0f;
         star = new Texture("star.png");
         height = Gdx.app.getGraphics().getHeight(); //height of user device
@@ -40,7 +41,7 @@ public class GameScreen implements Screen {
         this.skyMap = skyMap;
         //this.db = new Database();
         //this.db=null;   //TODO TEMPORARRY NULLS
-        this.ship=new Ship();
+        //this.ship=new Ship();
         this.combat = new Combat(ship);
         this.touchPoint = new Vector3();
     }
@@ -69,7 +70,8 @@ public class GameScreen implements Screen {
             for (int i = 0; i < skyMap.length; i++) {
                 game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
             }
-            if(positionPerSec <= 50 && ship.getShipY() < -ship.getShipLength()/2){
+            if(positionPerSec <= 50 && ship.position.getShipPositionY() < -ship.statistics.getShipHeight()/2){
+            //ship.getShipY() < -ship.getShipLength()/2){
                 game.setScreen(new MainMenuScreen(game, skyMap)); //enter menu
                 dispose();
             }
@@ -89,8 +91,10 @@ public class GameScreen implements Screen {
                 }
                 moveSky(delta, positionPerSec);
             }
-            if(ship.getShipY() >= -ship.getShipLength()/2){
-                ship.setShipY(ship.getShipY()-7);
+            //if(ship.getShipY() >= -ship.getShipLength()/2){
+            if(ship.position.getShipPositionY() >= -ship.statistics.getShipHeight()/2){
+                //ship.setShipY(ship.getShipY()-7);
+                ship.position.setShipPositionY(ship.position.getShipPositionY()-7);
                 moveSky(delta, positionPerSec);
             }
         } else{
@@ -103,7 +107,8 @@ public class GameScreen implements Screen {
 
                 //Ship Control
                 if(Gdx.input.isTouched() && ship.statistics.isAlive()){
-                    ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
+                    //ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
+                    ship.movement.shipControl();
                 }
                 //End of Ship Control
 
@@ -114,8 +119,10 @@ public class GameScreen implements Screen {
                     game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
                 }
                 moveSky(delta, positionPerSec);
-                if(ship.getShipY() + ship.getShipLength()/2 < (height/20)*19){
-                    ship.setShipY(ship.getShipY()+5);
+                //if(ship.getShipY() + ship.getShipLength()/2 < (height/20)*19){
+                if(ship.position.getShipPositionY() + ship.statistics.getShipHeight()/2 < (height/20)*19){
+                    //ship.setShipY(ship.getShipY()+5);
+                    ship.position.setShipPositionY(ship.position.getShipPositionY()+5);
                 }
             } else if(time <3 && time >2) { //hold that speed
                 for (int i = 0; i < skyMap.length; i++) {
@@ -128,12 +135,15 @@ public class GameScreen implements Screen {
                     game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
                 }
                 moveSky(delta, positionPerSec);
-                if(ship.getShipY() - ship.getShipLength()/2 > height/20){
-                    ship.setShipY(ship.getShipY()-10);
+                //if(ship.getShipY() - ship.getShipLength()/2 > height/20){
+                if(ship.position.getShipPositionY() - ship.statistics.getShipHeight()/2 > height/20){
+                    //ship.setShipY(ship.getShipY()-10);
+                    ship.position.setShipPositionY(ship.position.getShipPositionY()-10);
                 }
             }
         }
-        game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
+        //game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
+        //game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
         game.batch.end();
 
             if (Gdx.input.isTouched() && time>0.1) {    //press anywhere to quit level
