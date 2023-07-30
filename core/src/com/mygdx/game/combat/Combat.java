@@ -69,6 +69,7 @@ public class Combat {
     public void drawAllBullets(){
         for(Bullet pickedBullet : bulletsArrayList){
             pickedBullet.drawBullet();
+            System.out.println("Rysuję pocisk!");
         }
     }
 

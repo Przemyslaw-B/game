@@ -69,7 +69,6 @@ public class Movement extends Position{
         int inputX = Gdx.input.getX();
         int inputY = Gdx.input.getY();
         inputY = Gdx.app.getGraphics().getHeight() - inputY;
-        System.out.println("input x: " +inputX + "input y: " + inputY);
         moveHorizontal(inputX);
         moveVertical(inputY);
     }
