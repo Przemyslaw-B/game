@@ -3,14 +3,14 @@ package com.mygdx.game.bullets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.display.Drop;
 
 public class Bullet implements Bullets{
 
     private int shipId;
-    private int x;
-    private int y;
-    private int screenX;
-    private int screenY;
+    private float x;
+    private float y;
+    private float damage;
     private int speedX;
     private int speedY;
     private Texture texture;
@@ -20,9 +20,17 @@ public class Bullet implements Bullets{
         setBulletX(x);
         setBulletY(y);
         this.shipId = id;
+        texture = new Texture("star.png");
+        //TODO na bazie ID z bazy muszą być doczytane inne statystyki
+    }
+    public float getDamage(){
+        return damage;
+    }
+    public void setDamage(float damage){
+        this.damage = damage;
     }
     @Override
-    public int getBulletX() {
+    public float getBulletX() {
         return x;
     }
 
@@ -32,7 +40,7 @@ public class Bullet implements Bullets{
     }
 
     @Override
-    public int getBulletY() {
+    public float getBulletY() {
         return y;
     }
 
@@ -74,9 +82,9 @@ public class Bullet implements Bullets{
     }
 
     @Override
-    public void moveBullet() {
-        x += speedX;
-        y += speedY;
+    public void moveBullet(float delta) {
+        x += speedX*delta;
+        y += speedY*delta;
     }
 
     @Override
@@ -93,12 +101,9 @@ public class Bullet implements Bullets{
         }
     }
 
-    @Override
-    public boolean isOnScreen() {
-        if(x > screenX || y > screenY){
-            return false;
-        } else {
-            return true;
-        }
+    public void drawBullet(){
+        Drop.batch.draw(texture, x, y);
     }
+
+
 }

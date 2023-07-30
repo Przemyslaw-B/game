@@ -17,12 +17,10 @@ public class GameScreen implements Screen {
 
     final Drop game;
 
-    Texture star;
     int height;
     int width;
     float time;
     Background background;
-    float positionPerSec=50f;
     boolean exitFlag=false;
     boolean deadFlag=false;
     private Ship ship;
@@ -35,10 +33,8 @@ public class GameScreen implements Screen {
         this.game=game;
         this.ship = ship;
         this.time=0f;
-        star = new Texture("star.png");
         height = Gdx.app.getGraphics().getHeight(); //height of user device
         width = Gdx.app.getGraphics().getWidth();   //width of user device
-        Stars stars = new Stars(width, height);
         this.background = background;
         //this.db = new Database();
         //this.db=null;   //TODO TEMPORARRY NULLS
@@ -61,6 +57,7 @@ public class GameScreen implements Screen {
         background.draw();
         background.move(delta);
         ship.draw();
+
         if(exitFlag){ //exit to main menu
             /*
             for (int i = 0; i < skyMap.length; i++) {
@@ -98,6 +95,7 @@ public class GameScreen implements Screen {
         }else{
             if(time > 3){   //level here
                 background.setSpeedPerSec(800);
+                combat.tickOfBattle(delta);
                 //here add level
 
                 //Ship Control

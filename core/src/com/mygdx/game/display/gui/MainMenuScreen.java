@@ -27,28 +27,10 @@ public class MainMenuScreen extends Game implements Screen {
     int width;
     int height;
     OrthographicCamera camera;
-    //Texture star;
-    Texture shipT;
     private static Stage stage;
-    private Texture myTexture;
-    private TextureRegion shipMyTextureRegion;
-    private TextureRegionDrawable shipMyTextureRegionDrawable;
     private ImageButton playButton;
-    private float skyMap[][];
-    private Stars sky;
     private Background background;
     private float time=0f;
-    private float positionPerSec=50f;
-
-    public MainMenuScreen(final Drop game, float skyMap[][]){
-        this.game=game;
-        ship = new Ship();
-        this.width = Gdx.graphics.getWidth();
-        this.height = Gdx.graphics.getHeight();
-        this.sky = new Stars(width, height);
-        this.skyMap = skyMap;
-        createInterface();
-    }
 
 
     public MainMenuScreen(final Drop game) {
@@ -57,21 +39,12 @@ public class MainMenuScreen extends Game implements Screen {
         ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
-        this.sky = new Stars(width, height);
-        //skyMap = sky.createSkyMap(5);
         createInterface();
     }
 
     private void createInterface(){
-        //this.star = new Texture("star.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
-        //
-        shipT = new Texture(Gdx.files.internal("ship.png"));
-        shipMyTextureRegion = new TextureRegion(shipT);
-        shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
-        //playButton = new ImageButton(shipMyTextureRegionDrawable);
-        //
         playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
         playButton.setWidth(Ship.skin.getShipWidth());
         playButton.setHeight(Ship.skin.getShipHeight());

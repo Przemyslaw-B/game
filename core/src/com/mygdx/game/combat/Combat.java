@@ -19,6 +19,8 @@ public class Combat {
 
     public Combat(Ship userShip){
         this.enemyArrayList = new ArrayList<Enemy>();
+        this.bulletsArrayList = new ArrayList<Bullet>();
+        this.userShip = userShip;
         this.time=0f;
         this.rand = new Random();
     }
@@ -26,47 +28,78 @@ public class Combat {
     public void spawnEnemy(int enemyId){
         int enemyY = Gdx.app.getGraphics().getHeight();
         int enemyX = rand.nextInt(Gdx.app.getGraphics().getWidth());
-        this.enemy = new Enemy(enemyX, enemyY, enemyId);
+        enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
     }
 
-    public void removeDeadEnemy(Enemy enemyPick){
-        if(!enemyPick.isAlive()){
-            enemyArrayList.remove(enemyPick);
+    public void removeDeadEnemy(){
+        for(int i=enemyArrayList.size()-1; i>=0; i++){
+            if(!enemyArrayList.get(i).isAlive()){
+                enemyArrayList.remove(i);
+            }
+        }
+    }
+
+    public void moveBullet(float delta){
+        for(Bullet pickedBullet : bulletsArrayList){
+            pickedBullet.moveBullet(delta);
         }
     }
 
     public void enemyMove(float delta){
-        int enemiesAmount = enemyArrayList.size();
-        Enemy pickEnemy;
-        if(enemiesAmount > 0) {
-            pickEnemy = enemyArrayList.get(0);
-            enemyBullets(delta, pickEnemy);
-
-            for (int i = 0; i < enemiesAmount; i++) {
-                pickEnemy = enemyArrayList.get(i);
-                if (pickEnemy.isAlive()) {
-                    pickEnemy.getBulletArrayList();
-                } else {
-                    removeDeadEnemy(pickEnemy);
-                }
+        if(enemyArrayList.size() > 0){
+            for(Enemy pickedEnemy : enemyArrayList){
+                //todo podzielić Klase ENEMY na dodatkowo Move
+                int enemyX = pickedEnemy.getX();
+                enemyX += pickedEnemy.getSpeedX();
+                int enemyY = pickedEnemy.getY();
+                enemyY += pickedEnemy.getSpeedY();
+                pickedEnemy.setX(enemyX);
+                pickedEnemy.setY(enemyY);
             }
         }
-
     }
     public void enemyBullets(float delta , Enemy enemy){
-        bulletsArrayList = enemy.getBulletArrayList();
         if(bulletsArrayList.size()>0){
             for (Bullet bullet: bulletsArrayList) {
-                bullet.moveBullet();
+                bullet.moveBullet(delta);
             }
+        }
+    }
+
+    public void drawAllBullets(){
+        for(Bullet pickedBullet : bulletsArrayList){
+            pickedBullet.drawBullet();
         }
     }
 
     public void tickOfBattle(float delta){
         this.time += delta;
         enemyMove(delta);
+        enemyShoot(delta);
+        if(Gdx.input.isTouched()){
+            userShoot(delta);
+        }
+        moveBullet(delta);
+        drawAllBullets();
+        removeDeadEnemy();
     }
 
+    private void enemyShoot(float delta){
+        if(enemyArrayList.size() > 0){
+            for(int i=0; i < enemyArrayList.size(); i++){
+                Enemy enemy = enemyArrayList.get(i);
+                if(enemy.canShoot(delta)){
+                    bulletsArrayList.add(enemy.shot());
+                }
+            }
+        }
+    }
+
+    private void userShoot(float delta){
+        if(userShip.canShoot(delta)){
+            bulletsArrayList.add(userShip.shot());
+        }
+    }
     public boolean checkUserCollision(){
         //TODO sprawdzenie czy statek użytkownika nie zderzył się ze statkiem wroga
         return false;

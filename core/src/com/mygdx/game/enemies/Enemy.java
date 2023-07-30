@@ -19,7 +19,7 @@ public class Enemy implements Enemies{
     private Bullet bullet;
     private float damage;
     private float attackSpeed;
-    float time;
+    private float time;
     private static ArrayList<Bullet> bulletsArray;
 
 
@@ -29,6 +29,7 @@ public class Enemy implements Enemies{
         this.id = id;
         this.bulletsArray=new ArrayList<Bullet>();
         this.time=0f;
+        attackSpeed = 1f;
     }
 
     @Override
@@ -117,14 +118,9 @@ public class Enemy implements Enemies{
     }
 
     @Override
-    public void shot(float delta) {
-        time += delta;
-        float timeTillShot = 1/attackSpeed;
-        if(timeTillShot >= time){
-            this.bullet = new Bullet(x,y, id);
-            bulletsArray.add(bullet);
-            time=0;
-        }
+    public Bullet shot() {
+        Bullet bullet = new Bullet(x,y,id);
+        return  bullet;
     }
 
     @Override
@@ -138,8 +134,11 @@ public class Enemy implements Enemies{
         return damage;
     }
 
-    @Override
-    public ArrayList<Bullet> getBulletArrayList() {
-        return bulletsArray;
+    public boolean canShoot(float delta){
+        time+=delta;
+        if(time >= 1/attackSpeed){
+            return true;
+        }
+        return false;
     }
 }

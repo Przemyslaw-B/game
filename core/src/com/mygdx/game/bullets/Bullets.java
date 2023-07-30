@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public interface Bullets {
 
-   public int getBulletX();
+   public float getBulletX();
    public void setBulletX(int x);
-   public int getBulletY();
+   public float getBulletY();
    public void setBulletY(int y);
    public int getSpeedX();
    public void setSpeedX(int speedX);
@@ -16,11 +16,10 @@ public interface Bullets {
    public Texture getBulletTexture();
    public void setBulletTexture(Texture texture);
 
-   public void  moveBullet();
+   public void moveBullet(float delta);
 
    public boolean getFriendlyFire();
    public void setFriendlyFire(int id);
-   public  boolean isOnScreen();
 
 
 }

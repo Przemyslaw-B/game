@@ -23,9 +23,8 @@ public interface Enemies {
     public boolean isAlive();
     public void setAtackSpeed();
     public float getAttackSpeed();
-    public void shot(float delta);
+    public Bullet shot();
     public void setDamage();
     public float getDamage();
-    public ArrayList<Bullet> getBulletArrayList();
 
 }
