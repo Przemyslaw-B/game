@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
         game.batch.begin();
         background.draw();
         background.move(delta);
+        ship.draw();
         if(exitFlag){ //exit to main menu
             /*
             for (int i = 0; i < skyMap.length; i++) {
@@ -140,7 +141,7 @@ public class GameScreen implements Screen {
         }
         //game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
         //game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
-        ship.draw();
+
         game.batch.end();
 
             if (Gdx.input.isTouched() && time>0.1) {    //press anywhere to quit level
