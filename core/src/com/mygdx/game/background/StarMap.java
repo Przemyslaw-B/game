@@ -2,6 +2,7 @@ package com.mygdx.game.background;
 
 import com.badlogic.gdx.Gdx;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class StarMap {
@@ -11,16 +12,15 @@ public class StarMap {
     private int starsAmount;
     private int chance;
     private Random rand;
-    private Stars star;
     private int defaultRowsAmount;
-    private static int[][] starMap;
+    private static ArrayList<Star> starMap;
     private int pieceHeight;
     private int pieceWidth;
     public StarMap(){
         defaultRowsAmount = 5;    //default value
         columnsAmount = 10; //defaultValue
         chance = 75;
-        star = new Stars();
+        starMap = new ArrayList<Star>();
         createStarMap();
     }
 
@@ -58,15 +58,12 @@ public class StarMap {
         int tempHeight=0;
         int tempWidth=0;
         setStarsAmount();
-        starMap = new int[starsAmount][2];
         for(int i=0; i< starsAmount; i++){
             int val = rand.nextInt(100);
             if(val<chance){
-                starMap[i][0] = rand.nextInt(pieceWidth)+tempWidth;   //    x location of star
-                starMap[i][1] = rand.nextInt(pieceHeight)+tempHeight; //    y location of star
-            } else {
-                starMap[i][0] = -1; // star that will be not displayed
-                starMap[i][1] = -1; // star that will be not displayed
+                int starX = rand.nextInt(pieceWidth)+tempWidth;   //    x location of star
+                int starY = rand.nextInt(pieceHeight)+tempHeight; //    y location of star
+                starMap.add(new Star(starX, starY));    //add new star
             }
             tempWidth += pieceWidth;
             if(tempWidth > Gdx.app.getGraphics().getWidth()){
@@ -76,10 +73,10 @@ public class StarMap {
         }
     }
 
-    public int[][] getStarMap(){
+    public ArrayList<Star> getStarMap(){
         return starMap;
     }
-    public void setStarMap(int[][] starMap){
+    public void setStarMap(ArrayList<Star> starMap){
         this.starMap=starMap;
     }
 
@@ -88,7 +85,7 @@ public class StarMap {
         int beforeX=0;
         int tempWidth=pieceWidth;
         for(int i=0; i<columnsAmount; i++){
-            if(starMap[index][0] < tempWidth){
+            if(starMap.get(i).getX() < tempWidth){
                 starX=beforeX;
             } else {
                 beforeX = tempWidth;
@@ -102,8 +99,8 @@ public class StarMap {
         int starX = findStarX(index);
         for(int i=0; i<=index; i++){
             if(i==index){
-                starMap[i][0] = rand.nextInt(pieceWidth)+starX;
-                starMap[i][1] = rand.nextInt(pieceHeight)+Gdx.app.getGraphics().getHeight();
+                starMap.get(i).setX(rand.nextInt(pieceWidth)+starX);    //set star X
+                starMap.get(i).setY(rand.nextInt(pieceHeight)+Gdx.app.getGraphics().getHeight());   //set star Y
             }
         }
     }
@@ -113,11 +110,10 @@ public class StarMap {
     }
 
     public int getSinglaStarX(int index){
-        return starMap[index][0];
+        return starMap.get(index).getX();
     }
-
     public int getSingleStarY(int index){
-        return starMap[index][1];
+        return starMap.get(index).getY();
     }
 
 
