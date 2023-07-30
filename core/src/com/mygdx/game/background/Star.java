@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 public class Star {
 
     private Texture texture;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
     public Star(int x, int y){
         this.x = x;
@@ -18,17 +18,17 @@ public class Star {
         texture = new Texture("star.png");
     }
 
-    public void setX(int x){
+    public void setX(float x){
         this.x = x;
     }
     public int getX(){
-        return x;
+        return (int)x;
     }
-    public void setY(int y){
+    public void setY(float y){
         this.y = y;
     }
     public int getY(){
-        return y;
+        return (int)y;
     }
     public void setTexture(Texture texture){
         this.texture = texture;

@@ -17,6 +17,7 @@ public class StarMap {
     private int pieceHeight;
     private int pieceWidth;
     public StarMap(){
+        rand = new Random();
         defaultRowsAmount = 5;    //default value
         columnsAmount = 10; //defaultValue
         chance = 75;
@@ -59,6 +60,7 @@ public class StarMap {
         int tempWidth=0;
         setStarsAmount();
         for(int i=0; i< starsAmount; i++){
+            rand=new Random();
             int val = rand.nextInt(100);
             if(val<chance){
                 int starX = rand.nextInt(pieceWidth)+tempWidth;   //    x location of star
@@ -81,28 +83,21 @@ public class StarMap {
     }
 
     private int findStarX(int index){
-        int starX=0;
         int beforeX=0;
+        int starX=beforeX;
         int tempWidth=pieceWidth;
-        for(int i=0; i<columnsAmount; i++){
-            if(starMap.get(i).getX() < tempWidth){
-                starX=beforeX;
-            } else {
-                beforeX = tempWidth;
-                tempWidth+=pieceWidth;
-            }
+        while(starMap.get(index).getX() >= tempWidth){
+            beforeX = tempWidth;
+            starX=beforeX;
+            tempWidth += pieceWidth;
         }
         return starX;
     }
 
     public void renewSingleStar(int index){
         int starX = findStarX(index);
-        for(int i=0; i<=index; i++){
-            if(i==index){
-                starMap.get(i).setX(rand.nextInt(pieceWidth)+starX);    //set star X
-                starMap.get(i).setY(rand.nextInt(pieceHeight)+Gdx.app.getGraphics().getHeight());   //set star Y
-            }
-        }
+        starMap.get(index).setX(rand.nextInt(pieceWidth)+starX);    //set star X
+        starMap.get(index).setY(rand.nextInt(pieceHeight)+Gdx.app.getGraphics().getHeight());   //set star Y
     }
 
     public int getAmountOfStars(){

@@ -1,35 +1,53 @@
 package com.mygdx.game.background;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.display.Drop;
+
+import java.util.ArrayList;
+
 public class Background {
 
-    private int speed;
+    private float speedPerSec;
     private final StarMap starMap;
-    //private static float time;
+    private float time;
+    private float newPosition;
 
-    public Background(){
+    public Background(Drop game){
         starMap = new StarMap();
-        //time = 0f;
+        speedPerSec = 400f;
+        time=0f;
     }
 
-    public void setSpeed(int speed){
-        this.speed = speed;
+    public void setSpeedPerSec(float speedPerSec){
+        this.speedPerSec = speedPerSec;
     }
-    public int getSpeed(){
-        return speed;
+    public float getSpeedPerSec(){
+        return speedPerSec;
     }
 
-    public void move(){
-        int[][] tempMap = starMap.getStarMap();
-        for(int i=0; i<starMap.getAmountOfStars(); i++){
-            if(tempMap[i][1] > 0){
-                tempMap[i][1] += speed;
+    public void move(float delta){
+        ArrayList<Star> tempMap = starMap.getStarMap();
+        for(int i=0; i<tempMap.size()-1; i++){
+            if(tempMap.get(i).getY() > 0){
+                newPosition = tempMap.get(i).getY();
+                newPosition -= speedPerSec*delta;
+                tempMap.get(i).setY(newPosition);
             } else {
                 starMap.renewSingleStar(i);
             }
         }
     }
 
-    //public void draw(){}
+    public void draw(){
+        ArrayList<Star> tempStarMap = starMap.getStarMap();
+        for(int i=0; i<tempStarMap.size()-1; i++){
+            Star star = tempStarMap.get(i);
+            Texture starTexture = star.getTexture();
+            int starX = star.getX();
+            int starY = star.getY();
+            Drop.batch.draw(starTexture, starX, starY);
+        }
+    }
 
 
 }

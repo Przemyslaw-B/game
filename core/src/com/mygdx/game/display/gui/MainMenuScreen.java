@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.background.Background;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
@@ -26,7 +27,7 @@ public class MainMenuScreen extends Game implements Screen {
     int width;
     int height;
     OrthographicCamera camera;
-    Texture star;
+    //Texture star;
     Texture shipT;
     Stage stage;
     private Texture myTexture;
@@ -35,6 +36,7 @@ public class MainMenuScreen extends Game implements Screen {
     private ImageButton playButton;
     private float skyMap[][];
     private Stars sky;
+    private Background background;
     private float time=0f;
     private float positionPerSec=50f;
 
@@ -51,16 +53,17 @@ public class MainMenuScreen extends Game implements Screen {
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
+        background = new Background(game);
         ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         this.sky = new Stars(width, height);
-        skyMap = sky.createSkyMap(5);
+        //skyMap = sky.createSkyMap(5);
         createInterface();
     }
 
     private void createInterface(){
-        this.star = new Texture("star.png");
+        //this.star = new Texture("star.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
         //
@@ -102,8 +105,10 @@ public class MainMenuScreen extends Game implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
+        background.draw();
+        background.move(delta);
         //game.batch.draw(star, 0,0,100,100,200,200,1,1,0,0,0,250,250,false,false);
-
+        /*
         for(int i=0; i<skyMap.length; i++){
             game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
             skyMap[i][1] -= positionPerSec*delta;
@@ -111,6 +116,7 @@ public class MainMenuScreen extends Game implements Screen {
                 skyMap[i][1] = height;
             }
         }
+        */
         game.batch.end();
         stage.draw(); //Draw the ui
 
