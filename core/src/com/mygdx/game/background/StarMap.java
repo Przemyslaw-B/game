@@ -12,7 +12,7 @@ public class StarMap {
     private int starsAmount;
     private int chance;
     private Random rand;
-    private int defaultRowsAmount;
+    private final int defaultRowsAmount;
     private static ArrayList<Star> starMap;
     private int pieceHeight;
     private int pieceWidth;
@@ -21,7 +21,7 @@ public class StarMap {
         defaultRowsAmount = 5;    //default value
         columnsAmount = 10; //defaultValue
         chance = 75;
-        starMap = new ArrayList<Star>();
+        starMap = new ArrayList<>();
         createStarMap();
     }
 
@@ -79,7 +79,7 @@ public class StarMap {
         return starMap;
     }
     public void setStarMap(ArrayList<Star> starMap){
-        this.starMap=starMap;
+        StarMap.starMap =starMap;
     }
 
     private int findStarX(int index){
