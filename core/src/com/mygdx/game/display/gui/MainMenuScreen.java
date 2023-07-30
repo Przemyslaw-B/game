@@ -28,7 +28,6 @@ public class MainMenuScreen extends Game implements Screen {
     OrthographicCamera camera;
     Texture star;
     Texture shipT;
-    //Skin skin;
     Stage stage;
     private Texture myTexture;
     private TextureRegion shipMyTextureRegion;

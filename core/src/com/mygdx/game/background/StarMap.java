@@ -14,7 +14,8 @@ public class StarMap {
     private Stars star;
     private int defaultRowsAmount;
     private static int[][] starMap;
-
+    private int pieceHeight;
+    private int pieceWidth;
     public StarMap(){
         defaultRowsAmount = 5;    //default value
         columnsAmount = 10; //defaultValue
@@ -52,8 +53,8 @@ public class StarMap {
     }
 
     private void generateSky(){
-        int pieceHeight = Gdx.app.getGraphics().getHeight()/rowsAmount;
-        int pieceWIdth = Gdx.app.getGraphics().getWidth()/columnsAmount;
+        pieceHeight = Gdx.app.getGraphics().getHeight()/rowsAmount;
+        pieceWidth = Gdx.app.getGraphics().getWidth()/columnsAmount;
         int tempHeight=0;
         int tempWidth=0;
         setStarsAmount();
@@ -61,13 +62,13 @@ public class StarMap {
         for(int i=0; i< starsAmount; i++){
             int val = rand.nextInt(100);
             if(val<chance){
-                starMap[i][0] = rand.nextInt(pieceWIdth)+tempWidth;   //    x location of star
+                starMap[i][0] = rand.nextInt(pieceWidth)+tempWidth;   //    x location of star
                 starMap[i][1] = rand.nextInt(pieceHeight)+tempHeight; //    y location of star
             } else {
                 starMap[i][0] = -1; // star that will be not displayed
                 starMap[i][1] = -1; // star that will be not displayed
             }
-            tempWidth += pieceWIdth;
+            tempWidth += pieceWidth;
             if(tempWidth > Gdx.app.getGraphics().getWidth()){
                 tempWidth = 0;
                 tempHeight += pieceHeight;
@@ -75,8 +76,36 @@ public class StarMap {
         }
     }
 
-    public int[][] getSkyMap(){
+    public int[][] getStarMap(){
         return starMap;
+    }
+    public void setStarMap(int[][] starMap){
+        this.starMap=starMap;
+    }
+
+    private int findStarX(int index){
+        int starX=0;
+        int beforeX=0;
+        int tempWidth=pieceWidth;
+        for(int i=0; i<columnsAmount; i++){
+            if(starMap[index][0] < tempWidth){
+                starX=beforeX;
+            } else {
+                beforeX = tempWidth;
+                tempWidth+=pieceWidth;
+            }
+        }
+        return starX;
+    }
+
+    public void renewSingleStar(int index){
+        int starX = findStarX(index);
+        for(int i=0; i<=index; i++){
+            if(i==index){
+                starMap[i][0] = rand.nextInt(pieceWidth)+starX;
+                starMap[i][1] = rand.nextInt(pieceHeight)+Gdx.app.getGraphics().getHeight();
+            }
+        }
     }
 
     public int getAmountOfStars(){

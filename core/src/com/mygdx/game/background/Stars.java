@@ -4,9 +4,9 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 public class Stars {
     private Texture starTexture;
-    private final int width;
-    final int rowStarsAmount;
-    private final int height;
+    private  int width;
+    int rowStarsAmount;
+    private int height;
     private int starsAmount;
     private int starsLines;
     Random rand;
