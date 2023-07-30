@@ -13,8 +13,8 @@ public class Combat {
     private Ship userShip;
     private Enemy enemy;
     private Bullet bullet;
-    private ArrayList<Enemy> enemyArrayList;
-    private ArrayList<Bullet>  bulletsArrayList;
+    private static ArrayList<Enemy> enemyArrayList;
+    private static ArrayList<Bullet>  bulletsArrayList;
     private Random rand;
 
     public Combat(Ship userShip){
@@ -40,8 +40,10 @@ public class Combat {
     }
 
     public void moveBullet(float delta){
+        System.out.println("Ilość pocisków na mapie: " + bulletsArrayList.size());
         for(Bullet pickedBullet : bulletsArrayList){
             pickedBullet.moveBullet(delta);
+            System.out.println("Bullet X: " + pickedBullet.getBulletX()  + "Y: "+ pickedBullet.getBulletY() );
         }
     }
 
@@ -74,14 +76,21 @@ public class Combat {
     }
 
     public void tickOfBattle(float delta){
+        //System.out.println("Making tick of a battle!");
         this.time += delta;
+        //System.out.println("Enemy is moving!");
         enemyMove(delta);
+        //System.out.println("Enemy SHOT!");
         enemyShoot(delta);
         if(Gdx.input.isTouched()){
+            //System.out.println("You're time to shoot!");
             userShoot(delta);
         }
+        //System.out.println("Moving all bullets!");
         moveBullet(delta);
+        //System.out.println("Drawing all bullets!");
         drawAllBullets();
+        //System.out.println("Removings dead bodies!");
         removeDeadEnemy();
     }
 
