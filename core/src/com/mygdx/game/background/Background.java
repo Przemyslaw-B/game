@@ -12,7 +12,7 @@ public class Background {
     private float time;
     private float newPosition;
 
-    public Background(Drop game){
+    public Background(){
         starMap = new StarMap();
         speedPerSec = 400f;
         time=0f;

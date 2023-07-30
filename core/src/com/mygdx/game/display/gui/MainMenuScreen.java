@@ -29,7 +29,7 @@ public class MainMenuScreen extends Game implements Screen {
     OrthographicCamera camera;
     //Texture star;
     Texture shipT;
-    Stage stage;
+    private static Stage stage;
     private Texture myTexture;
     private TextureRegion shipMyTextureRegion;
     private TextureRegionDrawable shipMyTextureRegionDrawable;
@@ -53,7 +53,7 @@ public class MainMenuScreen extends Game implements Screen {
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
-        background = new Background(game);
+        background = new Background();
         ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
@@ -73,10 +73,10 @@ public class MainMenuScreen extends Game implements Screen {
         //playButton = new ImageButton(shipMyTextureRegionDrawable);
         //
         playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
-        playButton.setWidth(height/5);
-        playButton.setHeight(height/5);
+        playButton.setWidth(Ship.skin.getShipWidth());
+        playButton.setHeight(Ship.skin.getShipHeight());
 
-        playButton.setPosition( width/2,height/2, Align.center);
+        playButton.setPosition(Ship.position.getShipPositionX()-Ship.skin.getShipWidth(),Ship.position.getShipPositionY()-Ship.skin.getShipHeight(), Align.center);
         stage = new Stage(new ScreenViewport()); //Set up a stage for the ui
         stage.addActor(playButton); //Add the button to the stage to perform rendering and take input.
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
@@ -84,7 +84,7 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                game.setScreen(new GameScreen(game, skyMap, ship));
+                game.setScreen(new GameScreen(game, background, ship));
                 dispose();
                 return false;
             }
@@ -101,33 +101,13 @@ public class MainMenuScreen extends Game implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         stage.act(Gdx.graphics.getDeltaTime()); //Perform ui logic
-
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         background.draw();
         background.move(delta);
-        //game.batch.draw(star, 0,0,100,100,200,200,1,1,0,0,0,250,250,false,false);
-        /*
-        for(int i=0; i<skyMap.length; i++){
-            game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-            skyMap[i][1] -= positionPerSec*delta;
-            if(skyMap[i][1] <= 0){
-                skyMap[i][1] = height;
-            }
-        }
-        */
         game.batch.end();
         stage.draw(); //Draw the ui
-
-
-        /*
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
-            dispose();
-        }
-         */
-
     }
 
     @Override
