@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class Combat {
     private float time;
+    private float shotTimer;
     private Ship userShip;
     private Enemy enemy;
     private Bullet bullet;
@@ -22,6 +23,7 @@ public class Combat {
         this.bulletsArrayList = new ArrayList<Bullet>();
         this.userShip = userShip;
         this.time=0f;
+        this.shotTimer = 0f;
         this.rand = new Random();
     }
 
@@ -78,18 +80,18 @@ public class Combat {
     }
 
     public void tickOfBattle(float delta){
+        shotTimer += delta;
+        time += delta;
         //System.out.println("Making tick of a battle!");
-        this.time += delta;
         //System.out.println("Enemy is moving!");
         //enemyMove(delta);
+        //System.out.println("Moving all bullets!");
+        moveBullet(delta);
         //System.out.println("Enemy SHOT!");
         //enemyShoot(delta);
         if(Gdx.input.isTouched()){
-            System.out.println("You're time to shoot!");
-            userShoot(delta);
+            userShoot();
         }
-        //System.out.println("Moving all bullets!");
-        moveBullet(delta);
         //System.out.println("Drawing all bullets!");
         drawAllBullets();
         //System.out.println("Removings dead bodies!");
@@ -107,8 +109,9 @@ public class Combat {
         }
     }
 
-    private void userShoot(float delta){
-        if(userShip.canShoot(delta)){
+    private void userShoot(){
+        if(userShip.canShoot(shotTimer)){
+            shotTimer = 0;
             Bullet newBullet = userShip.shot();
             bulletsArrayList.add(newBullet);
         }

@@ -17,7 +17,6 @@ public class Ship {
         bullets = new PlayerBullets();
         statistics = new Statistics();
         movement = new Movement();
-        time = 0f;
     }
 
     public void draw(){
@@ -26,10 +25,8 @@ public class Ship {
         Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
     }
 
-    public boolean canShoot(float delta){
-        time+= delta;
-        System.out.println("I need: " + 1/statistics.getAttackSpeed() + " sec to shoot. Now we have: " + time + " sec.");
-        if(time >= 1/statistics.getAttackSpeed()){
+    public boolean canShoot(float shotTimer){
+        if(shotTimer >= 1/statistics.getAttackSpeed()){
             return true;
         }
         return false;
@@ -40,6 +37,7 @@ public class Ship {
         int y = position.getShipPositionY();
         int id = statistics.getPlayerId();
         Bullet bullet = new Bullet(x, y, id);
+        time = 0f;
         return bullet;
     }
 
