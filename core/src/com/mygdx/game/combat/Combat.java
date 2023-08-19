@@ -116,6 +116,16 @@ public class Combat {
             bulletsArrayList.add(newBullet);
         }
     }
+
+    private void removeBullet(){
+        //TODO usunięcie pocisku;
+    }
+
+    public boolean checkBulletInView(){
+        //TODO sprawdzenie czy pocisk nie wyleciał już poza obszar gry
+        return false;
+    }
+
     public boolean checkUserCollision(){
         //TODO sprawdzenie czy statek użytkownika nie zderzył się ze statkiem wroga
         return false;
