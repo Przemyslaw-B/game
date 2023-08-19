@@ -28,7 +28,8 @@ public class Ship {
 
     public boolean canShoot(float delta){
         time+= delta;
-        if(time >= 1f/statistics.getAttackSpeed()){
+        System.out.println("I need: " + 1/statistics.getAttackSpeed() + " sec to shoot. Now we have: " + time + " sec.");
+        if(time >= 1/statistics.getAttackSpeed()){
             return true;
         }
         return false;

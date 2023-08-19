@@ -41,9 +41,11 @@ public class Combat {
 
     public void moveBullet(float delta){
         System.out.println("Ilość pocisków na mapie: " + bulletsArrayList.size());
-        for(Bullet pickedBullet : bulletsArrayList){
-            pickedBullet.moveBullet(delta);
-            System.out.println("Bullet X: " + pickedBullet.getBulletX()  + "Y: "+ pickedBullet.getBulletY() );
+        if(bulletsArrayList.size() > 0) {
+            for (Bullet pickedBullet : bulletsArrayList) {
+                pickedBullet.moveBullet(delta);
+                System.out.println("Bullet X: " + pickedBullet.getBulletX() + "Y: " + pickedBullet.getBulletY());
+            }
         }
     }
 
@@ -79,11 +81,11 @@ public class Combat {
         //System.out.println("Making tick of a battle!");
         this.time += delta;
         //System.out.println("Enemy is moving!");
-        enemyMove(delta);
+        //enemyMove(delta);
         //System.out.println("Enemy SHOT!");
-        enemyShoot(delta);
+        //enemyShoot(delta);
         if(Gdx.input.isTouched()){
-            //System.out.println("You're time to shoot!");
+            System.out.println("You're time to shoot!");
             userShoot(delta);
         }
         //System.out.println("Moving all bullets!");
@@ -91,7 +93,7 @@ public class Combat {
         //System.out.println("Drawing all bullets!");
         drawAllBullets();
         //System.out.println("Removings dead bodies!");
-        removeDeadEnemy();
+        //removeDeadEnemy();
     }
 
     private void enemyShoot(float delta){
@@ -107,7 +109,8 @@ public class Combat {
 
     private void userShoot(float delta){
         if(userShip.canShoot(delta)){
-            bulletsArrayList.add(userShip.shot());
+            Bullet newBullet = userShip.shot();
+            bulletsArrayList.add(newBullet);
         }
     }
     public boolean checkUserCollision(){

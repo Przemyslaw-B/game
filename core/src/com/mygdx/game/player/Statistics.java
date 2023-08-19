@@ -13,10 +13,11 @@ public class Statistics extends Skin{
     public Statistics(){
         shipWidth = super.getShipWidth();
         shipHeight = super.getShipHeight();
+        playerId = 1;
         speedForward = 10; //default value
         speedSideways = 10; //default value
         health = 1; //default value
-        playerId = 1;
+        attackSpeed = 1; //default value
     }
 
     public void setAttackSpeed(float attackSpeed){
