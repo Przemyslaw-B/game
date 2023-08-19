@@ -75,7 +75,7 @@ public class Combat {
     public void drawAllBullets(){
         for(Bullet pickedBullet : bulletsArrayList){
             pickedBullet.drawBullet();
-            System.out.println("Rysuję pocisk!");
+            //System.out.println("Rysuję pocisk!");
         }
     }
 
@@ -92,6 +92,7 @@ public class Combat {
         if(Gdx.input.isTouched()){
             userShoot();
         }
+        removeBulletNotInView();
         //System.out.println("Drawing all bullets!");
         drawAllBullets();
         //System.out.println("Removings dead bodies!");
@@ -117,13 +118,30 @@ public class Combat {
         }
     }
 
-    private void removeBullet(){
-        //TODO usunięcie pocisku;
+    private void removeBulletNotInView(){
+        if(bulletsArrayList.size() > 0){
+            for(int i=bulletsArrayList.size()-1; i>=0; i--){
+                if(!checkBulletInView(bulletsArrayList.get(i))){
+                    bulletsArrayList.remove(i);
+                }
+            }
+        }
     }
 
-    public boolean checkBulletInView(){
-        //TODO sprawdzenie czy pocisk nie wyleciał już poza obszar gry
-        return false;
+     private boolean checkBulletInView(Bullet pickedBullet){
+         if(pickedBullet.getBulletY() < 0){
+             return false;
+         }
+         if(pickedBullet.getBulletY() > Gdx.app.getGraphics().getHeight()){
+             return false;
+         }
+         if(pickedBullet.getBulletX() < 0){
+             return false;
+         }
+         if(pickedBullet.getBulletX() > Gdx.app.getGraphics().getWidth()){
+            return false;
+         }
+        return true;
     }
 
     public boolean checkUserCollision(){
