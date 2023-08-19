@@ -6,7 +6,7 @@ import com.mygdx.game.bullets.*;
 
 import java.util.ArrayList;
 
-public class Enemy implements Enemies{
+public class Enemy  {
 
     private int id;
     private int x;
