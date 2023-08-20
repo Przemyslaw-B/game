@@ -55,12 +55,14 @@ public class Combat {
         if(enemyArrayList.size() > 0){
             for(Enemy pickedEnemy : enemyArrayList){
                 //todo podzielić Klase ENEMY na dodatkowo Move
+                /*
                 int enemyX = pickedEnemy.getX();
                 enemyX += pickedEnemy.getSpeedX();
                 int enemyY = pickedEnemy.getY();
                 enemyY += pickedEnemy.getSpeedY();
                 pickedEnemy.setX(enemyX);
                 pickedEnemy.setY(enemyY);
+                 */
             }
         }
     }

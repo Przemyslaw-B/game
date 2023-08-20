@@ -1,7 +1,8 @@
 package com.mygdx.game.player;
+import com.mygdx.game.interfaces.stats;
 
-public class Statistics extends Skin{
-    private static int playerId;
+public class Statistics extends Skin implements stats {
+    private static int id;
     private static int shipWidth;
     private static int shipHeight;
     private static int health;
@@ -13,7 +14,7 @@ public class Statistics extends Skin{
     public Statistics(){
         shipWidth = super.getShipWidth();
         shipHeight = super.getShipHeight();
-        playerId = 1;
+        id = 1;
         speedForward = 10; //default value
         speedSideways = 10; //default value
         health = 1; //default value
@@ -26,11 +27,11 @@ public class Statistics extends Skin{
     public float getAttackSpeed(){
         return attackSpeed;
     }
-    public void setPlayerId(int playerId){
-        this.playerId = playerId;
+    public void setId(int id){
+        this.id = id;
     }
-    public int getPlayerId(){
-        return playerId;
+    public int getId(){
+        return id;
     }
     public boolean isAlive(){
         if(health>0){

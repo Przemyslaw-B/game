@@ -35,7 +35,7 @@ public class Ship {
     public Bullet shot(){
         int x = position.getShipPositionX();
         int y = position.getShipPositionY();
-        int id = statistics.getPlayerId();
+        int id = statistics.getId();
         Bullet bullet = new Bullet(x, y, id);
         time = 0f;
         return bullet;
