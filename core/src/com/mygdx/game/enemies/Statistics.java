@@ -8,7 +8,7 @@ public class Statistics implements stats {
     private static int shipWidth;
     private static int shipHeight;
     private static int health;
-    private static float attackSpeed;
+    private static float attackSpeed = 0.4f;
     private static int speedForward;
     private static int speedSideways;
 
@@ -23,7 +23,7 @@ public class Statistics implements stats {
 
     @Override
     public float getAttackSpeed() {
-        return 0;
+        return attackSpeed;
     }
 
     @Override

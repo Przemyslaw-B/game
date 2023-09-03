@@ -34,9 +34,11 @@ public class Combat {
     }
 
     public void removeDeadEnemy(){
-        for(int i=enemyArrayList.size()-1; i>=0; i++){
-            if(!enemyArrayList.get(i).isAlive()){
-                enemyArrayList.remove(i);
+        if(enemyArrayList.size() > 0){
+            for(int i=enemyArrayList.size()-1; i>=0; i++){
+                if(!enemyArrayList.get(i).statistics.isAlive()){
+                    enemyArrayList.remove(i);
+                }
             }
         }
     }
@@ -106,7 +108,7 @@ public class Combat {
             for(int i=0; i < enemyArrayList.size(); i++){
                 Enemy enemy = enemyArrayList.get(i);
                 if(enemy.canShoot(delta)){
-                    bulletsArrayList.add(enemy.shot());
+                    bulletsArrayList.add(enemy.shoot());
                 }
             }
         }
