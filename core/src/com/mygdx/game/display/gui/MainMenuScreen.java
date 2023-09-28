@@ -20,6 +20,8 @@ import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.player.*;
 
+import java.io.IOException;
+
 public class MainMenuScreen extends Game implements Screen {
 
     final Drop game;

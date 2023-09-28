@@ -2,16 +2,14 @@ package com.mygdx.game.display;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
-import com.mygdx.game.display.Drop;
-import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.player.Ship;
-import com.mygdx.game.background.Stars;
 import com.mygdx.game.combat.Combat;
-import com.mygdx.game.database.Database;
+import com.mygdx.game.data.Data;
+
+import java.io.IOException;
 
 public class GameScreen implements Screen {
 
@@ -27,6 +25,7 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
+    private Data data;
 
     public GameScreen(final Drop game, Background background, Ship ship) {
 
@@ -36,7 +35,7 @@ public class GameScreen implements Screen {
         height = Gdx.app.getGraphics().getHeight(); //height of user device
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         this.background = background;
-        //this.db = new Database();
+        this.data = new Data();   //TODO change saving all data to files JSON/XML
         //this.db=null;   //TODO TEMPORARRY NULLS
         //this.ship=new Ship();
         this.combat = new Combat(ship);
