@@ -9,24 +9,18 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.player.Statistics;
 
-import java.io.BufferedReader;
-import java.io.File;
-
 public class Data {
     Reading reading;
     Writing writing;
     FileHandle file;
 
-    BufferedReader reader;
-
-
     JsonReader jsonReader;
     JsonValue jsonValue;
 
 
-
     public Data() {
         this.file = Gdx.files.local("data/playerStats.json");
+        this.jsonReader = new JsonReader();
 
         fileCheck(file);
         System.out.println("~~~~~~~~~~~~~~ UTWORZONO NOWY PLIK ~~~~~~~~~~~~~~");
@@ -56,10 +50,6 @@ public class Data {
     public void writeJson(FileHandle file){
         String tekst = "{\"health\":1, \"damage\":5}";
         file.writeString(tekst, false);
-
-    }
-
-    public void setDefault(){
 
     }
 
