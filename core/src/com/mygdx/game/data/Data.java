@@ -13,7 +13,6 @@ public class Data {
     Reading reading;
     Writing writing;
     FileHandle file;
-
     JsonReader jsonReader;
     JsonValue jsonValue;
 
@@ -23,12 +22,12 @@ public class Data {
         this.jsonReader = new JsonReader();
 
         fileCheck(file);
-        System.out.println("~~~~~~~~~~~~~~ UTWORZONO NOWY PLIK ~~~~~~~~~~~~~~");
         fileCheck(file);
         writeJson(file);
 
         this.jsonValue = jsonReader.parse(file);
         readJson(jsonValue);
+        readJson(jsonValue.get("health"));
 
 
     }
@@ -37,6 +36,7 @@ public class Data {
         if(!file.exists()){
             System.out.println("Plik nie istnieje");
             file.write(false);
+            System.out.println("~~~~~~~~~~~~~~ UTWORZONO NOWY PLIK ~~~~~~~~~~~~~~");
         }
         else {
             System.out.println("Plik istnieje!");
