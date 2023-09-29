@@ -10,25 +10,36 @@ import com.mygdx.game.player.Ship;
 import com.mygdx.game.player.Statistics;
 
 public class Data {
-    Reading reading;
-    Writing writing;
+    Reading read;
+    Writing write;
     FileHandle file;
     JsonReader jsonReader;
     JsonValue jsonValue;
 
 
     public Data() {
+        this.write = new Writing();
+        this.read = new Reading();
+
         this.file = Gdx.files.local("data/playerStats.json");
         this.jsonReader = new JsonReader();
 
         fileCheck(file);
         fileCheck(file);
-        writeJson(file);
+        String tekstTEST = "{\n" +
+                "  \"id\": 1,\n" +
+                "  \"health\": 1,\n" +
+                "  \"damage\": 2,\n" +
+                "  \"attackSpeed\": 1,\n" +
+                "  \"speedForward\": 2,\n" +
+                "  \"SpeedSideways\": 2\n" +
+                "}";
+        write.writeJson(file, tekstTEST);
 
         this.jsonValue = jsonReader.parse(file);
-        readJson(jsonValue);
-        readJson(jsonValue.get("health"));
-
+        //readJson(jsonValue);
+        //readJson(jsonValue.get("health"));
+        read.readJson(file);
 
     }
 
@@ -47,11 +58,7 @@ public class Data {
         System.out.println(json);
     }
 
-    public void writeJson(FileHandle file){
-        String tekst = "{\"health\":1, \"damage\":5}";
-        file.writeString(tekst, false);
 
-    }
 
 
 }
