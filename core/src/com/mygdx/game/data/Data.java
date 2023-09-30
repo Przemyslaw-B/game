@@ -34,12 +34,15 @@ public class Data {
                 "  \"speedForward\": 2,\n" +
                 "  \"SpeedSideways\": 2\n" +
                 "}";
-        write.writeJson(file, tekstTEST);
-
-        this.jsonValue = jsonReader.parse(file);
+        //write.writeEntireJson(file, tekstTEST);
+        //System.out.println("BEFORE UPDATE!");
+        read.readJson(file);
+        //write.updateJson(file, "damage", 10);
+       // System.out.println("AFTER UPDATE!");
+        //this.jsonValue = jsonReader.parse(file);
         //readJson(jsonValue);
         //readJson(jsonValue.get("health"));
-        read.readJson(file);
+        //read.readJson(file);
 
     }
 
