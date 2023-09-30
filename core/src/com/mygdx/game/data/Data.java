@@ -10,9 +10,9 @@ import com.mygdx.game.player.Ship;
 import com.mygdx.game.player.Statistics;
 
 public class Data {
-    static Reading read;
-    static Writing write;
-    SetDefault setDefault;
+    public static Reading read;
+    public static Writing write;
+    public static SetDefault setDefault;
     public static final String playerStats = "data/playerStats.json";
     static FileHandle filePlayerStats;
     JsonReader jsonReader;
@@ -30,6 +30,8 @@ public class Data {
         //fileCheck(filePlayerStats);
 
         //write.writeEntireJson(file, tekstTEST);
+        makeFile(filePlayerStats);
+        setDefault.setDefaultPlayerStats();
         System.out.println("BEFORE UPDATE!");
         read.readJson(filePlayerStats);
         write.updateJson(filePlayerStats, "damage", 10);

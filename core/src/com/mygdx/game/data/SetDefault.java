@@ -9,7 +9,7 @@ public class SetDefault {
     JsonReader jsonReader;
     JsonValue jsonValue;
     static FileHandle fileDefault;
-    private String pathPlayerStats = "..\\DefaultStats\\PlayerStats.json";
+    private String pathPlayerStats = "./game/data/DefaultStats/PlayerStats.json";
 
     String tekstTEST = "{\n" +
             "  \"id\": 1,\n" +
@@ -25,9 +25,14 @@ public class SetDefault {
     }
 
      public void setDefaultPlayerStats(){
-         fileDefault = Gdx.files.classpath(pathPlayerStats);
-         jsonValue = jsonReader.parse(fileDefault);
-         Data.write.writeEntireJson(Data.filePlayerStats, jsonValue.toString());
+        if(!Data.fileCheck(Data.filePlayerStats)){
+            Data.makeFile(Data.filePlayerStats);
+        }
+        //TODO ZŁA ŚCIEŻKA DO PLIKU PIERWSZEGO ODCZYTU USTAWIEŃ DOMYŚLNYCH Z PROJEKTU
+        fileDefault = new FileHandle(pathPlayerStats);
+        System.out.println("Czy plik domyślnych statystyk gracza istnieje? - " + Data.fileCheck(fileDefault));
+        jsonValue = jsonReader.parse(fileDefault);
+        Data.write.writeEntireJson(Data.filePlayerStats, jsonValue.toString());
      }
 
 }
