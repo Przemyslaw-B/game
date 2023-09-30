@@ -18,9 +18,26 @@ public class Reading {
 
     public void readJson(JsonValue json){System.out.println(json);}
     public void readJson(FileHandle file){
-        this.jsonValue = jsonReader.parse(file);
+        jsonValue = jsonReader.parse(file);
         System.out.println(jsonValue);
         //System.out.println("Size: " + jsonValue.size());
+    }
+
+    public int getFromFile(FileHandle file, String parameter){
+        int value = 0;
+        jsonValue = jsonReader.parse(file);
+        if(jsonValue.get(parameter).isNumber()){
+            value = jsonValue.getInt(parameter);
+        }
+        return value;
+    }
+
+    public boolean isParameterExist(FileHandle file, String parameter){
+        jsonValue = jsonReader.parse(file);
+        if(jsonValue.has(parameter)){
+            return true;
+        }
+        return false;
     }
 
 

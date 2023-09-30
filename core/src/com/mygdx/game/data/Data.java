@@ -10,9 +10,11 @@ import com.mygdx.game.player.Ship;
 import com.mygdx.game.player.Statistics;
 
 public class Data {
-    Reading read;
-    Writing write;
-    FileHandle file;
+    static Reading read;
+    static Writing write;
+    SetDefault setDefault;
+    public static final String playerStats = "data/playerStats.json";
+    static FileHandle filePlayerStats;
     JsonReader jsonReader;
     JsonValue jsonValue;
 
@@ -20,45 +22,41 @@ public class Data {
     public Data() {
         this.write = new Writing();
         this.read = new Reading();
+        this.setDefault = new SetDefault();
 
-        this.file = Gdx.files.local("data/playerStats.json");
+        this.filePlayerStats = Gdx.files.local(playerStats);
         this.jsonReader = new JsonReader();
 
-        fileCheck(file);
-        fileCheck(file);
-        String tekstTEST = "{\n" +
-                "  \"id\": 1,\n" +
-                "  \"health\": 1,\n" +
-                "  \"damage\": 2,\n" +
-                "  \"attackSpeed\": 1,\n" +
-                "  \"speedForward\": 2,\n" +
-                "  \"SpeedSideways\": 2\n" +
-                "}";
+        //fileCheck(filePlayerStats);
+
         //write.writeEntireJson(file, tekstTEST);
-        //System.out.println("BEFORE UPDATE!");
-        read.readJson(file);
-        //write.updateJson(file, "damage", 10);
-       // System.out.println("AFTER UPDATE!");
+        System.out.println("BEFORE UPDATE!");
+        read.readJson(filePlayerStats);
+        write.updateJson(filePlayerStats, "damage", 10);
+        System.out.println("AFTER UPDATE!");
+        read.readJson(filePlayerStats);
         //this.jsonValue = jsonReader.parse(file);
         //readJson(jsonValue);
         //readJson(jsonValue.get("health"));
-        //read.readJson(file);
+        System.out.println("AFTER SETTING DEFAULT!");
+        setDefault.setDefaultPlayerStats();
+        read.readJson(filePlayerStats);
 
     }
 
-    public void fileCheck(FileHandle file){
+    public static boolean fileCheck(FileHandle file){
+        if(file.exists()){
+            return true;
+        }
+        return false;
+    }
+
+    public static void makeFile(FileHandle file){
         if(!file.exists()){
-            System.out.println("Plik nie istnieje");
             file.write(false);
-            System.out.println("~~~~~~~~~~~~~~ UTWORZONO NOWY PLIK ~~~~~~~~~~~~~~");
+        } else {
+            System.out.println("PLIK JUŻ ISTNIEJE!");
         }
-        else {
-            System.out.println("Plik istnieje!");
-        }
-    }
-
-    public void readJson(JsonValue json){
-        System.out.println(json);
     }
 
 

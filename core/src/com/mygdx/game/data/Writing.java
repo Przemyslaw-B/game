@@ -11,19 +11,28 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Writing {
-    JsonWriter jsonWriter;
-    JsonReader  jsonReader;
 
     public Writing(){
-        this.jsonReader = new JsonReader();
+
     }
 
     public void writeEntireJson(FileHandle file, String tekst){
-        file.writeString(tekst, false);
+        if(Data.fileCheck(file)){
+            file.writeString(tekst, false);
+        } else{
+            Data.makeFile(file);
+            file.writeString(tekst, false);
+        }
+
     }
 
     public void updateJson(FileHandle file, String nazwa, int newValue){   //MOŻNA ZMIENIAĆ TYLKO WARTOŚCI INT
+        JsonReader jsonReader = new JsonReader();
         JsonValue jsonValue = jsonReader.parse(file);
+
+        if(!Data.fileCheck(file)){
+            Data.makeFile(file);
+        }
         if(jsonValue.has(nazwa)){
 
             HashMap <String, Integer> lista = new HashMap<>();
