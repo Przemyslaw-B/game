@@ -27,14 +27,12 @@ public class Writing {
     }
 
     public void updateJson(FileHandle file, String nazwa, int newValue){   //MOŻNA ZMIENIAĆ TYLKO WARTOŚCI INT
-        JsonReader jsonReader = new JsonReader();
-        JsonValue jsonValue = jsonReader.parse(file);
-
         if(!Data.fileCheck(file)){
             Data.makeFile(file);
         }
+        JsonReader jsonReader = new JsonReader();
+        JsonValue jsonValue = jsonReader.parse(file);
         if(jsonValue.has(nazwa)){
-
             HashMap <String, Integer> lista = new HashMap<>();
             for(int i=0; i < jsonValue.size(); i++){
                 lista.put(jsonValue.get(i).name(), jsonValue.getInt(i));

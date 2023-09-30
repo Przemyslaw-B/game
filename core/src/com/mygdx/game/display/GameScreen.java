@@ -35,7 +35,6 @@ public class GameScreen implements Screen {
         height = Gdx.app.getGraphics().getHeight(); //height of user device
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         this.background = background;
-        this.data = new Data();   //TODO change saving all data to files JSON/XML
         //this.db=null;   //TODO TEMPORARRY NULLS
         //this.ship=new Ship();
         this.combat = new Combat(ship);

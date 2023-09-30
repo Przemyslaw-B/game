@@ -30,20 +30,19 @@ public class Data {
         //fileCheck(filePlayerStats);
 
         //write.writeEntireJson(file, tekstTEST);
-        makeFile(filePlayerStats);
-        setDefault.setDefaultPlayerStats();
+        //makeFile(filePlayerStats);
+        //setDefault.setDefaultPlayerStats();
         System.out.println("BEFORE UPDATE!");
         read.readJson(filePlayerStats);
-        write.updateJson(filePlayerStats, "damage", 10);
+        //write.updateJson(filePlayerStats, "damage", 1);
         System.out.println("AFTER UPDATE!");
         read.readJson(filePlayerStats);
         //this.jsonValue = jsonReader.parse(file);
         //readJson(jsonValue);
         //readJson(jsonValue.get("health"));
-        System.out.println("AFTER SETTING DEFAULT!");
+        //System.out.println("AFTER SETTING DEFAULT!");
         setDefault.setDefaultPlayerStats();
-        read.readJson(filePlayerStats);
-
+        //read.readJson(filePlayerStats);
     }
 
     public static boolean fileCheck(FileHandle file){

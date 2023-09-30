@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.background.Background;
+import com.mygdx.game.data.Data;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
@@ -25,6 +26,7 @@ import java.io.IOException;
 public class MainMenuScreen extends Game implements Screen {
 
     final Drop game;
+    private Data data;
     private static Ship ship;
     int width;
     int height;
@@ -38,6 +40,7 @@ public class MainMenuScreen extends Game implements Screen {
     public MainMenuScreen(final Drop game) {
         this.game=game;
         background = new Background();
+        this.data = new Data();
         ship = new Ship();
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();

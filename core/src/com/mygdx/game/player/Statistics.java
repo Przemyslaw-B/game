@@ -16,7 +16,7 @@ public class Statistics extends Skin implements stats {
     public Statistics(){
         shipWidth = super.getShipWidth();
         shipHeight = super.getShipHeight();
-        //loadDefaultStatistics();
+        loadDefaultStatistics();
         //id = 1;
         //speedForward = 10; //default value
         //speedSideways = 10; //default value
