@@ -30,6 +30,9 @@ public class Combat {
     public void spawnEnemy(int enemyId){
         int enemyY = Gdx.app.getGraphics().getHeight();
         int enemyX = rand.nextInt(Gdx.app.getGraphics().getWidth());
+        //TODO DO TESTOW WARTOSCI NA STALE
+        enemyX=500;
+        enemyY=500;
         enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
     }
 
@@ -83,9 +86,16 @@ public class Combat {
         }
     }
 
+    public void drawAllEnemies(){
+        for(Enemy pickedEnemy: enemyArrayList){
+            pickedEnemy.draw();
+        }
+    }
+
     public void tickOfBattle(float delta){
         shotTimer += delta;
         time += delta;
+
         //System.out.println("Making tick of a battle!");
         //System.out.println("Enemy is moving!");
         //enemyMove(delta);
@@ -98,7 +108,10 @@ public class Combat {
         }
         removeBulletNotInView();
         //System.out.println("Drawing all bullets!");
+        enemyShoot(delta);  //strzelanie przeciwników
+        drawAllEnemies();
         drawAllBullets();
+        userShip.draw();
         //System.out.println("Removings dead bodies!");
         //removeDeadEnemy();
     }

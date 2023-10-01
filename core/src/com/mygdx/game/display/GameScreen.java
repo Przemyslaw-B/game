@@ -7,9 +7,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.combat.Combat;
-import com.mygdx.game.data.Data;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GameScreen implements Screen {
 
@@ -25,20 +25,23 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
-    private Data data;
-
+    //Enemy enemy;
+    //ArrayList<Enemy> enemyList;
     public GameScreen(final Drop game, Background background, Ship ship) {
-
         this.game=game;
         this.ship = ship;
         this.time=0f;
         height = Gdx.app.getGraphics().getHeight(); //height of user device
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         this.background = background;
-        //this.db=null;   //TODO TEMPORARRY NULLS
         //this.ship=new Ship();
         this.combat = new Combat(ship);
+        //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();
+
+        //DO TESTÓW JEDEN WRÓG
+        //enemyList.add(new Enemy(500, 500, 2));
+        combat.spawnEnemy(2);
     }
 
     @Override
@@ -54,7 +57,8 @@ public class GameScreen implements Screen {
         game.batch.begin();
         background.draw();
         background.move(delta);
-        ship.draw();
+
+
 
         if(exitFlag){ //exit to main menu
             /*
@@ -91,9 +95,10 @@ public class GameScreen implements Screen {
         */
 
         }else{
-            if(time > 3){   //level here
+            if(time > 1){   //level here
                 background.setSpeedPerSec(800);
                 combat.tickOfBattle(delta);
+                //ship.draw();
                 //here add level
 
                 //Ship Control
@@ -105,7 +110,8 @@ public class GameScreen implements Screen {
                 //End of Ship Control
 
                 //level end
-            } /* else if(time <= 2){   //speed up to enter level
+            } else {ship.draw();} //TODO - DO TESTÓW WYŚWIETLANIA!!!
+            /* else if(time <= 2){   //speed up to enter level
                 positionPerSec += 20;
                 for (int i = 0; i < skyMap.length; i++) {
                     game.batch.draw(star, skyMap[i][0], skyMap[i][1]);

@@ -15,7 +15,9 @@ public class Data {
     public static Create create;
     public static SetDefault setDefault;
     public static final String playerStats = "data/playerStats.json";
+    public static final String enemyStats = "data/enemyStats.json";
     static FileHandle filePlayerStats;
+    static FileHandle fileEnemyStats;
     JsonReader jsonReader;
     JsonValue jsonValue;
 
@@ -26,8 +28,10 @@ public class Data {
         this.read = new Reading();
         this.setDefault = new SetDefault();
         this.filePlayerStats = Gdx.files.local(playerStats);
+        this.fileEnemyStats = Gdx.files.local(enemyStats);
         this.jsonReader = new JsonReader();
         setDefault.setDefaultPlayerStats();
+        setDefault.setDefaultEnemyStat();
         read.readJson(filePlayerStats);
         //write.updateJson(filePlayerStats, "damage", 1);
         //System.out.println("AFTER UPDATE!");
