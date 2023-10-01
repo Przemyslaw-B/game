@@ -17,18 +17,18 @@ public class Writing {
     }
 
     public void writeEntireJson(FileHandle file, String tekst){
-        if(Data.fileCheck(file)){
+        if(Data.create.fileCheck(file)){
             file.writeString(tekst, false);
         } else{
-            Data.makeFile(file);
+            Data.create.makeFile(file);
             file.writeString(tekst, false);
         }
 
     }
 
     public void updateJson(FileHandle file, String nazwa, int newValue){   //MOŻNA ZMIENIAĆ TYLKO WARTOŚCI INT
-        if(!Data.fileCheck(file)){
-            Data.makeFile(file);
+        if(!Data.create.fileCheck(file)){
+            Data.create.makeFile(file);
         }
         JsonReader jsonReader = new JsonReader();
         JsonValue jsonValue = jsonReader.parse(file);

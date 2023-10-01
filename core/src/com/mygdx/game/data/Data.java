@@ -12,6 +12,7 @@ import com.mygdx.game.player.Statistics;
 public class Data {
     public static Reading read;
     public static Writing write;
+    public static Create create;
     public static SetDefault setDefault;
     public static final String playerStats = "data/playerStats.json";
     static FileHandle filePlayerStats;
@@ -20,45 +21,26 @@ public class Data {
 
 
     public Data() {
+        this.create = new Create();
         this.write = new Writing();
         this.read = new Reading();
         this.setDefault = new SetDefault();
-
         this.filePlayerStats = Gdx.files.local(playerStats);
         this.jsonReader = new JsonReader();
-
-        //fileCheck(filePlayerStats);
-
-        //write.writeEntireJson(file, tekstTEST);
-        //makeFile(filePlayerStats);
-        //setDefault.setDefaultPlayerStats();
-        System.out.println("BEFORE UPDATE!");
+        setDefault.setDefaultPlayerStats();
         read.readJson(filePlayerStats);
         //write.updateJson(filePlayerStats, "damage", 1);
-        System.out.println("AFTER UPDATE!");
-        read.readJson(filePlayerStats);
+        //System.out.println("AFTER UPDATE!");
+        //read.readJson(filePlayerStats);
         //this.jsonValue = jsonReader.parse(file);
         //readJson(jsonValue);
         //readJson(jsonValue.get("health"));
         //System.out.println("AFTER SETTING DEFAULT!");
-        setDefault.setDefaultPlayerStats();
+        //setDefault.setDefaultPlayerStats();
         //read.readJson(filePlayerStats);
     }
 
-    public static boolean fileCheck(FileHandle file){
-        if(file.exists()){
-            return true;
-        }
-        return false;
-    }
 
-    public static void makeFile(FileHandle file){
-        if(!file.exists()){
-            file.write(false);
-        } else {
-            System.out.println("PLIK JUŻ ISTNIEJE!");
-        }
-    }
 
 
 

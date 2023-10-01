@@ -16,8 +16,8 @@ public class Reading {
 
     public void readJson(JsonValue json){System.out.println(json);}
     public void readJson(FileHandle file){
-        if(!Data.fileCheck(file)){
-            Data.makeFile(file);
+        if(!Data.create.fileCheck(file)){
+            Data.create.makeFile(file);
         }
         JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(file);
@@ -26,8 +26,8 @@ public class Reading {
     }
 
     public int getFromFile(FileHandle file, String parameter){
-        if(!Data.fileCheck(file)){
-            Data.makeFile(file);
+        if(!Data.create.fileCheck(file)){
+            Data.create.makeFile(file);
         }
         int value = 0;
         JsonReader jsonReader = new JsonReader();
@@ -39,8 +39,8 @@ public class Reading {
     }
 
     public boolean isParameterExist(FileHandle file, String parameter){
-        if(!Data.fileCheck(file)){
-            Data.makeFile(file);
+        if(!Data.create.fileCheck(file)){
+            Data.create.makeFile(file);
         }
         JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(file);
@@ -48,8 +48,8 @@ public class Reading {
     }
 
     public static float readPlayerStat(String parameter){
-        if(!Data.fileCheck(Data.filePlayerStats)){
-            Data.makeFile(Data.filePlayerStats);
+        if(!Data.create.fileCheck(Data.filePlayerStats)){
+            Data.create.makeFile(Data.filePlayerStats);
         }
         float value = 0;
         JsonReader jsonRead = new JsonReader();
