@@ -187,7 +187,7 @@ public class Combat {
                 int enemyLeft = enemyCenter[0] - pickedEnemy.skin.getShipWidth()/2;
                 int enemyRight = enemyCenter[0] + pickedEnemy.skin.getShipWidth()/2;
                 int enemyLineX = enemyRight - enemyLeft;
-                int enemyLineY = enemyFront - enemyLeft;
+                int enemyLineY = enemyFront - enemyBack;
 
                 int biggerY;
                 if(userLineY >= enemyLineY){
