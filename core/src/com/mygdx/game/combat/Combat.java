@@ -112,6 +112,8 @@ public class Combat {
         drawAllBullets();
         drawAllEnemies();
         userShip.draw();
+        boolean collision = checkUserCollision();
+        System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
         //System.out.println("Removings dead bodies!");
         //removeDeadEnemy();
     }
@@ -203,16 +205,21 @@ public class Combat {
 
                 int difference = enemyCenter[1] - userCenter[1];
                 //Check height collision
-                if(difference <= biggerY || -difference <=  biggerY){
-                    //check width collision
-
-
+                if(difference < 0){
+                    difference = -difference;
                 }
-
-
+                if(difference <= biggerY){
+                    //check width collision
+                    difference = userCenter[0] - enemyCenter[0];
+                    if(difference < 0){
+                        difference = -difference;
+                    }
+                    if(difference <= biggerX){
+                        return true;
+                    }
+                }
             }
         }
-
         return false;
     }
 
