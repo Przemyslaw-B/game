@@ -23,7 +23,7 @@ public class Bullet implements Bullets{
         speedY = 600;    //TODO TEST VALUE
         this.shipId = id;
         texture = new Texture("star.png");
-        //TODO na bazie ID z bazy muszą być doczytane inne statystyki
+        setFriendlyFire(id);
     }
     public float getDamage(){
         return damage;

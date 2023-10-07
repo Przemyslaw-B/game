@@ -18,7 +18,7 @@ public class SetDefault {
             "}";
 
     String defaultEnemyStats = "{\n" +
-            "  \"id\": 1,\n" +
+            "  \"id\": 2,\n" +
             "  \"health\": 1,\n" +
             "  \"damage\": 2,\n" +
             "  \"attackSpeed\": 1,\n" +

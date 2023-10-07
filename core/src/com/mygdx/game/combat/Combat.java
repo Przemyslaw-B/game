@@ -109,8 +109,8 @@ public class Combat {
         removeBulletNotInView();
         //System.out.println("Drawing all bullets!");
         enemyShoot(delta);  //strzelanie przeciwników
-        drawAllEnemies();
         drawAllBullets();
+        drawAllEnemies();
         userShip.draw();
         //System.out.println("Removings dead bodies!");
         //removeDeadEnemy();
@@ -163,6 +163,56 @@ public class Combat {
 
     public boolean checkUserCollision(){
         //TODO sprawdzenie czy statek użytkownika nie zderzył się ze statkiem wroga
+        int[] userCenter = new int[2];
+        userCenter[0] = userShip.position.getShipPositionX();
+        userCenter[1] = userShip.position.getShipPositionY();
+
+        int userFront = userCenter[1] + userShip.skin.getShipHeight()/2;
+        int userBack = userCenter[1] - userShip.skin.getShipHeight()/2;
+        int userLeft = userCenter[0] - userShip.skin.getShipWidth()/2;
+        int userRight = userCenter[0] + userShip.skin.getShipWidth()/2;
+        int userLineY = userFront - userBack;
+        int userLineX = userRight - userLeft;
+
+        if(!enemyArrayList.isEmpty()){
+            for(Enemy pickedEnemy : enemyArrayList){
+                int[] enemyCenter = new int[2];
+                enemyCenter[0] = pickedEnemy.position.getX();
+                enemyCenter[1] = pickedEnemy.position.getY();
+
+                int enemyFront = enemyCenter[1] + pickedEnemy.skin.getShipHeight()/2;
+                int enemyBack = enemyCenter[1] - pickedEnemy.skin.getShipHeight()/2;
+                int enemyLeft = enemyCenter[0] - pickedEnemy.skin.getShipWidth()/2;
+                int enemyRight = enemyCenter[0] + pickedEnemy.skin.getShipWidth()/2;
+                int enemyLineX = enemyRight - enemyLeft;
+                int enemyLineY = enemyFront - enemyLeft;
+
+                int biggerY;
+                if(userLineY >= enemyLineY){
+                    biggerY = userLineY/2;
+                } else{
+                    biggerY = enemyLineY/2;
+                }
+
+                int biggerX;
+                if(userLineX >= enemyLineX){
+                    biggerX = userLineX/2;
+                } else {
+                    biggerX = enemyLineX/2;
+                }
+
+                int difference = enemyCenter[1] - userCenter[1];
+                //Check height collision
+                if(difference <= biggerY || -difference <=  biggerY){
+                    //check width collision
+
+
+                }
+
+
+            }
+        }
+
         return false;
     }
 

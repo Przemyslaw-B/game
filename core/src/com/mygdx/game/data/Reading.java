@@ -60,5 +60,18 @@ public class Reading {
         return value;
     }
 
+    public static float readEnemyStat(int id, String parameter){
+        if(!Data.create.fileCheck(Data.fileEnemyStats)){
+            Data.create.makeFile(Data.fileEnemyStats);
+        }
+        float value=0;
+        JsonReader jsonRead = new JsonReader();
+        JsonValue json = jsonRead.parse(Data.fileEnemyStats);
+        if(json.has(parameter)){
+            value=json.getInt(parameter);
+        }
+        return value;
+    }
+
 
 }
