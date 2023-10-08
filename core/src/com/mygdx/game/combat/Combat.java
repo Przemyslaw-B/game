@@ -1,6 +1,7 @@
 package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
@@ -17,6 +18,7 @@ public class Combat {
     private static ArrayList<Enemy> enemyArrayList;
     private static ArrayList<Bullet>  bulletsArrayList;
     private Random rand;
+    private BattleInterface battleInterface;
 
     public Combat(Ship userShip){
         this.enemyArrayList = new ArrayList<Enemy>();
@@ -25,6 +27,7 @@ public class Combat {
         this.time=0f;
         this.shotTimer = 0f;
         this.rand = new Random();
+        this.battleInterface = new BattleInterface();
     }
 
     public void spawnEnemy(int enemyId){
@@ -119,6 +122,7 @@ public class Combat {
         //System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
         //System.out.println("Removing dead bodies!");
         //removeDeadEnemy();
+        battleInterface.drawInterface();
     }
 
     private void enemyShoot(float delta){
