@@ -113,11 +113,11 @@ public class Combat {
         drawAllEnemies();
         userShip.draw();
         boolean collision = checkUserCollision();
-        //System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
+        System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
 
         boolean checkHit = checkHit();
-        System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
-        //System.out.println("Removings dead bodies!");
+        //System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
+        //System.out.println("Removing dead bodies!");
         //removeDeadEnemy();
     }
 
@@ -166,68 +166,54 @@ public class Combat {
         return true;
     }
 
-    public boolean checkUserCollision(){
+    public boolean checkUserCollision() {
         //TODO sprawdzenie czy statek użytkownika nie zderzył się ze statkiem wroga
         int[] userCenter = new int[2];
         userCenter[0] = userShip.position.getShipPositionX();
         userCenter[1] = userShip.position.getShipPositionY();
 
-        int userFront = userCenter[1] + userShip.skin.getShipHeight()/2;
-        int userBack = userCenter[1] - userShip.skin.getShipHeight()/2;
-        int userLeft = userCenter[0] - userShip.skin.getShipWidth()/2;
-        int userRight = userCenter[0] + userShip.skin.getShipWidth()/2;
-        int userLineY = userFront - userBack;
-        int userLineX = userRight - userLeft;
+        int userFront = userCenter[1] + userShip.skin.getShipHeight() / 2;
+        int userBack = userCenter[1] - userShip.skin.getShipHeight() / 2;
+        int userLeft = userCenter[0] - userShip.skin.getShipWidth() / 2;
+        int userRight = userCenter[0] + userShip.skin.getShipWidth() / 2;
 
-        if(!enemyArrayList.isEmpty()){
-            for(Enemy pickedEnemy : enemyArrayList){
-                int[] enemyCenter = new int[2];
-                enemyCenter[0] = pickedEnemy.position.getX();
-                enemyCenter[1] = pickedEnemy.position.getY();
 
-                int enemyFront = enemyCenter[1] + pickedEnemy.skin.getShipHeight()/2;
-                int enemyBack = enemyCenter[1] - pickedEnemy.skin.getShipHeight()/2;
-                int enemyLeft = enemyCenter[0] - pickedEnemy.skin.getShipWidth()/2;
-                int enemyRight = enemyCenter[0] + pickedEnemy.skin.getShipWidth()/2;
-                int enemyLineX = enemyRight - enemyLeft;
-                int enemyLineY = enemyFront - enemyBack;
-
-                int biggerY;
-                if(userLineY >= enemyLineY){
-                    biggerY = userLineY/2;
-                } else{
-                    biggerY = enemyLineY/2;
-                }
-
-                int biggerX;
-                if(userLineX >= enemyLineX){
-                    biggerX = userLineX/2;
-                } else {
-                    biggerX = enemyLineX/2;
-                }
-
-                int difference = enemyCenter[1] - userCenter[1];
-                //Check height collision
-                if(difference < 0){
-                    difference = -difference;
-                }
-                if(difference <= biggerY){
-                    //check width collision
-                    difference = userCenter[0] - enemyCenter[0];
-                    if(difference < 0){
-                        difference = -difference;
-                    }
-                    if(difference <= biggerX){
-                        return true;
-                    }
+        if (!enemyArrayList.isEmpty()) {
+            for (Enemy pickedEnemy : enemyArrayList) {
+                if( checkCollisionForPickedEnemy(userFront, userBack, userLeft, userRight, pickedEnemy)){
+                    return true;
                 }
             }
         }
         return false;
     }
 
+    private boolean checkCollisionForPickedEnemy(int userFront, int userBack, int userLeft, int userRight , Enemy pickedEnemy){
+
+        int[] enemyCenter = new int[2];
+        enemyCenter[0] = pickedEnemy.position.getX();
+        enemyCenter[1] = pickedEnemy.position.getY();
+
+        int enemyFront = enemyCenter[1] + pickedEnemy.skin.getShipHeight() / 2;
+        int enemyBack = enemyCenter[1] - pickedEnemy.skin.getShipHeight() / 2;
+        int enemyLeft = enemyCenter[0] - pickedEnemy.skin.getShipWidth() / 2;
+        int enemyRight = enemyCenter[0] + pickedEnemy.skin.getShipWidth() / 2;
+
+        //Check Y
+        if((userFront >= enemyBack && userFront <= enemyFront) || (userBack >= enemyBack && userBack <= enemyFront) ){
+            //Check X
+            if((userLeft >= enemyLeft && userLeft <= enemyRight) || (userRight >= enemyLeft && userRight <= enemyRight)){
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+
+
     private boolean checkHit(){
-        //TODO sprawdzenie czy pocisk przeciwnika trafił statek użytkownika
        for(Bullet pickedBullet : bulletsArrayList){
            // check if user got hit
            if(checkIsUserDamagedByBullet(pickedBullet)){
