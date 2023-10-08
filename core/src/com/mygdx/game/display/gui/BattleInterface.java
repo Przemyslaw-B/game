@@ -10,6 +10,9 @@ public class BattleInterface {
 
     int heartX;
     int heartY;
+
+    int scoreX;
+    int scoreY;
     private static Texture heartTexture;
     private static TextureRegion heartTextureRegion;
     private static TextureRegionDrawable heartTextureRegionDrawable;
@@ -21,27 +24,44 @@ public class BattleInterface {
 
 
     public BattleInterface(){
-        heartTexture = new Texture(Gdx.files.internal("score.png"));
+        heartTexture = new Texture(Gdx.files.internal("heart.png"));
         heartTextureRegion = new TextureRegion(heartTexture);
         heartTextureRegionDrawable = new TextureRegionDrawable(heartTextureRegion);
 
+        scoreTexture = new Texture(Gdx.files.internal("score.png"));
+        scoreTextureRegion = new TextureRegion(scoreTexture);
+        scoreTextureRegionDrawable = new TextureRegionDrawable(scoreTextureRegion);
+
+        setScorePlace();
         setHeartPlace();
     }
 
+    private void setScorePlace(){
+        int height = Gdx.graphics.getHeight();
+        int width = Gdx.graphics.getWidth();
+
+        double value = width * 0.05;
+        this.scoreX = 0 + (int) value;
+        //this.scoreX = scoreX + scoreTextureRegion.getRegionWidth()/2;
+
+        value = height * 0.05;
+        this.scoreY = height - (int) value;
+        this.scoreY = scoreY - scoreTextureRegion.getRegionHeight()/2;
+    }
     private void setHeartPlace(){
         int height = Gdx.graphics.getHeight();
         int width = Gdx.graphics.getWidth();
 
-        double value =width * 0.05;
+        double value = width * 0.05;
         this.heartX = 0 + (int) value;
-        this.heartX = heartX + heartTextureRegion.getRegionWidth()/2;
+        //this.heartX = heartX + heartTextureRegion.getRegionWidth()/2;
 
         value = height * 0.05;
-        this.heartY = height - (int) value;
+        this.heartY = this.scoreY - scoreTextureRegion.getRegionHeight()/2 - (int) value;
         this.heartY = heartY - heartTextureRegion.getRegionHeight()/2;
     }
-
     public void drawInterface(){
-            Drop.batch.draw(heartTexture, heartX, heartY);
+        Drop.batch.draw(scoreTexture, scoreX, scoreY);
+        Drop.batch.draw(heartTexture, heartX, heartY);
     }
 }
