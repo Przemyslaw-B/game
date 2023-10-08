@@ -113,7 +113,10 @@ public class Combat {
         drawAllEnemies();
         userShip.draw();
         boolean collision = checkUserCollision();
-        System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
+        //System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
+
+        boolean checkHit = checkHit();
+        System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
         //System.out.println("Removings dead bodies!");
         //removeDeadEnemy();
     }
@@ -223,13 +226,77 @@ public class Combat {
         return false;
     }
 
-    public boolean checkEnemyHit(){
+    private boolean checkHit(){
         //TODO sprawdzenie czy pocisk przeciwnika trafił statek użytkownika
+       for(Bullet pickedBullet : bulletsArrayList){
+           // check if user got hit
+           if(checkIsUserDamagedByBullet(pickedBullet)){
+               bulletsArrayList.remove(pickedBullet);
+               //TODO decrease user hp
+               return true;
+           } else {
+               //check if enemy got hit
+               for(Enemy pickedEnemy : enemyArrayList){
+                   if(checkIsEnemyDamagedByBullet(pickedEnemy, pickedBullet)){
+                       bulletsArrayList.remove(pickedBullet);
+                       //TODO decrease enemy hp
+                       return true;
+                   }
+               }
+           }
+       }
         return false;
     }
 
-    public boolean checkUserBulletHit(){
+    private boolean checkIsEnemyDamagedByBullet(Enemy pickedEnemy, Bullet  pickedBullet){
+        if(pickedBullet.getFriendlyFire()){
+            return false;
+        }
+
+        int bulletX = (int) pickedBullet.getBulletX();
+        int bulletY = (int) pickedBullet.getBulletY();
+
+        int[] enemyCenter = new int[2];
+        enemyCenter[0] = pickedEnemy.position.getX();
+        enemyCenter[1] = pickedEnemy.position.getY();
+
+        int enemyFront = enemyCenter[1] + pickedEnemy.skin.getShipHeight()/2;
+        int enemyBack = enemyCenter[1] - pickedEnemy.skin.getShipHeight()/2;
+        int enemyLeft = enemyCenter[0] - pickedEnemy.skin.getShipWidth()/2;
+        int enemyRight = enemyCenter[0] + pickedEnemy.skin.getShipWidth()/2;
+
+        if(bulletY <= enemyFront && bulletY >= enemyBack){
+            if(bulletX >= enemyLeft && bulletX <= enemyRight){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkIsUserDamagedByBullet(Bullet pickedBullet){
         //TODO sprawdzenie czy pocisk gracza trafił jakiś statek przeciwnika
+        //sprawdź czy pocisk został wystrzelony przez przeciwnika
+        if(!pickedBullet.getFriendlyFire()){
+            return false;
+        }
+
+        int bulletX = (int) pickedBullet.getBulletX();
+        int bulletY = (int) pickedBullet.getBulletY();
+
+        int[] userCenter = new int[2];
+        userCenter[0] = userShip.position.getShipPositionX();
+        userCenter[1] = userShip.position.getShipPositionY();
+
+        int userFront = userCenter[1] + userShip.skin.getShipHeight()/2;
+        int userBack = userCenter[1] - userShip.skin.getShipHeight()/2;
+        int userLeft = userCenter[0] - userShip.skin.getShipWidth()/2;
+        int userRight = userCenter[0] + userShip.skin.getShipWidth()/2;
+
+        if(bulletY <= userFront && bulletY >= userBack){
+            if(bulletX >= userLeft && bulletX <= userRight){
+                return true;
+            }
+        }
         return false;
     }
 }
