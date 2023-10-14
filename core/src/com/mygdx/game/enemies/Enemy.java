@@ -11,17 +11,20 @@ public class Enemy {
     public Statistics statistics;
     public Skin skin;
     public Position position;
-    public Actions actions;
+    public Actions action;
     private int id;
     float timer;
 
     public Enemy(int x, int y, int id) {
         this.id = id;
+        this.action = new Actions(statistics);
         skin = new Skin(id);
         statistics = new Statistics(id);
         position = new Position(x, y);
         timer = 0f;
     }
+
+    public Enemy(){}
 
     public boolean canShoot(float delta){
         timer += delta;
@@ -35,7 +38,8 @@ public class Enemy {
         int x = position.getX();
         int y = position.getY();
         int id = statistics.getId();
-        Bullet bullet = new Bullet(x, y, id);
+        int damage = statistics.getDamage();
+        Bullet bullet = new Bullet(x, y, damage, id);
         timer = 0f;
         return bullet;
     }

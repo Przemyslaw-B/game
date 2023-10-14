@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.display.Drop;
+import com.mygdx.game.score.Score;
 
 public class BattleInterface {
 
@@ -13,6 +14,8 @@ public class BattleInterface {
 
     int scoreX;
     int scoreY;
+    Score score;
+    DrawScore drawScore;
     private static Texture heartTexture;
     private static TextureRegion heartTextureRegion;
     private static TextureRegionDrawable heartTextureRegionDrawable;
@@ -23,12 +26,14 @@ public class BattleInterface {
 
 
 
-    public BattleInterface(){
-        heartTexture = new Texture(Gdx.files.internal("heart.png"));
+    public BattleInterface(Score score){
+        this.score = score;
+        this.drawScore = new DrawScore(score);
+        heartTexture = new Texture(Gdx.files.internal("health/heart.png"));
         heartTextureRegion = new TextureRegion(heartTexture);
         heartTextureRegionDrawable = new TextureRegionDrawable(heartTextureRegion);
 
-        scoreTexture = new Texture(Gdx.files.internal("score.png"));
+        scoreTexture = new Texture(Gdx.files.internal("score/score.png"));
         scoreTextureRegion = new TextureRegion(scoreTexture);
         scoreTextureRegionDrawable = new TextureRegionDrawable(scoreTextureRegion);
 
@@ -48,6 +53,7 @@ public class BattleInterface {
         this.scoreY = height - (int) value;
         this.scoreY = scoreY - scoreTextureRegion.getRegionHeight()/2;
     }
+
     private void setHeartPlace(){
         int height = Gdx.graphics.getHeight();
         int width = Gdx.graphics.getWidth();
@@ -62,6 +68,7 @@ public class BattleInterface {
     }
     public void drawInterface(){
         Drop.batch.draw(scoreTexture, scoreX, scoreY);
+        drawScore.draw(scoreX + scoreTextureRegion.getRegionWidth(), scoreY);
         Drop.batch.draw(heartTexture, heartX, heartY);
     }
 }

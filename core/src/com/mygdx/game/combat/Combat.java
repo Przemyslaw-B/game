@@ -5,6 +5,7 @@ import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
+import com.mygdx.game.score.Score;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,15 +20,17 @@ public class Combat {
     private static ArrayList<Bullet>  bulletsArrayList;
     private Random rand;
     private BattleInterface battleInterface;
+    private Score score;
 
     public Combat(Ship userShip){
+        score = new Score();
         this.enemyArrayList = new ArrayList<Enemy>();
         this.bulletsArrayList = new ArrayList<Bullet>();
         this.userShip = userShip;
         this.time=0f;
         this.shotTimer = 0f;
         this.rand = new Random();
-        this.battleInterface = new BattleInterface();
+        this.battleInterface = new BattleInterface(score);
     }
 
     public void spawnEnemy(int enemyId){
@@ -40,8 +43,8 @@ public class Combat {
     }
 
     public void removeDeadEnemy(){
-        if(enemyArrayList.size() > 0){
-            for(int i=enemyArrayList.size()-1; i>=0; i++){
+        if(!enemyArrayList.isEmpty()){
+            for(int i=enemyArrayList.size()-1; i>=0; i--){
                 if(!enemyArrayList.get(i).statistics.isAlive()){
                     enemyArrayList.remove(i);
                 }
@@ -50,11 +53,11 @@ public class Combat {
     }
 
     public void moveBullet(float delta){
-        System.out.println("Ilość pocisków na mapie: " + bulletsArrayList.size());
+        //System.out.println("Ilość pocisków na mapie: " + bulletsArrayList.size());
         if(bulletsArrayList.size() > 0) {
             for (Bullet pickedBullet : bulletsArrayList) {
                 pickedBullet.moveBullet(delta);
-                System.out.println("Bullet X: " + pickedBullet.getBulletX() + "Y: " + pickedBullet.getBulletY());
+                //System.out.println("Bullet X: " + pickedBullet.getBulletX() + "Y: " + pickedBullet.getBulletY());
             }
         }
     }
@@ -90,8 +93,10 @@ public class Combat {
     }
 
     public void drawAllEnemies(){
-        for(Enemy pickedEnemy: enemyArrayList){
-            pickedEnemy.draw();
+        if(!enemyArrayList.isEmpty()){
+            for(Enemy pickedEnemy: enemyArrayList){
+                pickedEnemy.draw();
+            }
         }
     }
 
@@ -100,12 +105,7 @@ public class Combat {
         time += delta;
 
         //System.out.println("Making tick of a battle!");
-        //System.out.println("Enemy is moving!");
-        //enemyMove(delta);
-        //System.out.println("Moving all bullets!");
         moveBullet(delta);
-        //System.out.println("Enemy SHOT!");
-        //enemyShoot(delta);
         if(Gdx.input.isTouched()){
             userShoot();
         }
@@ -116,9 +116,9 @@ public class Combat {
         drawAllEnemies();
         userShip.draw();
         boolean collision = checkUserCollision();
-        System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
+        //System.out.println("Wynik weryfikacji kolizji z przeciwnikiem: " + collision);
 
-        boolean checkHit = checkHit();
+        checkHit();
         //System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
         //System.out.println("Removing dead bodies!");
         //removeDeadEnemy();
@@ -210,36 +210,64 @@ public class Combat {
                 return true;
             }
         }
-
-
         return false;
     }
 
 
-
-    private boolean checkHit(){
+    /*
+    private void checkHit(){
        for(Bullet pickedBullet : bulletsArrayList){
            // check if user got hit
            if(checkIsUserDamagedByBullet(pickedBullet)){
                bulletsArrayList.remove(pickedBullet);
                //TODO decrease user hp
-               return true;
            } else {
                //check if enemy got hit
-               for(Enemy pickedEnemy : enemyArrayList){
-                   if(checkIsEnemyDamagedByBullet(pickedEnemy, pickedBullet)){
-                       bulletsArrayList.remove(pickedBullet);
-                       //TODO decrease enemy hp
-                       return true;
+               //if(!enemyArrayList.isEmpty()){
+                   for(Enemy pickedEnemy : enemyArrayList){
+                       if(checkIsEnemyDamagedByBullet(pickedEnemy, pickedBullet)){
+                           bulletsArrayList.remove(pickedBullet);
+                           //TODO decrease enemy hp
+                           //pickedEnemy.action.reduceHp(userShip.statistics.getDamage());
+                       }
                    }
-               }
+               //}
            }
        }
-        return false;
+    }
+     */
+    private void checkHit(){
+        for(int i = bulletsArrayList.size()-1; i >=0; i--){
+            Bullet pickedBullet = bulletsArrayList.get(i);
+            if(pickedBullet.getFriendlyFire()){
+                if(checkIsUserDamagedByBullet(pickedBullet)){
+                    //TODO decrease user hp
+                    userShip.statistics.reduceHealth(pickedBullet.getDamage());
+                    bulletsArrayList.remove(pickedBullet);
+                }
+            } else{
+                if(!enemyArrayList.isEmpty()){
+                    boolean flag = false;
+                    int counter = enemyArrayList.size()-1;
+                    while(flag == false && counter >= 0) {
+                        //System.out.println("COUNTER: " + counter);
+                        Enemy pickedEnemy = enemyArrayList.get(counter);
+                        if (checkIsEnemyDamagedByBullet(pickedEnemy, pickedBullet)) {
+                            //TODO decrease enemy hp
+                            pickedEnemy.action.reduceHp(pickedBullet.getDamage());
+                            bulletsArrayList.remove(pickedBullet);
+                            flag = true;
+                        }
+                        counter--;
+                    }
+                }
+            }
+        }
     }
 
     private boolean checkIsEnemyDamagedByBullet(Enemy pickedEnemy, Bullet  pickedBullet){
         if(pickedBullet.getFriendlyFire()){
+
             return false;
         }
 

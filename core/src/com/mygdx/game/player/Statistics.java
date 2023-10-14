@@ -24,6 +24,17 @@ public class Statistics extends Skin implements stats {
         //attackSpeed = 1; //default value
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        Statistics.health = health;
+    }
+
+    public void reduceHealth(int value){
+        health -= value;
+    }
     public void setAttackSpeed(float attackSpeed){
         Statistics.attackSpeed = attackSpeed;
     }

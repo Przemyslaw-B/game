@@ -10,13 +10,13 @@ public class Bullet implements Bullets{
     private int shipId;
     private float x;
     private float y;
-    private float damage;
+    private int damage;
     private int speedX;
     private int speedY;
     private Texture texture;
     private boolean friendlyFire;
 
-    public Bullet(int x, int y, int id){
+    public Bullet(int x, int y, int damage, int id){
         setBulletX(x);
         setBulletY(y);
         speedX = 0; //TODO TEST VALUE
@@ -24,11 +24,12 @@ public class Bullet implements Bullets{
         this.shipId = id;
         texture = new Texture("star.png");
         setFriendlyFire(id);
+        this.damage = damage;
     }
-    public float getDamage(){
+    public int getDamage(){
         return damage;
     }
-    public void setDamage(float damage){
+    public void setDamage(int damage){
         this.damage = damage;
     }
     @Override

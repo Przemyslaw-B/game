@@ -19,6 +19,13 @@ public class Statistics implements stats {
         loadDefaultStatistics();
     }
 
+    public int getHealth() {
+        return health;
+    }
+    public void setHealth(int health) {
+        Statistics.health = health;
+    }
+
     public int getDamage(){
         return damage;
     }
@@ -49,6 +56,9 @@ public class Statistics implements stats {
 
     @Override
     public boolean isAlive() {
+        if(health > 0){
+            return true;
+        }
         return false;
     }
 

@@ -14,7 +14,7 @@ public class SetDefault {
             "  \"damage\": 2,\n" +
             "  \"attackSpeed\": 1,\n" +
             "  \"speedForward\": 7,\n" +
-            "  \"SpeedSideways\": 7\n" +
+            "  \"speedSideways\": 7\n" +
             "}";
 
     String defaultEnemyStats = "{\n" +
@@ -23,7 +23,8 @@ public class SetDefault {
             "  \"damage\": 2,\n" +
             "  \"attackSpeed\": 1,\n" +
             "  \"speedForward\": 7,\n" +
-            "  \"SpeedSideways\": 7\n" +
+            "  \"speedSideways\": 7\n" +
+            "  \"points\": 1\n" +
             "}";
 
     public SetDefault(){
