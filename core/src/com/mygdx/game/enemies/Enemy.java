@@ -17,9 +17,9 @@ public class Enemy {
 
     public Enemy(int x, int y, int id) {
         this.id = id;
+        statistics = new Statistics(id);
         this.action = new Actions(statistics);
         skin = new Skin(id);
-        statistics = new Statistics(id);
         position = new Position(x, y);
         timer = 0f;
     }

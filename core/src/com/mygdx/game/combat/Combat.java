@@ -121,7 +121,7 @@ public class Combat {
         checkHit();
         //System.out.println("Wynik weryfikacji pomyślnego trafienia: " + checkHit);
         //System.out.println("Removing dead bodies!");
-        //removeDeadEnemy();
+        removeDeadEnemy();
         battleInterface.drawInterface();
     }
 
