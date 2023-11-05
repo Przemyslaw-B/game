@@ -11,7 +11,7 @@ public class Zero implements Number {
     final Texture texture;
     final TextureRegion textureRegion;
     public Zero(){
-        this.texture = new Texture(Gdx.files.internal("score/numbers/0.png"));
+        this.texture = new Texture(Gdx.files.internal("health/numbers/0.png"));
         this.textureRegion = new TextureRegion(texture);
     }
 

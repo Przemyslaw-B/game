@@ -24,9 +24,6 @@ public class DrawHealth {
 
     private void drawNumbers(int health){
         switch (health){
-            case 0:
-                numbers.getZero().draw(x,y);
-                break;
             case 1:
                 numbers.getOne().draw(x,y);
                 break;
@@ -54,8 +51,11 @@ public class DrawHealth {
             case 9:
                 numbers.getNine().draw(x,y);
                 break;
-            default:
+            case 10:
                 numbers.getMax().draw(x,y);
+                break;
+            default:
+                numbers.getZero().draw(x,y);
                 break;
         }
     }

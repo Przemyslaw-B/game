@@ -35,6 +35,21 @@ public class Statistics extends Skin implements stats {
     public void reduceHealth(int value){
         health -= value;
     }
+
+    public void increaseHealth(){
+        if(!isHealthMax()){
+            health += 1;
+        }
+    }
+
+    private boolean isHealthMax(){
+        if(health >= 10){
+            health =10;
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void setAttackSpeed(float attackSpeed){
         Statistics.attackSpeed = attackSpeed;
     }
