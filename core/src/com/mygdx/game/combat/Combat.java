@@ -1,6 +1,7 @@
 package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
@@ -123,6 +124,18 @@ public class Combat {
         //System.out.println("Removing dead bodies!");
         removeDeadEnemy();
         battleInterface.drawInterface();
+    }
+
+    public boolean isBattleOn(){
+            //TODO sprawdź cz nastąpił koniec gry
+        if(userShip.statistics.isAlive()){
+            return true;
+        }
+        return false;
+    }
+
+    public void finalScore(){
+        //TODO podsumowanie punktów
     }
 
     private void enemyShoot(float delta){

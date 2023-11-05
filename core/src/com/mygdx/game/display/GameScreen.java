@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
+import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.combat.Combat;
 
@@ -61,6 +62,8 @@ public class GameScreen implements Screen {
 
 
         if(exitFlag){ //exit to main menu
+            game.setScreen(new MainMenuScreen(game));
+            dispose();
             /*
             for (int i = 0; i < skyMap.length; i++) {
                 game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
@@ -146,9 +149,9 @@ public class GameScreen implements Screen {
 
         game.batch.end();
 
-            if (Gdx.input.isTouched() && time>0.1) {    //press anywhere to quit level
-                touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-                //exitFlag = true;
+            if (!combat.isBattleOn()) {    //press anywhere to quit level
+                //touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+                exitFlag = true;
             }
     }
 
