@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.display.Drop;
+import com.mygdx.game.display.gui.health.DrawHealth;
 import com.mygdx.game.score.Score;
 
 public class BattleInterface {
@@ -14,6 +15,12 @@ public class BattleInterface {
 
     int scoreX;
     int scoreY;
+
+    int xX;
+    int xY;
+
+    DrawHealth drawHealth;
+
     Score score;
     DrawScore drawScore;
     private static Texture heartTexture;
@@ -23,6 +30,10 @@ public class BattleInterface {
     private static Texture scoreTexture;
     private static TextureRegion scoreTextureRegion;
     private static TextureRegionDrawable scoreTextureRegionDrawable;
+
+    private static Texture healthXTexture;
+    private static TextureRegion healthXTextureRegion;
+    private static TextureRegionDrawable healthXTextureRegionDrawable;
 
 
 
@@ -37,8 +48,15 @@ public class BattleInterface {
         scoreTextureRegion = new TextureRegion(scoreTexture);
         scoreTextureRegionDrawable = new TextureRegionDrawable(scoreTextureRegion);
 
+        healthXTexture = new Texture(Gdx.files.internal("health/x.png"));
+        healthXTextureRegion = new TextureRegion(scoreTexture);
+        healthXTextureRegionDrawable = new TextureRegionDrawable(scoreTextureRegion);
+
         setScorePlace();
         setHeartPlace();
+        setXPlace();
+        double width = Gdx.graphics.getWidth()*0.05;
+        drawHealth = new DrawHealth(xX + (int) width, xY);
     }
 
     private void setScorePlace(){
@@ -66,9 +84,20 @@ public class BattleInterface {
         this.heartY = this.scoreY - scoreTextureRegion.getRegionHeight()/2 - (int) value;
         this.heartY = heartY - heartTextureRegion.getRegionHeight()/2;
     }
+
+    private void setXPlace(){
+        //int height = Gdx.graphics.getHeight();
+        int width = Gdx.graphics.getWidth();
+
+        double value = width * 0.05;
+        xY = heartY;
+        xX = heartX + (int) value + heartTextureRegion.getRegionWidth()/2;
+    }
     public void drawInterface(){
         Drop.batch.draw(scoreTexture, scoreX, scoreY);
         drawScore.draw(scoreX + scoreTextureRegion.getRegionWidth(), scoreY);
         Drop.batch.draw(heartTexture, heartX, heartY);
+        Drop.batch.draw(healthXTexture, xX, xY);
+        drawHealth.drawHealthAmount();
     }
 }
