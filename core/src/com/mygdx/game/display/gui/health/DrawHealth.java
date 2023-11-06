@@ -52,7 +52,7 @@ public class DrawHealth {
                 numbers.getNine().draw(x,y);
                 break;
             case 10:
-                numbers.getMax().draw(x,y);
+                numbers.getMax().draw(x-numbers.getMax().endWidth()/2,y);
                 break;
             default:
                 numbers.getZero().draw(x,y);

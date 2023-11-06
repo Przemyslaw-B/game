@@ -22,4 +22,7 @@ public class Zero implements Number {
     public void draw(int valueX, int valueY) {
         Drop.batch.draw(texture, valueX, valueY);
     }
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
+    }
 }

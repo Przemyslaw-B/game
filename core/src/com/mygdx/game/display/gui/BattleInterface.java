@@ -55,8 +55,8 @@ public class BattleInterface {
         setScorePlace();
         setHeartPlace();
         setXPlace();
-        double width = Gdx.graphics.getWidth()*0.05;
-        drawHealth = new DrawHealth(xX + (int) width, xY);
+        int addition = (int) (Gdx.graphics.getWidth()*0.01);
+        drawHealth = new DrawHealth(xX + xX/4, xY);
     }
 
     private void setScorePlace(){
@@ -86,12 +86,8 @@ public class BattleInterface {
     }
 
     private void setXPlace(){
-        //int height = Gdx.graphics.getHeight();
-        int width = Gdx.graphics.getWidth();
-
-        double value = width * 0.05;
         xY = heartY;
-        xX = heartX + (int) value + heartTextureRegion.getRegionWidth()/2;
+        xX = heartX + heartTextureRegion.getRegionWidth();
     }
     public void drawInterface(){
         Drop.batch.draw(scoreTexture, scoreX, scoreY);

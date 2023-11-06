@@ -23,4 +23,7 @@ public class One implements Number {
         int x = valueX + textureRegion.getRegionWidth()/2;
         Drop.batch.draw(texture, x, valueY);
     }
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
+    }
 }

@@ -24,4 +24,9 @@ public class Eight implements Number {
         int x = valueX + textureRegion.getRegionWidth()/2;
         Drop.batch.draw(texture, x, valueY);
     }
+
+    @Override
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
+    }
 }
