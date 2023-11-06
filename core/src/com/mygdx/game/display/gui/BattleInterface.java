@@ -55,7 +55,6 @@ public class BattleInterface {
         setScorePlace();
         setHeartPlace();
         setXPlace();
-        int addition = (int) (Gdx.graphics.getWidth()*0.01);
         drawHealth = new DrawHealth(xX + xX/4, xY);
     }
 
@@ -65,7 +64,6 @@ public class BattleInterface {
 
         double value = width * 0.05;
         this.scoreX = 0 + (int) value;
-        //this.scoreX = scoreX + scoreTextureRegion.getRegionWidth()/2;
 
         value = height * 0.05;
         this.scoreY = height - (int) value;

@@ -15,6 +15,9 @@ public class Enemy {
     private int id;
     float timer;
 
+    //TODO Get rotation from enemy
+    //TODO SET shoting direction of enemy
+
     public Enemy(int x, int y, int id) {
         this.id = id;
         statistics = new Statistics(id);
@@ -47,8 +50,9 @@ public class Enemy {
     public void draw(){
         int texturePositionX = position.getX() - skin.getShipWidth()/2;
         int texturePositionY = position.getY() - skin.getShipHeight()/2;
-        Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
+        //Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
+        skin.setPositionSprite(texturePositionX, texturePositionY);
+        skin.getSprite().draw(Drop.batch);
     }
-
 }
 
