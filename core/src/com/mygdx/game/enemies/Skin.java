@@ -18,7 +18,7 @@ public class Skin{
         shipMyTextureRegion = new TextureRegion(shipTexture);
         shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
         sprite = new Sprite(shipTexture,getShipWidth(), getShipHeight());
-        sprite.setRotation(180);
+        setRotation(180);
     }
     public void setShipTexture(String shipTexture){
         this.shipTexture = new Texture(shipTexture);
@@ -47,6 +47,9 @@ public class Skin{
     }
     public int getRotation(){
         return 360-(int) sprite.getRotation();
+    }
+    public void setRotation(int rotation){
+        sprite.setRotation(360-rotation);
     }
 
     public void setPositionSprite(int x, int y){
