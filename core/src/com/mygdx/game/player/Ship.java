@@ -10,6 +10,7 @@ public class Ship {
     public static PlayerBullets bullets;
     public static Skin skin;
     private float time;
+    int[] vector;
 
     public Ship(){
         skin = new Skin();
@@ -22,7 +23,9 @@ public class Ship {
     public void draw(){
         int texturePositionX = position.getShipPositionX() - skin.getShipWidth()/2;
         int texturePositionY = position.getShipPositionY() - skin.getShipHeight()/2;
-        Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
+        //Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
+        skin.setPositionSprite(texturePositionX, texturePositionY);
+        skin.getSprite().draw(Drop.batch);
     }
 
     public boolean canShoot(float shotTimer){
@@ -37,7 +40,7 @@ public class Ship {
         int y = position.getShipPositionY();
         int id = statistics.getId();
         int damage = statistics.getDamage();
-        Bullet bullet = new Bullet(x, y, damage, id);
+        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
         time = 0f;
         return bullet;
     }

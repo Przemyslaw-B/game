@@ -14,6 +14,7 @@ public class Enemy {
     public Actions action;
     private int id;
     float timer;
+    int[] vector;
 
     //TODO Get rotation from enemy
     //TODO SET shoting direction of enemy
@@ -25,6 +26,9 @@ public class Enemy {
         skin = new Skin(id);
         position = new Position(x, y);
         timer = 0f;
+        this.vector = new int[2];
+        vector[0] = 0;
+        vector[1] = -1;
     }
 
     public Enemy(){}
@@ -42,7 +46,7 @@ public class Enemy {
         int y = position.getY();
         int id = statistics.getId();
         int damage = statistics.getDamage();
-        Bullet bullet = new Bullet(x, y, damage, id);
+        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
         timer = 0f;
         return bullet;
     }

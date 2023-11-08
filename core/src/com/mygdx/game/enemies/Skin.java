@@ -45,6 +45,9 @@ public class Skin{
     public Sprite getSprite(){
         return sprite;
     }
+    public int getRotation(){
+        return 360-(int) sprite.getRotation();
+    }
 
     public void setPositionSprite(int x, int y){
         sprite.setPosition((float) x, (float) y);

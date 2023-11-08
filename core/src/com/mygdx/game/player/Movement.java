@@ -15,7 +15,7 @@ public class Movement extends Position{
         inputY = Gdx.app.getGraphics().getHeight() - inputY;    //odwróć oś Y
         vector[0] = getHorizontalMove(inputX);
         vector[1] = getVerticalMove(inputY);
-        System.out.println("~BEFORE CALC~ Vector: X: " + vector[0] + " Y: " + vector[1]);
+        //System.out.println("~BEFORE CALC~ Vector: X: " + vector[0] + " Y: " + vector[1]);
         calculateOptimalVector(inputX, inputY);
     }
 
