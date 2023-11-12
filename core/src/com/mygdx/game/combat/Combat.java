@@ -7,7 +7,6 @@ import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
 import com.mygdx.game.score.Score;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,6 +21,7 @@ public class Combat {
     private Random rand;
     private BattleInterface battleInterface;
     private Score score;
+
 
     public Combat(Ship userShip){
         score = new Score();

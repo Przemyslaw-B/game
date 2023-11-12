@@ -8,6 +8,8 @@ import com.mygdx.game.background.Background;
 import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.combat.Combat;
+import com.mygdx.game.display.gui.gameOver.GameOver;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -26,10 +28,15 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
+    private GameOver gameOver;
+
+
     //Enemy enemy;
     //ArrayList<Enemy> enemyList;
     public GameScreen(final Drop game, Background background, Ship ship) {
         this.game=game;
+        this.gameOver = new GameOver();
+
         this.ship = ship;
         this.time=0f;
         height = Gdx.app.getGraphics().getHeight(); //height of user device
@@ -147,12 +154,14 @@ public class GameScreen implements Screen {
         //game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
         //game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
 
-        game.batch.end();
 
             if (!combat.isBattleOn()) {    //press anywhere to quit level
-                //touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-                exitFlag = true;
+                gameOver.drawGameOver();
+                if(gameOver.checkIfContinue()){
+                    exitFlag = true;
+                }
             }
+        game.batch.end();
     }
 
     @Override
