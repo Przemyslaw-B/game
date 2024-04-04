@@ -6,13 +6,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
 import com.mygdx.game.display.gui.MainMenuScreen;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.display.gui.gameOver.GameOver;
-
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class GameScreen implements Screen {
 
@@ -28,6 +25,7 @@ public class GameScreen implements Screen {
 
     private Vector3 touchPoint;
     private Combat combat;
+    private Level level;
     private GameOver gameOver;
 
 
@@ -44,11 +42,13 @@ public class GameScreen implements Screen {
         this.background = background;
         //this.ship=new Ship();
         this.combat = new Combat(ship);
+        this.level = new Level(combat);
         //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();
 
         //DO TESTÓW JEDEN WRÓG
         //enemyList.add(new Enemy(500, 500, 2));
+
         combat.spawnEnemy(2);
     }
 

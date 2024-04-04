@@ -1,10 +1,14 @@
 package com.mygdx.game.score;
 
+import com.mygdx.game.data.Data;
+
 public class Score {
     private int score;
     private double multiplier;
+    private int topScore;
     public Score(){
         reset();
+        getTopScore();
     }
 
     public void addToScore(int value){
@@ -29,5 +33,22 @@ public class Score {
     public void reset(){
         resetMultiplier();
         resetScore();
+    }
+
+    public int getTopScore(){
+        return Data.read.getFromFile(Data.fileLevelStats, "topScore");
+    }
+
+    private void setNewTopScore(int newScore){
+        Data.write.updateJson(Data.fileLevelStats, "topScore", newScore);
+        topScore = newScore;
+    }
+
+    public boolean isNewTopScore(){
+        if(score > topScore){
+            setNewTopScore(score);
+            return true;
+        }
+        return false;
     }
 }

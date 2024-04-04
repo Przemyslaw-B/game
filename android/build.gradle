@@ -1,6 +1,5 @@
 android {
     namespace "com.mygdx.game"
-    buildToolsVersion "23.0.1"
     compileSdkVersion 33
     sourceSets {
         main {
@@ -31,6 +30,10 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        renderScript true
+        aidl true
     }
 }
 

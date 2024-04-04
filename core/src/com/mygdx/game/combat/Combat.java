@@ -3,6 +3,7 @@ package com.mygdx.game.combat;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.display.gui.BattleInterface;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
@@ -21,6 +22,7 @@ public class Combat {
     private Random rand;
     private BattleInterface battleInterface;
     private Score score;
+    private Level level;
 
 
     public Combat(Ship userShip){
@@ -32,6 +34,12 @@ public class Combat {
         this.shotTimer = 0f;
         this.rand = new Random();
         this.battleInterface = new BattleInterface(score);
+        setLevel();
+    }
+
+    private void setLevel(){
+        this.level = new Level();   //TODO level setting
+
     }
 
     public void spawnEnemy(int enemyId){
@@ -41,6 +49,11 @@ public class Combat {
         enemyX=500;
         enemyY=500;
         enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
+    }
+
+    public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop){
+        //enemyArrayList.add(new Enemy(enemyId, enemyX, enemyY, rotation, isFromTop));
+        enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop));
     }
 
     public void removeDeadEnemy(){
@@ -104,6 +117,7 @@ public class Combat {
     public void tickOfBattle(float delta){
         shotTimer += delta;
         time += delta;
+        level.tickOfLevel(delta);
 
         //System.out.println("Making tick of a battle!");
         moveBullet(delta);

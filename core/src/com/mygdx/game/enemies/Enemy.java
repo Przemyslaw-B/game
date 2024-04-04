@@ -15,6 +15,7 @@ public class Enemy {
     private int id;
     float timer;
     int[] vector;
+    private boolean isFromTop;
 
     //TODO Get rotation from enemy
     //TODO SET shoting direction of enemy
@@ -25,6 +26,18 @@ public class Enemy {
         this.action = new Actions(statistics);
         skin = new Skin(id);
         position = new Position(x, y);
+        timer = 0f;
+        this.vector = new int[2];
+        vector[0] = 0;
+        vector[1] = -1;
+    }
+
+    public Enemy(int x, int y, int id, int rotation, boolean isFromTop) {
+        this.id = id;
+        statistics = new Statistics(id);
+        this.action = new Actions(statistics);
+        skin = new Skin(id);
+        position = new Position(x, y, rotation, isFromTop);
         timer = 0f;
         this.vector = new int[2];
         vector[0] = 0;
@@ -56,6 +69,7 @@ public class Enemy {
         int texturePositionY = position.getY() - skin.getShipHeight()/2;
         //Drop.batch.draw(skin.getShipTexture(),  texturePositionX, texturePositionY);
         skin.setPositionSprite(texturePositionX, texturePositionY);
+        skin.setRotation(position.getRotation());
         skin.getSprite().draw(Drop.batch);
     }
 }
