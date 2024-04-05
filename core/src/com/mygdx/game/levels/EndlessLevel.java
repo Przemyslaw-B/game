@@ -3,10 +3,11 @@ package com.mygdx.game.levels;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.enemies.Enemy;
+import com.mygdx.game.interfaces.levelInterface;
 
 import java.util.Random;
 
-public class EndlessLevel {
+public class EndlessLevel implements levelInterface {
     private int width;
     private int height;
     private int rotation;
@@ -32,7 +33,7 @@ public class EndlessLevel {
     }
 
     private void spawnEnemy(int amount){
-        int enemyId = 1;
+        int enemyId = 2;
         boolean isleftSite;
         boolean isFromTop;
         for(int i=0; i<amount; i++){
@@ -45,6 +46,7 @@ public class EndlessLevel {
     public void tickOfLevel(float locTime){
         time += locTime;
         //System.out.println("Time of level: " + time);
+
         if(time > 3f && test == false){
             test = true;
             System.out.println("~~~ It's time for a new ENEMY! ~~~");

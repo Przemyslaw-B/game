@@ -12,6 +12,7 @@ public class Enemy {
     public Skin skin;
     public Position position;
     public Actions action;
+    public Movement movement;
     private int id;
     float timer;
     int[] vector;
@@ -26,6 +27,7 @@ public class Enemy {
         this.action = new Actions(statistics);
         skin = new Skin(id);
         position = new Position(x, y);
+        movement = new Movement(position, statistics);
         timer = 0f;
         this.vector = new int[2];
         vector[0] = 0;
@@ -38,6 +40,7 @@ public class Enemy {
         this.action = new Actions(statistics);
         skin = new Skin(id);
         position = new Position(x, y, rotation, isFromTop);
+        movement = new Movement(position, statistics);
         timer = 0f;
         this.vector = new int[2];
         vector[0] = 0;

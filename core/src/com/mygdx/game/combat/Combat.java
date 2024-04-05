@@ -38,8 +38,7 @@ public class Combat {
     }
 
     private void setLevel(){
-        this.level = new Level();   //TODO level setting
-
+        this.level = new Level(true);   //TODO level setting
     }
 
     public void spawnEnemy(int enemyId){
@@ -121,6 +120,7 @@ public class Combat {
 
         //System.out.println("Making tick of a battle!");
         moveBullet(delta);
+        enemyMove();
         if(Gdx.input.isTouched()){
             userShoot();
         }
@@ -159,6 +159,17 @@ public class Combat {
                 if(enemy.canShoot(delta)){
                     bulletsArrayList.add(enemy.shoot());
                 }
+            }
+        }
+    }
+
+    private void enemyMove(){
+        System.out.println("~~~ Enemy Array List Size: "+ enemyArrayList.size() + " ~~~");
+        if(enemyArrayList.size() > 0){
+            for(int i=0; i < enemyArrayList.size(); i++){
+                Enemy enemy = enemyArrayList.get(i);
+                System.out.println("~~~ Ruszam ENEMY nr. " + i + " ~~~");
+                enemy.movement.move();
             }
         }
     }

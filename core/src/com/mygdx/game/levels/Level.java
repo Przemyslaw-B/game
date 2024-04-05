@@ -2,44 +2,55 @@ package com.mygdx.game.levels;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.data.Data;
 
+import java.util.ArrayList;
+
 public class Level {
     int currentLevel;
-    Combat combat;
+    //Object loadedLevel;
+    ArrayList loadedLevel;
     private EndlessLevel endlessLevel;
 
-    public Level(){
-        endlessLevel = new EndlessLevel();
-    }
-    public Level(Combat combat){
-        this.combat = combat;
-        loadLevel();
-    }
 
-    public Level(Combat combat, int lvl){
-        this.combat = combat;
-        loadLevel(lvl);
+    public Level(boolean isEndlessLevel){
+        loadedLevel = new ArrayList();
+        pickLevel(isEndlessLevel);
     }
-
 
     private void loadLevel(){
         currentLevel = Data.read.getFromFile(Data.fileLevelStats, "lvl");
     }
-    private void loadLevel(int lvl){
-        currentLevel = lvl;
-    }
-
+    
     public void loadNextLevel(){
         currentLevel++;
+        saveNewTopLevel();
     }
 
-    public EndlessLevel getEndlessLevel() {
-        return endlessLevel;
+    private void saveNewTopLevel(){
+        Data.write.updateJson(Data.fileLevelStats, "lvl", currentLevel);
     }
 
     public void tickOfLevel(float time){
-        //TODO endless level for test
-        endlessLevel.tickOfLevel(time);
+        switch (currentLevel){
+            case 0:
+                endlessLevel.tickOfLevel(time);
+               break;
 
+            default:
+
+                break;
+
+        }
     }
+
+    public void pickLevel(boolean isEndlessLevel){
+    if(isEndlessLevel){
+        currentLevel = 0;
+        endlessLevel = new EndlessLevel();
+    } else {
+        loadLevel();
+    }
+    }
+
+
 }
 
