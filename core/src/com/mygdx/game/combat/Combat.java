@@ -142,7 +142,7 @@ public class Combat {
             for(int i=0; i < enemyArrayList.size(); i++){
                 Enemy enemy = enemyArrayList.get(i);
                 if(enemy.canShoot(delta)){
-                    bulletsArrayList.add(enemy.shoot());
+                    bulletsArrayList.add(enemy.shoot(false));
                 }
             }
         }
@@ -150,7 +150,10 @@ public class Combat {
 
     private void enemyMove(float delta){
         if(!enemyArrayList.isEmpty()){
+            int count = 0;
             for(Enemy pickedEnemy : enemyArrayList){
+                System.out.println("Ruszam wrogiem nr: " + count);
+                count++;
                 pickedEnemy.movement.move(delta);
             }
         }
@@ -261,7 +264,6 @@ public class Combat {
             Bullet pickedBullet = bulletsArrayList.get(i);
             if(pickedBullet.getFriendlyFire()){
                 if(checkIsUserDamagedByBullet(pickedBullet)){
-                    //TODO decrease user hp
                     userShip.statistics.reduceHealth(pickedBullet.getDamage());
                     bulletsArrayList.remove(pickedBullet);
                 }
@@ -273,8 +275,11 @@ public class Combat {
                         //System.out.println("COUNTER: " + counter);
                         Enemy pickedEnemy = enemyArrayList.get(counter);
                         if (checkIsEnemyDamagedByBullet(pickedEnemy, pickedBullet)) {
-                            //TODO decrease enemy hp
                             pickedEnemy.action.reduceHp(pickedBullet.getDamage());
+                            if(pickedEnemy.statistics.getHealth() <= 0){
+                                int tempScore = pickedEnemy.statistics.getScore();
+                                score.addToScore(tempScore);
+                            }
                             bulletsArrayList.remove(pickedBullet);
                             flag = true;
                         }

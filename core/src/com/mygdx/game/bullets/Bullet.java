@@ -142,21 +142,24 @@ public class Bullet implements Bullets{
         double b=0;
         int[] searched = new int[2];
         if (rotation > 0 && rotation < 90){
-            b = c * Math.sin(rotation);
-            a =  Math.pow(c,2) + Math.pow(b,2);
+            b = c * Math.sin(Math.toRadians(rotation));
+            a =  Math.pow(c,2) - Math.pow(b,2);
             a = Math.sqrt(a);
-            b=-b;
+            //b=-b;
         } else if(rotation > 90 && rotation < 180){
-            b = c * Math.sin(rotation);
-            a =  Math.pow(c,2) + Math.pow(b,2);
+            int val = rotation - 90;
+            b = c * Math.sin(Math.toRadians(val));
+            a =  Math.pow(c,2) - Math.pow(b,2);
             a = Math.sqrt(a);
         }  else if(rotation < 270 && rotation > 180){
-            a = c * Math.sin(rotation);
-            b =  Math.pow(c,2) + Math.pow(a,2);
-            b = Math.sqrt(b);
+            int val = rotation - 180;
+            b = c * Math.sin(Math.toRadians(val));
+            a =  Math.pow(c,2) - Math.pow(b,2);
+            a = Math.sqrt(a);
         }else if (rotation < 360 && rotation > 270){
-            b = c * Math.sin(rotation);
-            a =  Math.pow(c,2) + Math.pow(b,2);
+            int val = rotation - 270;
+            b = c * Math.sin(Math.toRadians(val));
+            a =  Math.pow(c,2) - Math.pow(b,2);
             a = Math.sqrt(a);
         }
         searched[0] = (int) b;

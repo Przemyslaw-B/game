@@ -57,15 +57,18 @@ public class Enemy {
         return false;
     }
 
-    public Bullet shoot(){
+    public Bullet shoot(boolean isAimed){
         int x = position.getX();
         int y = position.getY();
         int id = statistics.getId();
         int damage = statistics.getDamage();
-        //Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
-        //Bullet bullet = new Bullet(x, y, damage, id, position.getRotation());
-        int angle = calculateAngle(x, y);
-        Bullet bullet = new Bullet(x, y, damage, id, angle);
+        Bullet bullet;
+        if(isAimed){
+            int angle = calculateAngle(x, y);
+            bullet = new Bullet(x, y, damage, id, angle);
+        } else{
+            bullet = new Bullet(x, y, damage, id, position.getRotation());
+        }
         timer = 0f;
         return bullet;
     }
@@ -88,11 +91,26 @@ public class Enemy {
         double y = mod(startingY-playerY);
         double c = Math.sqrt((x*x) + (y*y));
         double val = Math.asin(x/c);
-        //TODO ODBICIE 0, 90, 180, 270 degree
+        val = Math.toDegrees(val);
         System.out.println("Pozycja ENEMY: X: " + startingX + ", Y: " + startingY);
         System.out.println("Pozycja GRACZA: X: " + playerX + ", Y: " + playerY);
+        System.out.println("Bok x: " + x + ", bok y: " + y + ", wyliczone c: " + c);
         System.out.println("Wylicznony kąt pocisku to: " + val);
-        angle = (int) val;
+        //angle = (int) val;
+        angle = checkAngle(val, startingX, startingY, playerX, playerY);
+        System.out.println("Kąt po aktualizacji: " + angle);
+        return angle;
+    }
+
+    private int checkAngle(double value, int x, int y, int playerX, int playerY){
+        int angle = (int)value;
+        if(playerX > x && playerY <= y){
+            angle += 90;
+        } else if(playerX <= x && playerY < y){
+            angle += 180;
+        } else if(playerX < x && playerY >= y){
+            angle += 270;
+        }
         return angle;
     }
 

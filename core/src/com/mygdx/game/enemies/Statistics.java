@@ -13,6 +13,7 @@ public class Statistics implements stats {
     private float attackSpeed = 0.4f;
     private int speedForward;
     private int speedSideways;
+    private int score;
 
     public Statistics(int id){
         this.id=id;
@@ -91,6 +92,7 @@ public class Statistics implements stats {
     public int getShipHeight() {
         return 0;
     }
+    public int getScore(){return score;}
 
     public void loadDefaultStatistics(){
         this.health = (int) Data.read.readEnemyStat(id, "health");
@@ -98,5 +100,6 @@ public class Statistics implements stats {
         this.attackSpeed = Data.read.readEnemyStat(id, "attackSpeed");
         this.speedForward = (int) Data.read.readEnemyStat(id, "speedForward");
         this.speedSideways = (int) Data.read.readEnemyStat(id, "speedSideways");
+        this.score = (int) Data.read.readEnemyStat(id, "points");
     }
 }

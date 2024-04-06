@@ -15,18 +15,18 @@ public class Movement extends Enemy{
     }
 
     public void move(float delta){
-        calculateNewPosition(position.getRotation());
         this.delta = delta;
+        calculateNewPosition(position.getRotation());
+        position.setX(newX);
+        position.setY(newY);
     }
 
     private void calculateNewPosition(int rotation){
         int oldX = position.getX();
         int oldY = position.getY();
         catchDirections(rotation);
-        newX = oldX + (int) a;
-        newY = oldY + (int) b;
-        position.setX(newX);
-        position.setY(newY);
+        newX = oldX + (int) Math.round(a);
+        newY = oldY + (int) Math.round(b);
     }
 
     private void catchDirections(int rotation){
@@ -40,20 +40,20 @@ public class Movement extends Enemy{
         }else if(rotation > 90 && rotation < 180){
             updated = rotation - 90;
             calculatePathFromDegree(updated);
-            this.b = -1*b;
+            this.b = -b;
         } else if(rotation == 180){
             moveDown();
         } else if(rotation > 180 && rotation < 270){
             updated = rotation - 180;
             calculatePathFromDegree(updated);
-            this.b = -1*b;
-            this.a = -1*a;
+            this.b = -b;
+            this.a = -a;
         } else if(rotation == 270){
             moveLeft();
         } else if (rotation > 270) {
             updated = rotation - 180;
             calculatePathFromDegree(updated);
-            this.a = -1*a;
+            this.a = -a;
         }
     }
 
@@ -74,12 +74,12 @@ public class Movement extends Enemy{
     private void calculatePathFromDegree(int rotation){
         int forwardSpeed = statistics.getSpeedForward();
         int sidewaysSpeed = statistics.getSpeedSideways();
-        double speed = ((forwardSpeed+sidewaysSpeed)/2)*delta;
+        double speed = ((forwardSpeed+sidewaysSpeed)/2);//*delta;
         double c = speed;
         double degree = Math.toRadians((double) rotation);
         double sinA = Math.sin(degree);
         a = sinA * c;
-        b = Math.sqrt(c*c) - Math.sqrt(a*a);
+        b = Math.sqrt((c*c)-(a*a));
     }
 
 }
