@@ -3,44 +3,83 @@ package com.mygdx.game.enemies;
 public class Movement extends Enemy{
     Position position;
     Statistics statistics;
+    int newX;
+    int newY;
+    double a;
+    double b;
+    float delta;
 
     public Movement(Position position, Statistics statistics){
         this.position = position;
         this.statistics = statistics;
     }
 
-    public void move(){
+    public void move(float delta){
         calculateNewPosition(position.getRotation());
+        this.delta = delta;
     }
 
     private void calculateNewPosition(int rotation){
         int oldX = position.getX();
         int oldY = position.getY();
-        int forwardSpeed = statistics.getSpeedForward();
-        int sidewaysSpeed = statistics.getSpeedSideways();
-        int speed = (forwardSpeed+sidewaysSpeed)/2; //TODO w uproszczeniu
-        //TODO obliczanie nowej pozycji przeciwnika
-        double a;
-        double b;
-        double c = speed;
-        double sinA = Math.sin((float) rotation);
-        a = sinA * c;
-        b = Math.sqrt((c*c)-(a*a));
-        //int newX = (int) a;
-        //int newY = (int) b;
-
-        int newX = oldX + 10;
-        int newY = oldY + 10;
+        catchDirections(rotation);
+        newX = oldX + (int) a;
+        newY = oldY + (int) b;
         position.setX(newX);
         position.setY(newY);
-
-        System.out.println("~~~STARA POZYCJA WROGA~~~");
-        System.out.println("X: " + oldX + ", Y: " + oldY);
-        System.out.println("~~~NOWA POZYCJA WROGA~~~");
-        System.out.println("X: " + newX + ", Y: " + newY);
-
-
-
-
     }
+
+    private void catchDirections(int rotation){
+        int updated;
+        if(rotation == 0){
+            moveUp();
+        } else if(rotation > 0 && rotation < 90){
+            calculatePathFromDegree(rotation);
+        } else if(rotation == 90) {
+            moveRight();
+        }else if(rotation > 90 && rotation < 180){
+            updated = rotation - 90;
+            calculatePathFromDegree(updated);
+            this.b = -1*b;
+        } else if(rotation == 180){
+            moveDown();
+        } else if(rotation > 180 && rotation < 270){
+            updated = rotation - 180;
+            calculatePathFromDegree(updated);
+            this.b = -1*b;
+            this.a = -1*a;
+        } else if(rotation == 270){
+            moveLeft();
+        } else if (rotation > 270) {
+            updated = rotation - 180;
+            calculatePathFromDegree(updated);
+            this.a = -1*a;
+        }
+    }
+
+
+    private void moveUp(){
+        b = statistics.getSpeedForward();
+    }
+    private void moveLeft(){
+        a = -statistics.getSpeedSideways();
+    }
+    private  void moveRight(){
+        a = statistics.getSpeedSideways();
+    }
+    private void moveDown(){
+        b = -statistics.getSpeedForward();
+    }
+
+    private void calculatePathFromDegree(int rotation){
+        int forwardSpeed = statistics.getSpeedForward();
+        int sidewaysSpeed = statistics.getSpeedSideways();
+        double speed = ((forwardSpeed+sidewaysSpeed)/2)*delta;
+        double c = speed;
+        double degree = Math.toRadians((double) rotation);
+        double sinA = Math.sin(degree);
+        a = sinA * c;
+        b = Math.sqrt(c*c) - Math.sqrt(a*a);
+    }
+
 }

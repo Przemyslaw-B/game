@@ -18,12 +18,12 @@ public class SetDefault {
             "}";
 
     String defaultEnemyStats = "{\n" +
-            "  \"id\": 1,\n" +
+            "  \"id\": 2,\n" +
             "  \"health\": 1,\n" +
             "  \"damage\": 1,\n" +
             "  \"attackSpeed\": 1,\n" +
-            "  \"speedForward\": 7,\n" +
-            "  \"speedSideways\": 7\n" +
+            "  \"speedForward\": 5,\n" +
+            "  \"speedSideways\": 5\n" +
             "  \"points\": 1\n" +
             "}";
 
@@ -42,13 +42,12 @@ public class SetDefault {
     public SetDefault(){
         this.jsonReader = new JsonReader();
     }
-
-     public void setDefaultPlayerStats(){
-        Data.write.writeEntireJson(Data.filePlayerStats, defaultPlayerStat);
-     }
-     public void setDefaultEnemyStat(){
-        Data.write.writeEntireJson(Data.fileEnemyStats, defaultEnemyStats);
-     }
-     public void setDefaultLevelStat(){Data.write.writeEntireJson(Data.fileLevelStats, defaultLevelStats);}
+    public void resetEnemyToDefault(){
+        Data.write.updateJson(Data.fileEnemyStats, "speedForward", 5);
+        Data.write.updateJson(Data.fileEnemyStats, "speedSideways", 5);
+    }
+    public void setDefaultPlayerStats(){Data.write.writeEntireJson(Data.filePlayerStats, defaultPlayerStat);}
+    public void setDefaultEnemyStat(){Data.write.writeEntireJson(Data.fileEnemyStats, defaultEnemyStats);}
+    public void setDefaultLevelStat(){Data.write.writeEntireJson(Data.fileLevelStats, defaultLevelStats);}
     public void setDefaultUprgradesStats(){Data.write.writeEntireJson(Data.fileUpgradesStats, defaultUprgradesStats);}
 }

@@ -1,6 +1,5 @@
 package com.mygdx.game.enemies;
 
-import java.util.random.*;
 
 public class Position {
 
@@ -42,7 +41,6 @@ public class Position {
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
-
     public boolean isFromTop() {
         return isFromTop;
     }

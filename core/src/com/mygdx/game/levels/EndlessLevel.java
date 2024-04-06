@@ -2,6 +2,7 @@ package com.mygdx.game.levels;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.combat.Combat;
+import com.mygdx.game.data.Data;
 import com.mygdx.game.enemies.Enemy;
 import com.mygdx.game.interfaces.levelInterface;
 
@@ -26,6 +27,7 @@ public class EndlessLevel implements levelInterface {
         this.time = 0f;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
+        Data.setDefault.resetEnemyToDefault();
     }
 
     private int getRng(int min, int max){
@@ -38,14 +40,12 @@ public class EndlessLevel implements levelInterface {
         boolean isFromTop;
         for(int i=0; i<amount; i++){
         //TODO for test;
-            Combat.spawnEnemy(enemyId, width/2,height/2, 180, true);
-
+            Combat.spawnEnemy(enemyId, width/2,height/2, 250, true);
         }
     }
 
     public void tickOfLevel(float locTime){
         time += locTime;
-        //System.out.println("Time of level: " + time);
 
         if(time > 3f && test == false){
             test = true;

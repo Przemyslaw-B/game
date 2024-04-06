@@ -75,21 +75,6 @@ public class Combat {
         }
     }
 
-    public void enemyMove(float delta){
-        if(enemyArrayList.size() > 0){
-            for(Enemy pickedEnemy : enemyArrayList){
-                //todo podzielić Klase ENEMY na dodatkowo Move
-                /*
-                int enemyX = pickedEnemy.getX();
-                enemyX += pickedEnemy.getSpeedX();
-                int enemyY = pickedEnemy.getY();
-                enemyY += pickedEnemy.getSpeedY();
-                pickedEnemy.setX(enemyX);
-                pickedEnemy.setY(enemyY);
-                 */
-            }
-        }
-    }
     public void enemyBullets(float delta , Enemy enemy){
         if(bulletsArrayList.size()>0){
             for (Bullet bullet: bulletsArrayList) {
@@ -120,7 +105,7 @@ public class Combat {
 
         //System.out.println("Making tick of a battle!");
         moveBullet(delta);
-        enemyMove();
+        enemyMove(delta);
         if(Gdx.input.isTouched()){
             userShoot();
         }
@@ -163,13 +148,10 @@ public class Combat {
         }
     }
 
-    private void enemyMove(){
-        System.out.println("~~~ Enemy Array List Size: "+ enemyArrayList.size() + " ~~~");
-        if(enemyArrayList.size() > 0){
-            for(int i=0; i < enemyArrayList.size(); i++){
-                Enemy enemy = enemyArrayList.get(i);
-                System.out.println("~~~ Ruszam ENEMY nr. " + i + " ~~~");
-                enemy.movement.move();
+    private void enemyMove(float delta){
+        if(!enemyArrayList.isEmpty()){
+            for(Enemy pickedEnemy : enemyArrayList){
+                pickedEnemy.movement.move(delta);
             }
         }
     }
@@ -355,4 +337,6 @@ public class Combat {
         }
         return false;
     }
+
+
 }

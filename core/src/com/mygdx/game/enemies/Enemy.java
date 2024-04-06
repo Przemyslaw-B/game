@@ -62,7 +62,10 @@ public class Enemy {
         int y = position.getY();
         int id = statistics.getId();
         int damage = statistics.getDamage();
-        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
+        //Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
+        //Bullet bullet = new Bullet(x, y, damage, id, position.getRotation());
+        int angle = calculateAngle(x, y);
+        Bullet bullet = new Bullet(x, y, damage, id, angle);
         timer = 0f;
         return bullet;
     }
@@ -74,6 +77,30 @@ public class Enemy {
         skin.setPositionSprite(texturePositionX, texturePositionY);
         skin.setRotation(position.getRotation());
         skin.getSprite().draw(Drop.batch);
+    }
+    public int getId(){return id;}
+
+    private int calculateAngle(int startingX, int startingY){
+        int angle=0;
+        int playerX = com.mygdx.game.player.Position.getShipPositionX();
+        int playerY = com.mygdx.game.player.Position.getShipPositionY();
+        double x = mod(startingX-playerX);
+        double y = mod(startingY-playerY);
+        double c = Math.sqrt((x*x) + (y*y));
+        double val = Math.asin(x/c);
+        //TODO ODBICIE 0, 90, 180, 270 degree
+        System.out.println("Pozycja ENEMY: X: " + startingX + ", Y: " + startingY);
+        System.out.println("Pozycja GRACZA: X: " + playerX + ", Y: " + playerY);
+        System.out.println("Wylicznony kąt pocisku to: " + val);
+        angle = (int) val;
+        return angle;
+    }
+
+    private int mod (int value){
+        if(value <0){
+            return -value;
+        }
+        return value;
     }
 }
 

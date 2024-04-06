@@ -11,15 +11,13 @@ public class Position extends Statistics{
         shipY = Gdx.app.getGraphics().getHeight()/2;
     }
 
-    public int getShipPositionX(){
-        return shipX;
-    }
+    public static int getShipPositionX(){return shipX;}
 
     public void setShipPositionX(int shipX){
         this.shipX =shipX;
     }
 
-    public int getShipPositionY(){
+    public static int getShipPositionY(){
         return shipY;
     }
 

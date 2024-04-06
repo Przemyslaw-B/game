@@ -5,14 +5,14 @@ import com.mygdx.game.interfaces.stats;
 
 public class Statistics implements stats {
 
-    private static int id;
-    private static int shipWidth;
-    private static int shipHeight;
-    private static int health;
-    private static int damage;
-    private static float attackSpeed = 0.4f;
-    private static int speedForward;
-    private static int speedSideways;
+    private int id;
+    private int shipWidth;
+    private int shipHeight;
+    private int health;
+    private int damage;
+    private float attackSpeed = 0.4f;
+    private int speedForward;
+    private int speedSideways;
 
     public Statistics(int id){
         this.id=id;
@@ -23,7 +23,7 @@ public class Statistics implements stats {
         return health;
     }
     public void setHealth(int health) {
-        Statistics.health = health;
+        this.health = health;
     }
 
     public int getDamage(){
@@ -51,7 +51,7 @@ public class Statistics implements stats {
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Statistics implements stats {
 
     @Override
     public int getSpeedForward() {
-        return 0;
+        return speedForward;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Statistics implements stats {
 
     @Override
     public int getSpeedSideways() {
-        return 0;
+        return speedSideways;
     }
 
     @Override
