@@ -1,6 +1,6 @@
 package com.mygdx.game.enemies;
 
-public class Movement extends Enemy{
+public class Movement {
     Position position;
     Statistics statistics;
     int newX;

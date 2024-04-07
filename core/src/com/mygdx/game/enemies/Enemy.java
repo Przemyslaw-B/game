@@ -17,9 +17,8 @@ public class Enemy {
     float timer;
     int[] vector;
     private boolean isFromTop;
+    private boolean isFocusedOnPlayer;
 
-    //TODO Get rotation from enemy
-    //TODO SET shoting direction of enemy
 
     public Enemy(int x, int y, int id) {
         this.id = id;
@@ -34,7 +33,7 @@ public class Enemy {
         vector[1] = -1;
     }
 
-    public Enemy(int x, int y, int id, int rotation, boolean isFromTop) {
+    public Enemy(int x, int y, int id, int rotation, boolean isFromTop, boolean isFocusedOnPlayer) {
         this.id = id;
         statistics = new Statistics(id);
         this.action = new Actions(statistics);
@@ -45,9 +44,9 @@ public class Enemy {
         this.vector = new int[2];
         vector[0] = 0;
         vector[1] = -1;
+        this.isFromTop = isFromTop;
+        this.isFocusedOnPlayer = isFocusedOnPlayer;
     }
-
-    public Enemy(){}
 
     public boolean canShoot(float delta){
         timer += delta;
@@ -56,6 +55,9 @@ public class Enemy {
         }
         return false;
     }
+
+    public boolean getIsFocusedOnPlayer(){return isFocusedOnPlayer;}
+    public void setIsFocusedOnPlayer(boolean isFocused){this.isFocusedOnPlayer = isFocused;}
 
     public Bullet shoot(boolean isAimed){
         int x = position.getX();

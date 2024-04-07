@@ -40,18 +40,27 @@ public class EndlessLevel implements levelInterface {
         boolean isFromTop;
         for(int i=0; i<amount; i++){
         //TODO for test;
-            Combat.spawnEnemy(enemyId, width/2,height/2, 250, true);
+            Combat.spawnEnemy(enemyId, width/2,height/2, 250, false, true);
         }
     }
 
     public void tickOfLevel(float locTime){
         time += locTime;
+        float reqTime = 3f;
+        int amountEnemy=1;
 
-        if(time > 3f && test == false){
-            test = true;
-            System.out.println("~~~ It's time for a new ENEMY! ~~~");
-            spawnEnemy(1);
+
+        //TODO WHILE DO POPRAWY, 
+        while(amountEnemy > 0){
+            if(time > reqTime && test == false){
+                //test = true;
+                System.out.println("~~~ It's time for a new ENEMY! ~~~");
+                //spawnEnemy(1);
+                reqTime += 1f;
+            }
+            amountEnemy -= 1;
         }
+
     }
 
 }

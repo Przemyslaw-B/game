@@ -47,12 +47,13 @@ public class Combat {
         //TODO DO TESTOW WARTOSCI NA STALE
         enemyX=500;
         enemyY=500;
-        enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
+        //enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
+        enemyArrayList.add(new Enemy(enemyX, enemyY, 2, 180, true, false));
     }
 
-    public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop){
+    public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
         //enemyArrayList.add(new Enemy(enemyId, enemyX, enemyY, rotation, isFromTop));
-        enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop));
+        enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop, isFocusedOnPlayer));
     }
 
     public void removeDeadEnemy(){
@@ -139,10 +140,9 @@ public class Combat {
 
     private void enemyShoot(float delta){
         if(enemyArrayList.size() > 0){
-            for(int i=0; i < enemyArrayList.size(); i++){
-                Enemy enemy = enemyArrayList.get(i);
-                if(enemy.canShoot(delta)){
-                    bulletsArrayList.add(enemy.shoot(false));
+            for(Enemy pickedEnemy : enemyArrayList){
+                if(pickedEnemy.canShoot(delta)){
+                    bulletsArrayList.add(pickedEnemy.shoot(pickedEnemy.getIsFocusedOnPlayer()));
                 }
             }
         }
