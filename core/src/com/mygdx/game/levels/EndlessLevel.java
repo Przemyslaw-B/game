@@ -6,6 +6,7 @@ import com.mygdx.game.data.Data;
 import com.mygdx.game.enemies.Enemy;
 import com.mygdx.game.interfaces.levelInterface;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EndlessLevel implements levelInterface {
@@ -20,6 +21,10 @@ public class EndlessLevel implements levelInterface {
     private float time;
 
     private boolean test = false;
+    private float reqTime = 3f;
+    private int amountEnemy = 3;
+    private int amountSameEnemy=1;
+    private ArrayList enemyQueue;
 
 
     public EndlessLevel(){
@@ -34,33 +39,31 @@ public class EndlessLevel implements levelInterface {
         return random.nextInt(max-min) + min;
     }
 
-    private void spawnEnemy(int amount){
+    private void spawnEnemy(boolean isFromTop, boolean isFocusedOnPlayer){
         int enemyId = 2;
-        boolean isleftSite;
-        boolean isFromTop;
-        for(int i=0; i<amount; i++){
-        //TODO for test;
-            Combat.spawnEnemy(enemyId, width/2,height/2, 250, false, true);
-        }
+        Combat.spawnEnemy(enemyId, width/2,height/2, 250, isFromTop, isFocusedOnPlayer);
     }
 
-    public void tickOfLevel(float locTime){
+    public void tickOfLevel(float locTime) {
         time += locTime;
-        float reqTime = 3f;
-        int amountEnemy=1;
-
-
-        //TODO WHILE DO POPRAWY, 
-        while(amountEnemy > 0){
-            if(time > reqTime && test == false){
-                //test = true;
+        if (time > reqTime) {
+            if (amountEnemy > 0) {
                 System.out.println("~~~ It's time for a new ENEMY! ~~~");
-                //spawnEnemy(1);
-                reqTime += 1f;
+                spawnEnemy(false, true);
+                amountEnemy--;
+                reqTime += 2f;
             }
-            amountEnemy -= 1;
         }
-
+        if (amountEnemy <= 0) {
+            reqTime = time;
+            amountEnemy = 3;
+        }
     }
+
+    private void chooseEnemyToSpawn(int amount){
+        this.amountSameEnemy = amount;
+        //TODO add new enemy to queue spawn;
+    }
+
 
 }
