@@ -24,7 +24,7 @@ public class EndlessLevel implements levelInterface {
     private float reqTime = 3f;
     private int amountEnemy = 3;
     private int amountSameEnemy=1;
-    private ArrayList enemyQueue;
+    private ArrayList <Enemy> enemyQueue;
 
 
     public EndlessLevel(){
@@ -37,21 +37,28 @@ public class EndlessLevel implements levelInterface {
     }
 
     private int getRng(int min, int max){
-        return random.nextInt(max-min) + min;
+        int roll = random.nextInt(max - min) + min;
+        return roll;
     }
 
-    private void spawnEnemy(boolean isFromTop, boolean isFocusedOnPlayer){
-        int enemyId = 2;
-        Combat.spawnEnemy(enemyId, width/2,height/2, 250, isFromTop, isFocusedOnPlayer);
+    private void spawnEnemy(int x, int y, int enemyId,int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
+        Combat.spawnEnemy(enemyId, x,y, rotation, isFromTop, isFocusedOnPlayer);
     }
+
+    //TODO Usunięcie przeciwników poza ekranem (memory leak)
+    //TODO Przeciwnicy z góry bez poruszania w dół
+    //TODO kolejka przeciwników w nowej klasie nie w enemy tylko tempEnemy?
+    //TODO przeciwnicy na diagonali nie poruszają się zgodnie z rotacją
+    //TODO przeciwnicy na start bardziej  przesunięci
+    //TODO ruch przeciwników na boki + góra/dół podczas rozgrywki
 
     public void tickOfLevel(float locTime) {
         time += locTime;
+        chooseEnemyToSpawn(amountEnemy);
         if (time > reqTime) {
-            if (amountEnemy > 0) {
-                System.out.println("~~~ It's time for a new ENEMY! ~~~");
-                spawnEnemy(false, true);
-                amountEnemy--;
+            if (!enemyQueue.isEmpty()) {
+                spawnEnemy(enemyQueue.get(0).position.getX(), enemyQueue.get(0).position.getY(), enemyQueue.get(0).getId(), enemyQueue.get(0).position.getRotation(), enemyQueue.get(0).getIsFromTop(), enemyQueue.get(0).getIsFocusedOnPlayer());
+                enemyQueue.remove(0);
                 reqTime += 2f;
             }
         }
@@ -80,6 +87,7 @@ public class EndlessLevel implements levelInterface {
                 y = rollPositionY(x, isFromTop);
             }
             Enemy tempEnemy = new Enemy(x, y, id, rotation, isFromTop, isAimedOnPlayer);
+            enemyQueue.add(tempEnemy);
             amountSameEnemy--;
         }
     }
@@ -87,7 +95,7 @@ public class EndlessLevel implements levelInterface {
     private int rollID(){
         int id = 2;
         int maxRoll = 2;
-        id = getRng(2,maxRoll);
+        //id = getRng(2,maxRoll);
         return id;
     }
 

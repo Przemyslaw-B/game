@@ -84,6 +84,7 @@ public class Enemy {
         skin.getSprite().draw(Drop.batch);
     }
     public int getId(){return id;}
+    public boolean getIsFromTop(){return isFromTop;}
 
     private int calculateAngle(int startingX, int startingY){
         int angle=0;
