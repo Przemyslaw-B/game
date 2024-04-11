@@ -48,7 +48,7 @@ public class Movement {
         int newY = position.getY();
         if(movingToRight){
             newX += statistics.getSpeedSideways();
-            int temp = newX + Math.round((sizeX/2));
+            int temp = newX + Math.round(sizeX/2);
         }else{
             newX -= statistics.getSpeedSideways();
         }
