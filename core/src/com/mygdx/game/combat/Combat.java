@@ -112,6 +112,7 @@ public class Combat {
         level.tickOfLevel(delta);
 
         //System.out.println("Making tick of a battle!");
+
         moveBullet(delta);
         enemyMove(delta);
         if(Gdx.input.isTouched()){

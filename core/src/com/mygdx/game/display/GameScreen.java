@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
         background.move(delta);
         //System.out.println("Is Battle On: " + combat.isBattleOn());
         //System.out.println("Exit Flag: " + exitFlag);
-        combat.getAMOUNT_TEST_ONLY();
+        //combat.getAMOUNT_TEST_ONLY();
 
         if(exitFlag){ //exit to main menu
             //System.out.println("~~~~~Exit Flag: " + exitFlag + "~~~~~");
