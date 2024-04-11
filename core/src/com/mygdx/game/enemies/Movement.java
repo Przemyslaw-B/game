@@ -46,13 +46,19 @@ public class Movement {
     private void moveIfFromTop(){
         int newX = position.getX();
         int newY = position.getY();
-        int temp;
         if(movingToRight){
             newX += statistics.getSpeedSideways();
-            temp = newX + Math.round(sizeX/2);
+            if(checkIfCloseToWall(newX)){
+                movingToRight = false;
+            }
         }else{
             newX -= statistics.getSpeedSideways();
+            if(checkIfCloseToWall(newX)){
+                movingToRight = true;
+            }
         }
+        position.setX(newX);
+        position.setY(newY);
     }
 
     private void moveIfDiagonal(){
@@ -69,11 +75,23 @@ public class Movement {
         return false;
     }
 
-    private boolean checkIfCloseToWall(int newX, int sizeX){
+    private boolean checkIfCloseToWall(int newX){
+       int temp;
         if(movingToRight){
-
+            temp = newX + Math.round(sizeX/2);
+            if(temp >= width){
+                return true;
+            } else{
+                return false;
+            }
+        } else {
+            temp = newX - Math.round(sizeX/2);
+            if(temp <= 0){
+                return true;
+            } else {
+                return false;
+            }
         }
-
     }
 
     private void calculateNewPosition(int rotation){

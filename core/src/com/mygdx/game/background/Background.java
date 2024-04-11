@@ -14,7 +14,7 @@ public class Background {
 
     public Background(){
         starMap = new StarMap();
-        speedPerSec = 350f;
+        speedPerSec = 150f;
         time=0f;
     }
 

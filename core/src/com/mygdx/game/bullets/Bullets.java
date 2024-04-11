@@ -14,7 +14,7 @@ public interface Bullets {
    public void setSpeedY(int speedY);
 
    public Texture getBulletTexture();
-   public void setBulletTexture(Texture texture);
+   public void setBulletTexture(int id);
 
    public void moveBullet(float delta);
 

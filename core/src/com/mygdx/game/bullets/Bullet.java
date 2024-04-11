@@ -29,7 +29,7 @@ public class Bullet implements Bullets{
         speedY = 600;    //TODO TEST VALUE
         speed = 600;
         this.shipId = id;
-        texture = new Texture("star.png");
+        setBulletTexture(id);
         setFriendlyFire(id);
         this.damage = damage;
 
@@ -99,12 +99,7 @@ public class Bullet implements Bullets{
         return texture;
     }
 
-    @Override
-    public void setBulletTexture(Texture texture) {
-    //TODO wczytywanie textury z bazy
 
-    //this.texture=
-    }
 
     @Override
     public void moveBullet(float delta) {
@@ -184,6 +179,24 @@ public class Bullet implements Bullets{
 
     public void drawBullet(){
         Drop.batch.draw(texture, x, y);
+    }
+
+
+    public void setBulletTexture(int id) {
+        //TODO wczytywanie textury z bazy
+        switch (id){
+            case 1:
+                this.texture = new Texture("bullets/bullet.png");
+                break;
+
+            case 2:
+                this.texture = new Texture("bullets/bullet_enemy.png");
+                break;
+
+            default:
+                this.texture = new Texture("bullets/bullet_enemy.png");
+                break;
+        }
     }
 
 

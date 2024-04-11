@@ -67,7 +67,7 @@ public class EndlessLevel implements levelInterface {
             amountEnemy = 3;
         }
     }
-
+    
     private void chooseEnemyToSpawn(int amount){
         this.amountSameEnemy = amount;
         int id = rollID();
