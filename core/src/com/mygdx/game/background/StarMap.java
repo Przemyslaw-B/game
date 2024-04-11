@@ -18,8 +18,8 @@ public class StarMap {
     private int pieceWidth;
     public StarMap(){
         rand = new Random();
-        defaultRowsAmount = 5;    //default value
-        columnsAmount = 10; //defaultValue
+        defaultRowsAmount = 4;    //default value
+        columnsAmount = 8; //defaultValue
         chance = 75;
         starMap = new ArrayList<>();
         createStarMap();

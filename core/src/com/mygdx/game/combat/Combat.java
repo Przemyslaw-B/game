@@ -23,9 +23,12 @@ public class Combat {
     private BattleInterface battleInterface;
     private Score score;
     private Level level;
-
+    private int width;
+    private int height;
 
     public Combat(Ship userShip){
+        this.width = Gdx.graphics.getWidth();
+        this.height = Gdx.graphics.getHeight();
         score = new Score();
         this.enemyArrayList = new ArrayList<Enemy>();
         this.bulletsArrayList = new ArrayList<Bullet>();
@@ -45,14 +48,12 @@ public class Combat {
         int enemyY = Gdx.app.getGraphics().getHeight();
         int enemyX = rand.nextInt(Gdx.app.getGraphics().getWidth());
         //TODO DO TESTOW WARTOSCI NA STALE
-        enemyX=500;
-        enemyY=500;
-        //enemyArrayList.add(new Enemy(enemyX, enemyY, enemyId));
-        enemyArrayList.add(new Enemy(enemyX, enemyY, 2, 180, true, false));
+        //enemyX=500;
+        //enemyY=500;
+        //enemyArrayList.add(new Enemy(enemyX, enemyY, 2, 180, true, false));
     }
 
     public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
-        //enemyArrayList.add(new Enemy(enemyId, enemyX, enemyY, rotation, isFromTop));
         enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop, isFocusedOnPlayer));
     }
 
@@ -99,6 +100,12 @@ public class Combat {
         }
     }
 
+    public void getAMOUNT_TEST_ONLY(){
+        System.out.println("~~~ AMOUNT of ENEMY: " + enemyArrayList.size() + " ~~~");
+        System.out.println("~~~ AMOUNT of BULLETS: " + bulletsArrayList.size() + " ~~~");
+    }
+
+    //TODO MEMORY LEAK arrays?
     public void tickOfBattle(float delta){
         shotTimer += delta;
         time += delta;
@@ -111,6 +118,7 @@ public class Combat {
             userShoot();
         }
         removeBulletNotInView();
+        removeEnemyNotInView();
         //System.out.println("Drawing all bullets!");
         enemyShoot(delta);  //strzelanie przeciwników
         drawAllBullets();
@@ -150,10 +158,10 @@ public class Combat {
 
     private void enemyMove(float delta){
         if(!enemyArrayList.isEmpty()){
-            int count = 0;
+            //int count = 0;
             for(Enemy pickedEnemy : enemyArrayList){
-                System.out.println("Ruszam wrogiem nr: " + count);
-                count++;
+                //System.out.println("Ruszam wrogiem nr: " + count);
+                //count++;
                 pickedEnemy.movement.move(delta);
             }
         }
@@ -191,6 +199,37 @@ public class Combat {
             return false;
          }
         return true;
+    }
+
+    private void removeEnemyNotInView(){
+        if(!enemyArrayList.isEmpty()){
+            for(int i = enemyArrayList.size()-1; i > 0; i--){
+                Enemy pickedEnemy = enemyArrayList.get(i);
+                if(checkEnemyNOTInView(pickedEnemy)){
+                    enemyArrayList.remove(pickedEnemy);
+                }
+            }
+        }
+    }
+
+    private boolean checkEnemyNOTInView(Enemy pickedEnemy){
+        int enemyX = pickedEnemy.position.getX();
+        int enemyY = pickedEnemy.position.getY();
+        int sizeX = pickedEnemy.skin.getShipWidth()/2;
+        int sizeY = pickedEnemy.skin.getShipHeight()/2;
+        if(enemyX - sizeX > width){
+            return true;
+        }
+        if(enemyX + sizeX < 0){
+            return true;
+        }
+        if(enemyY - sizeY > height){
+            return true;
+        }
+        if(enemyY + sizeY < 0){
+            return true;
+        }
+        return false;
     }
 
     public boolean checkUserCollision() {
@@ -341,6 +380,11 @@ public class Combat {
             }
         }
         return false;
+    }
+
+    public void endOfGameKillAll(){
+        bulletsArrayList.clear();
+        enemyArrayList.clear();
     }
 
 

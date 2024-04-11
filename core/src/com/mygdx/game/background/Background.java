@@ -14,7 +14,7 @@ public class Background {
 
     public Background(){
         starMap = new StarMap();
-        speedPerSec = 150f;
+        speedPerSec = 50f;
         time=0f;
     }
 
@@ -26,6 +26,7 @@ public class Background {
     }
 
     public void move(float delta){
+
         ArrayList<Star> tempMap = starMap.getStarMap();
         for(int i=0; i<tempMap.size()-1; i++){
             if(tempMap.get(i).getY() > 0){
@@ -36,9 +37,11 @@ public class Background {
                 starMap.renewSingleStar(i);
             }
         }
+
     }
 
     public void draw(){
+
         ArrayList<Star> tempStarMap = starMap.getStarMap();
         for(int i=0; i<tempStarMap.size()-1; i++){
             Star star = tempStarMap.get(i);
@@ -47,6 +50,7 @@ public class Background {
             int starY = star.getY();
             Drop.batch.draw(starTexture, starX, starY);
         }
+
     }
 
 

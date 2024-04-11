@@ -19,7 +19,7 @@ public class GameScreen implements Screen {
     int width;
     float time;
     Background background;
-    boolean exitFlag=false;
+    private boolean exitFlag;
     boolean deadFlag=false;
     private Ship ship;
 
@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
     private Combat combat;
     private Level level;
     private GameOver gameOver;
+    private int backgroundSpeed = 200;
 
 
     //Enemy enemy;
@@ -34,7 +35,7 @@ public class GameScreen implements Screen {
     public GameScreen(final Drop game, Background background, Ship ship) {
         this.game=game;
         this.gameOver = new GameOver();
-
+        this.exitFlag = false;
         this.ship = ship;
         this.time=0f;
         height = Gdx.app.getGraphics().getHeight(); //height of user device
@@ -49,7 +50,7 @@ public class GameScreen implements Screen {
         //DO TESTÓW JEDEN WRÓG
         //enemyList.add(new Enemy(500, 500, 2));
 
-        combat.spawnEnemy(2);
+        //combat.spawnEnemy(2);
     }
 
     @Override
@@ -65,102 +66,36 @@ public class GameScreen implements Screen {
         game.batch.begin();
         background.draw();
         background.move(delta);
-
-
+        //System.out.println("Is Battle On: " + combat.isBattleOn());
+        //System.out.println("Exit Flag: " + exitFlag);
+        combat.getAMOUNT_TEST_ONLY();
 
         if(exitFlag){ //exit to main menu
+            //System.out.println("~~~~~Exit Flag: " + exitFlag + "~~~~~");
+            combat.endOfGameKillAll();
             game.setScreen(new MainMenuScreen(game));
             dispose();
-            /*
-            for (int i = 0; i < skyMap.length; i++) {
-                game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-            }
-            if(positionPerSec <= 50 && ship.position.getShipPositionY() < -ship.statistics.getShipHeight()/2){
-            //ship.getShipY() < -ship.getShipLength()/2){
-                game.setScreen(new MainMenuScreen(game, skyMap)); //enter menu
-                dispose();
-            }
-            if (positionPerSec != 50){
-                if(positionPerSec > 50){
-                    if(positionPerSec-5<50){
-                        positionPerSec -= 1;
-                    } else {
-                        positionPerSec -= 5;
-                    }
-                } else {
-                    if(positionPerSec+5 > 50){
-                        positionPerSec += 1;
-                    } else{
-                        positionPerSec += 5;
-                    }
-                }
-                moveSky(delta, positionPerSec);
-            }
-            //if(ship.getShipY() >= -ship.getShipLength()/2){
-            if(ship.position.getShipPositionY() >= -ship.statistics.getShipHeight()/2){
-                //ship.setShipY(ship.getShipY()-7);
-                ship.position.setShipPositionY(ship.position.getShipPositionY()-7);
-                moveSky(delta, positionPerSec);
-            }
-        */
-
-        }else{
+        }
+        if(combat.isBattleOn()){
             if(time > 1){   //level here
-                background.setSpeedPerSec(800);
+                background.setSpeedPerSec(this.backgroundSpeed);
                 combat.tickOfBattle(delta);
-                //ship.draw();
-                //here add level
-
                 //Ship Control
                 if(Gdx.input.isTouched() && ship.statistics.isAlive()){
-                    //ship.shipControl(Gdx.input.getX(), Gdx.input.getY(), delta);
-                    //System.out.println("Ship is ALIVE!, let's move");
                     ship.movement.shipControl();
                 }
                 //End of Ship Control
-
-                //level end
             } else {ship.draw();} //TODO - DO TESTÓW WYŚWIETLANIA!!!
-            /* else if(time <= 2){   //speed up to enter level
-                positionPerSec += 20;
-                for (int i = 0; i < skyMap.length; i++) {
-                    game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-                }
-                moveSky(delta, positionPerSec);
-                //if(ship.getShipY() + ship.getShipLength()/2 < (height/20)*19){
-                if(ship.position.getShipPositionY() + ship.statistics.getShipHeight()/2 < (height/20)*19){
-                    //ship.setShipY(ship.getShipY()+5);
-                    ship.position.setShipPositionY(ship.position.getShipPositionY()+5);
-                }
-            } else if(time <3 && time >2) { //hold that speed
-                for (int i = 0; i < skyMap.length; i++) {
-                    game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-                }
-                moveSky(delta, positionPerSec);
-            }else if(time <= 5 && time >= 3){   //slow down to fight in level
-                positionPerSec -= 17;
-                for (int i = 0; i < skyMap.length; i++) {
-                    game.batch.draw(star, skyMap[i][0], skyMap[i][1]);
-                }
-                moveSky(delta, positionPerSec);
-                //if(ship.getShipY() - ship.getShipLength()/2 > height/20){
-                if(ship.position.getShipPositionY() - ship.statistics.getShipHeight()/2 > height/20){
-                    //ship.setShipY(ship.getShipY()-10);
-                    ship.position.setShipPositionY(ship.position.getShipPositionY()-10);
-                }
+        } else {    //press anywhere to quit level
+            //System.out.println("~~~~BATTLE IS NOT ON!~~~~~");
+            gameOver.drawGameOver();
+            combat.endOfGameKillAll();
+            if(gameOver.checkIfContinue()){
+                this.exitFlag = true;
+                //System.out.println("~~~~~Exit Flag: " + exitFlag + "~~~~~");
             }
-           */
         }
-        //game.batch.draw(ship.getShipTexture(), ship.getShipX()-(ship.getShipWidth()/2), ship.getShipY()-(ship.getShipLength()/2));    //draw ship
-        //game.batch.draw(ship.skin.getShipTexture(), ship.position.getShipPositionX()-(ship.statistics.getShipWidth()/2), ship.position.getShipPositionY()-(ship.statistics.getShipHeight()/2)); //draw a ship
 
-
-            if (!combat.isBattleOn()) {    //press anywhere to quit level
-                gameOver.drawGameOver();
-                if(gameOver.checkIfContinue()){
-                    exitFlag = true;
-                }
-            }
         game.batch.end();
     }
 
