@@ -18,15 +18,18 @@ public class Enemy {
     int[] vector;
     private boolean isFromTop;
     private boolean isFocusedOnPlayer;
-
+    int sizeX;
+    int sizeY;
 
     public Enemy(int x, int y, int id) {
         this.id = id;
         statistics = new Statistics(id);
         this.action = new Actions(statistics);
         skin = new Skin(id);
+        sizeX = skin.getShipWidth();
+        sizeY = skin.getShipHeight();
         position = new Position(x, y);
-        movement = new Movement(position, statistics);
+        movement = new Movement(position, statistics, sizeX, sizeY);
         timer = 0f;
         this.vector = new int[2];
         vector[0] = 0;
@@ -39,7 +42,7 @@ public class Enemy {
         this.action = new Actions(statistics);
         skin = new Skin(id);
         position = new Position(x, y, rotation, isFromTop);
-        movement = new Movement(position, statistics);
+        movement = new Movement(position, statistics, sizeX, sizeY);
         timer = 0f;
         this.vector = new int[2];
         vector[0] = 0;

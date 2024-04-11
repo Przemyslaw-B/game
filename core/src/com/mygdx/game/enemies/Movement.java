@@ -1,5 +1,7 @@
 package com.mygdx.game.enemies;
 
+import com.badlogic.gdx.Gdx;
+
 public class Movement {
     Position position;
     Statistics statistics;
@@ -8,17 +10,62 @@ public class Movement {
     double a;
     double b;
     float delta;
+    boolean isFromTop;
+    boolean tempIsLeft;
+    int width;
+    int height;
+    int sizeX;
+    int sizeY;
+    boolean movingToRight;
 
-    public Movement(Position position, Statistics statistics){
+    public Movement(Position position, Statistics statistics, int sizeX, int sizeY){
+        this.width = Gdx.graphics.getWidth();
+        this.height = Gdx.graphics.getHeight();
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
         this.position = position;
         this.statistics = statistics;
+        this.isFromTop = position.isFromTop();
+        this.tempIsLeft = calculateIsLeft();
+        if(tempIsLeft){
+            this.movingToRight = true;
+        } else {
+            this.movingToRight = false;
+        }
     }
 
-    public void move(float delta){
+    public void move(float delta){  //TODO colision detect to add
         this.delta = delta;
+        if(!isFromTop){
+            moveIfDiagonal();
+        }else{
+            moveIfFromTop();
+        }
+    }
+
+    private void moveIfFromTop(){
+        int newX = position.getX();
+        int newY = position.getY();
+        if(movingToRight){
+            newX += statistics.getSpeedSideways();
+            int temp = newX + Math.round((sizeX/2));
+        }else{
+            newX -= statistics.getSpeedSideways();
+        }
+    }
+
+    private void moveIfDiagonal(){
         calculateNewPosition(position.getRotation());
         position.setX(newX);
         position.setY(newY);
+    }
+
+    private boolean calculateIsLeft(){
+        int tempPosition = position.getX();
+        if(tempPosition < width/2){
+            return true;
+        }
+        return false;
     }
 
     private void calculateNewPosition(int rotation){
