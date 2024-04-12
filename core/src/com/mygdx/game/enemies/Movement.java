@@ -78,7 +78,7 @@ public class Movement {
     private boolean checkIfCloseToWall(int newX){
        int temp;
         if(movingToRight){
-            temp = newX + Math.round(sizeX/2);
+                  temp = newX + Math.round(sizeX/2);
             if(temp >= width){
                 return true;
             } else{

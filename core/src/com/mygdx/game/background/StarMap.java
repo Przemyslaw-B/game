@@ -1,6 +1,7 @@
 package com.mygdx.game.background;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.data.TexturesLoader;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +17,10 @@ public class StarMap {
     private static ArrayList<Star> starMap;
     private int pieceHeight;
     private int pieceWidth;
-    public StarMap(){
+    private TexturesLoader manager;
+
+    public StarMap(TexturesLoader manager){
+        this.manager = manager;
         rand = new Random();
         defaultRowsAmount = 4;    //default value
         columnsAmount = 8; //defaultValue
@@ -65,7 +69,7 @@ public class StarMap {
             if(val<chance){
                 int starX = rand.nextInt(pieceWidth)+tempWidth;   //    x location of star
                 int starY = rand.nextInt(pieceHeight)+tempHeight; //    y location of star
-                starMap.add(new Star(starX, starY));    //add new star
+                starMap.add(new Star(starX, starY, manager));    //add new star
             }
             tempWidth += pieceWidth;
             if(tempWidth > Gdx.app.getGraphics().getWidth()){

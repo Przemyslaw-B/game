@@ -2,6 +2,8 @@ package com.mygdx.game.background;
 
 import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.data.TexturesLoader;
+
 public class Stars {
     private Texture starTexture;
     private  int width;
@@ -9,10 +11,12 @@ public class Stars {
     private int height;
     private int starsAmount;
     private int starsLines;
+    private TexturesLoader manager;
     Random rand;
     int chance = 75;    // value of chance to get a star from 0 to 99
 
-    public Stars(int width, int height){
+    public Stars(int width, int height, TexturesLoader manager){
+        this.manager = manager;
         this.width = width;
         this.height = height;
         this.rowStarsAmount = 10;
@@ -21,9 +25,10 @@ public class Stars {
 
     public Stars(){}
 
-    public void setTexture(Texture starTexture){
-        this.starTexture = starTexture;
+    public void setTexture(){
+        this.starTexture = manager.asset.get("star.png");
     }
+
     public Texture getStarTexture(){
         return starTexture;
     }

@@ -1,21 +1,31 @@
 package com.mygdx.game.background;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.data.TexturesLoader;
 
 public class Star {
 
     private Texture texture;
     private float x;
     private float y;
+    private TexturesLoader manager;
 
-    public Star(int x, int y){
+    public Star(int x, int y, TexturesLoader manager){
         this.x = x;
         this.y = y;
+        this.manager = manager;
+
         setDefaultTexture();
     }
 
     private void setDefaultTexture(){
-        texture = new Texture("star.png");
+        manager.asset.update();
+        if(manager.checkStarAsset()){
+            texture = manager.getStarAsset();
+        } else{
+            manager.loadStarTexture();
+            setDefaultTexture();
+        }
     }
 
     public void setX(float x){

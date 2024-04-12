@@ -3,6 +3,7 @@ package com.mygdx.game.display.gui;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.background.Background;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
@@ -35,11 +37,13 @@ public class MainMenuScreen extends Game implements Screen {
     private ImageButton playButton;
     private Background background;
     private float time=0f;
+    private TexturesLoader manager;
 
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
-        background = new Background();
+        this.manager = new TexturesLoader();
+        background = new Background(manager);
         this.data = new Data();
         ship = new Ship();
         this.width = Gdx.graphics.getWidth();

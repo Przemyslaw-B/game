@@ -1,6 +1,7 @@
 package com.mygdx.game.background;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 import java.util.ArrayList;
@@ -11,9 +12,11 @@ public class Background {
     private final StarMap starMap;
     private float time;
     private float newPosition;
+    private TexturesLoader manager;
 
-    public Background(){
-        starMap = new StarMap();
+    public Background(TexturesLoader manager){
+        this.manager = manager;
+        starMap = new StarMap(manager);
         speedPerSec = 50f;
         time=0f;
     }
