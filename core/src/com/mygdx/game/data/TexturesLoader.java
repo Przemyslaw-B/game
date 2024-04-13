@@ -16,6 +16,7 @@ public class TexturesLoader {
     private String enemyShipAsset_2 = "enemy.png";
 
 
+
     private AssetManager asset;
     public TexturesLoader(){
          this.asset=new AssetManager();
@@ -156,8 +157,6 @@ public class TexturesLoader {
                 return asset.get(enemyShipAsset_2);
         }
     }
-
-
 
 
     public void loadStarTexture(){

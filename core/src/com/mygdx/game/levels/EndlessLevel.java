@@ -48,8 +48,6 @@ public class EndlessLevel implements levelInterface {
         Combat.spawnEnemy(enemyId, x,y, rotation, isFromTop, isFocusedOnPlayer, manager);
     }
 
-    //TODO Usunięcie przeciwników poza ekranem (memory leak)
-    //TODO Przeciwnicy z góry bez poruszania w dół
     //TODO kolejka przeciwników w nowej klasie nie w enemy tylko tempEnemy?
     //TODO przeciwnicy na diagonali nie poruszają się zgodnie z rotacją
     //TODO przeciwnicy na start bardziej  przesunięci
@@ -57,17 +55,18 @@ public class EndlessLevel implements levelInterface {
 
     public void tickOfLevel(float locTime) {
         time += locTime;
-        chooseEnemyToSpawn(amountEnemy);
+
         if (time > reqTime) {
+            chooseEnemyToSpawn(amountEnemy);
             if (!enemyQueue.isEmpty()) {
                 spawnEnemy(enemyQueue.get(0).position.getX(), enemyQueue.get(0).position.getY(), enemyQueue.get(0).getId(), enemyQueue.get(0).position.getRotation(), enemyQueue.get(0).getIsFromTop(), enemyQueue.get(0).getIsFocusedOnPlayer());
                 enemyQueue.remove(0);
-                reqTime += 2f;
+                reqTime += 1.5f;
             }
         }
         if (amountEnemy <= 0) {
             reqTime = time;
-            amountEnemy = 3;
+            amountEnemy = 1;
         }
     }
     
@@ -89,7 +88,7 @@ public class EndlessLevel implements levelInterface {
                 x = rollPositionX(isFromTop, isLeft);
                 y = rollPositionY(x, isFromTop);
             }
-            Enemy tempEnemy = new Enemy(x, y, id, rotation, isFromTop, isAimedOnPlayer, manager);
+            Enemy tempEnemy = new Enemy(x, height, id, rotation, isFromTop, isAimedOnPlayer, manager);
             enemyQueue.add(tempEnemy);
             amountSameEnemy--;
         }
@@ -103,8 +102,8 @@ public class EndlessLevel implements levelInterface {
     }
 
     private boolean rollIsFromTop(){
-        int roll = getRng(0, 9);
-        if(roll >= 0 && roll <= 7){
+        int roll = getRng(1, 10);
+        if(roll <= 7){
             return true;
         }
         return false;
@@ -114,7 +113,7 @@ public class EndlessLevel implements levelInterface {
         if(isFromTop){
             return false;
         }
-        int roll = getRng(0, 9);
+        int roll = getRng(0, 10);
         if(roll >= 0 && roll <= 6){
             return false;
         }
@@ -148,7 +147,7 @@ public class EndlessLevel implements levelInterface {
         int y;
         if(isFromTop){
             if(positionX < 0 || positionX > width){
-                y = getRng(height-50, height);
+                y = getRng((height*3)/4, height);
                 return y;
             } else {
                 y = height + 50;
@@ -160,8 +159,8 @@ public class EndlessLevel implements levelInterface {
     }
 
     private boolean rollIsLeft(){
-        int roll = getRng(0,1);
-        if(roll == 0){
+        int roll = getRng(1,10);
+        if(roll <= 5){
             return true;
         }
         return false;

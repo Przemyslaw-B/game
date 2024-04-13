@@ -72,10 +72,14 @@ public class Enemy {
         int id = statistics.getId();
         int damage = statistics.getDamage();
         Bullet bullet;
-        if(isAimed){
-            int angle = calculateAngle(x, y);
-            bullet = new Bullet(x, y, damage, id, angle, manager);
-        } else{
+        if(!position.isFromTop()){
+            if(isAimed){
+                int angle = calculateAngle(x, y);
+                bullet = new Bullet(x, y, damage, id, angle, manager);
+            } else {
+                bullet = new Bullet(x, y, damage, id, 180, manager);
+            }
+        }else{
             bullet = new Bullet(x, y, damage, id, position.getRotation(), manager);
         }
         timer = 0f;

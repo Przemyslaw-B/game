@@ -2,6 +2,8 @@ package com.mygdx.game.enemies;
 
 import com.badlogic.gdx.Gdx;
 
+import java.util.Random;
+
 public class Movement {
     Position position;
     Statistics statistics;
@@ -17,8 +19,16 @@ public class Movement {
     int sizeX;
     int sizeY;
     boolean movingToRight;
+    boolean movingDown;
+    Random rand;
+    int limiterY ;
+
 
     public Movement(Position position, Statistics statistics, int sizeX, int sizeY){
+        this.rand = new Random();
+        this.movingDown = true;
+        int temp = Math.round(Gdx.graphics.getHeight()*0.7f);
+        this.limiterY = getRng(50, temp);
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         this.sizeX = sizeX;
@@ -43,20 +53,43 @@ public class Movement {
         }
     }
 
+    private int getRng(int min, int max){
+        return rand.nextInt(max-min) + min;
+    }
+
     private void moveIfFromTop(){
         int newX = position.getX();
         int newY = position.getY();
+
+        int tempX = Math.round(statistics.getSpeedSideways()/2);
         if(movingToRight){
-            newX += statistics.getSpeedSideways();
+            //newX += statistics.getSpeedSideways();
+            newX += tempX;
             if(checkIfCloseToWall(newX)){
                 movingToRight = false;
             }
         }else{
-            newX -= statistics.getSpeedSideways();
+            //newX -= statistics.getSpeedSideways();
+            newX -= tempX;
             if(checkIfCloseToWall(newX)){
                 movingToRight = true;
             }
         }
+
+        float tempY = statistics.getSpeedForward()/3;
+        if(movingDown){
+            newY -= Math.round(tempY);
+        } else {
+            newY += Math.round(tempY);
+        }
+
+        if(position.getY() <= limiterY){
+            movingDown = false;
+        }
+        if(position.getY() >= height){
+            movingDown = true;
+        }
+
         position.setX(newX);
         position.setY(newY);
     }
