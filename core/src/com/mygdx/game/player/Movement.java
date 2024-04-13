@@ -1,11 +1,15 @@
 package com.mygdx.game.player;
-
 import com.badlogic.gdx.Gdx;
 
-public class Movement extends Position{
+public class Movement {
 
     int[] vector;
-    public Movement(){
+    private Position position;
+    private Statistics statistics;
+
+    public Movement(Position position, Statistics statistics){
+        this.position = position;
+        this.statistics = statistics;
         this.vector = new int[2];
     }
 
@@ -22,8 +26,8 @@ public class Movement extends Position{
     private void calculateOptimalVector(int inputX, int inputY){
         int oldX = vector[0];
         int oldY = vector[1];
-        float repeatX = vector[0]/getSpeedSideways();
-        float repeatY = vector[1]/getSpeedForward();
+        float repeatX = vector[0]/statistics.getSpeedSideways();
+        float repeatY = vector[1]/statistics.getSpeedForward();
 
         if(repeatX < 0 ){
             repeatX = -repeatX;
@@ -34,15 +38,15 @@ public class Movement extends Position{
 
         if(repeatX != 0 && repeatY != 0){
             if(repeatY < repeatX){
-                vector[0] = getSpeedSideways();
-                vector[1] = (int) ((float) getSpeedForward()/(repeatX/repeatY));
+                vector[0] = statistics.getSpeedSideways();
+                vector[1] = (int) ((float) statistics.getSpeedForward()/(repeatX/repeatY));
 
             } else if(repeatY == repeatX){
-                vector[0] = getSpeedSideways();
-                vector[1] = getSpeedForward();
+                vector[0] = statistics.getSpeedSideways();
+                vector[1] = statistics.getSpeedForward();
             } else {
-                vector[0] = (int) ((float) getSpeedSideways()/(repeatY/repeatX));
-                vector[1] = getSpeedForward();
+                vector[0] = (int) ((float) statistics.getSpeedSideways()/(repeatY/repeatX));
+                vector[1] = statistics.getSpeedForward();
             }
         } else {
             if(repeatX == 0 && repeatY ==0){
@@ -50,11 +54,11 @@ public class Movement extends Position{
                 vector[1] = 0;
           } else if(repeatY ==  0 && repeatX != 0){
 
-                vector[0] = getSpeedSideways();
+                vector[0] = statistics.getSpeedSideways();
                 vector[1] = 0;
             } else {
                 vector[0] = 0;
-                vector[1] = getSpeedForward();
+                vector[1] = statistics.getSpeedForward();
             }
         }
         setDirection(oldX, oldY);
@@ -71,22 +75,22 @@ public class Movement extends Position{
 
 
     private int getVerticalMove(int inputY){
-        int vertical = inputY - getShipPositionY();
+        int vertical = inputY - position.getShipPositionY();
         return vertical;
     }
 
     private int getHorizontalMove(int inputX){
-        int horizontal = inputX - getShipPositionX();
+        int horizontal = inputX - position.getShipPositionX();
         return horizontal;
     }
 
 
     private void moveVertical(){
-        setShipPositionY(getShipPositionY() + vector[1]);
+        position.setShipPositionY(position.getShipPositionY() + vector[1]);
     }
 
     private void moveHorizontal() {
-        setShipPositionX(getShipPositionX() + vector[0]);
+        position.setShipPositionX(position.getShipPositionX() + vector[0]);
     }
 
     public void shipControl(){

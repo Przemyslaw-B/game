@@ -6,15 +6,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.data.TexturesLoader;
 
 public class Skin{
     private static Texture shipTexture;
     private static TextureRegion shipMyTextureRegion;
     private static TextureRegionDrawable shipMyTextureRegionDrawable;
     private Sprite sprite;
+    private TexturesLoader manager;
 
-    public Skin(int id){
-        shipTexture = new Texture(Gdx.files.internal("enemy.png"));
+    public Skin(int id, TexturesLoader manager){
+        this.manager = manager;
+        //shipTexture = new Texture(Gdx.files.internal("enemy.png"));
+        loadTexture(id);
         shipMyTextureRegion = new TextureRegion(shipTexture);
         shipMyTextureRegionDrawable = new TextureRegionDrawable(shipMyTextureRegion);
         sprite = new Sprite(shipTexture,getShipWidth(), getShipHeight());
@@ -23,6 +27,11 @@ public class Skin{
     public void setShipTexture(String shipTexture){
         this.shipTexture = new Texture(shipTexture);
         shipMyTextureRegion = new TextureRegion(this.shipTexture);
+    }
+
+    private void loadTexture(int id){
+        manager.loadEnemyShipTexture(id);
+        shipTexture = manager.getEnemyShipTexture(id);
     }
 
     public int getShipWidth(){

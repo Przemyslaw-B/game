@@ -3,6 +3,7 @@ package com.mygdx.game.levels;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.enemies.Enemy;
 import com.mygdx.game.interfaces.levelInterface;
 
@@ -19,6 +20,7 @@ public class EndlessLevel implements levelInterface {
     private Random random;
     private int maxEnemyID;
     private float time;
+    private TexturesLoader manager;
 
     private boolean test = false;
     private float reqTime = 3f;
@@ -27,7 +29,8 @@ public class EndlessLevel implements levelInterface {
     private ArrayList <Enemy> enemyQueue;
 
 
-    public EndlessLevel(){
+    public EndlessLevel(TexturesLoader manager){
+        this.manager = manager;
         this.random = new Random();
         this.time = 0f;
         this.width = Gdx.graphics.getWidth();
@@ -42,7 +45,7 @@ public class EndlessLevel implements levelInterface {
     }
 
     private void spawnEnemy(int x, int y, int enemyId,int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
-        Combat.spawnEnemy(enemyId, x,y, rotation, isFromTop, isFocusedOnPlayer);
+        Combat.spawnEnemy(enemyId, x,y, rotation, isFromTop, isFocusedOnPlayer, manager);
     }
 
     //TODO Usunięcie przeciwników poza ekranem (memory leak)
@@ -86,7 +89,7 @@ public class EndlessLevel implements levelInterface {
                 x = rollPositionX(isFromTop, isLeft);
                 y = rollPositionY(x, isFromTop);
             }
-            Enemy tempEnemy = new Enemy(x, y, id, rotation, isFromTop, isAimedOnPlayer);
+            Enemy tempEnemy = new Enemy(x, y, id, rotation, isFromTop, isAimedOnPlayer, manager);
             enemyQueue.add(tempEnemy);
             amountSameEnemy--;
         }

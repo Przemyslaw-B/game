@@ -2,7 +2,7 @@ package com.mygdx.game.player;
 
 import com.badlogic.gdx.Gdx;
 
-public class Position extends Statistics{
+public class Position{
     private static int shipX;
     private static int shipY;
 

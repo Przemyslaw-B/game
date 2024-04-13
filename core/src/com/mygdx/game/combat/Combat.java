@@ -1,6 +1,7 @@
 package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.levels.Level;
@@ -25,8 +26,10 @@ public class Combat {
     private Level level;
     private int width;
     private int height;
+    private TexturesLoader manager;
 
-    public Combat(Ship userShip){
+    public Combat(Ship userShip, TexturesLoader manager){
+        this.manager = manager;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         score = new Score();
@@ -41,7 +44,7 @@ public class Combat {
     }
 
     private void setLevel(){
-        this.level = new Level(true);   //TODO level setting
+        this.level = new Level(true, manager);   //TODO level setting
     }
 
     public void spawnEnemy(int enemyId){
@@ -53,8 +56,8 @@ public class Combat {
         //enemyArrayList.add(new Enemy(enemyX, enemyY, 2, 180, true, false));
     }
 
-    public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
-        enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop, isFocusedOnPlayer));
+    public static void spawnEnemy(int enemyId, int enemyX, int enemyY, int rotation, boolean isFromTop, boolean isFocusedOnPlayer, TexturesLoader manager){
+        enemyArrayList.add(new Enemy(enemyX,enemyY,enemyId, rotation, isFromTop, isFocusedOnPlayer, manager));
     }
 
     public void removeDeadEnemy(){

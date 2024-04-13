@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
@@ -28,12 +29,14 @@ public class GameScreen implements Screen {
     private Level level;
     private GameOver gameOver;
     private int backgroundSpeed = 200;
+    private TexturesLoader manager;
 
 
     //Enemy enemy;
     //ArrayList<Enemy> enemyList;
-    public GameScreen(final Drop game, Background background, Ship ship) {
+    public GameScreen(final Drop game, Background background, Ship ship, TexturesLoader manager) {
         this.game=game;
+        this.manager=manager;
         this.gameOver = new GameOver();
         this.exitFlag = false;
         this.ship = ship;
@@ -42,7 +45,7 @@ public class GameScreen implements Screen {
         width = Gdx.app.getGraphics().getWidth();   //width of user device
         this.background = background;
         //this.ship=new Ship();
-        this.combat = new Combat(ship);
+        this.combat = new Combat(ship, manager);
         //this.level = new Level(combat);
         //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();

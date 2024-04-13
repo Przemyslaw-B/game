@@ -3,6 +3,7 @@ package com.mygdx.game.bullets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Bullet implements Bullets{
@@ -18,8 +19,11 @@ public class Bullet implements Bullets{
     private boolean friendlyFire;
     int rotation;
     int[] vector;
+    private TexturesLoader manager;
+    private int bulletId;
 
-    public Bullet(int x, int y, int damage, int id, int rotation){
+    public Bullet(int x, int y, int damage, int id, int rotation, TexturesLoader manager){
+        this.manager = manager;
         setBulletX(x);
         setBulletY(y);
         this.vector = new int[2];
@@ -29,6 +33,9 @@ public class Bullet implements Bullets{
         speedY = 600;    //TODO TEST VALUE
         speed = 600;
         this.shipId = id;
+        System.out.println("Loading BULLET TEXTURE: 1");
+        loadBulletTexture(id);
+        System.out.println("Setting BULLET TEXTURE");
         setBulletTexture(id);
         setFriendlyFire(id);
         this.damage = damage;
@@ -181,23 +188,15 @@ public class Bullet implements Bullets{
         Drop.batch.draw(texture, x, y);
     }
 
+    private void loadBulletTexture(int id){
+        //SHIP ID!
+      manager.loadBulletTexture(id);
+    }
+
 
     public void setBulletTexture(int id) {
         //TODO wczytywanie textury z bazy
-        switch (id){
-            case 1:
-                this.texture = new Texture("bullets/bullet.png");
-                break;
-
-            case 2:
-                this.texture = new Texture("bullets/bullet_enemy.png");
-                break;
-
-            default:
-                this.texture = new Texture("bullets/bullet_enemy.png");
-                break;
-        }
+        this.texture = manager.getBulletTexture(id);
     }
-
 
 }

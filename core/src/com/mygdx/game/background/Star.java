@@ -14,12 +14,11 @@ public class Star {
         this.x = x;
         this.y = y;
         this.manager = manager;
-
         setDefaultTexture();
     }
 
     private void setDefaultTexture(){
-        manager.asset.update();
+        manager.update();
         if(manager.checkStarAsset()){
             texture = manager.getStarAsset();
         } else{
@@ -44,7 +43,12 @@ public class Star {
         this.texture = texture;
     }
     public void setTexture(String texture){
-        this.texture = new Texture(texture);
+        if(manager.checkStarAsset()){
+            this.texture = manager.getStarAsset();
+        } else{
+            manager.loadStarTexture();
+            setDefaultTexture();
+        }
     }
     public Texture getTexture(){
         return texture;

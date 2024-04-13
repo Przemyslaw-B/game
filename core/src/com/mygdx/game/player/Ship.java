@@ -1,6 +1,7 @@
 package com.mygdx.game.player;
 
 import com.mygdx.game.bullets.Bullet;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Ship {
@@ -11,13 +12,15 @@ public class Ship {
     public static Skin skin;
     private float time;
     int[] vector;
+    private TexturesLoader manager;
 
-    public Ship(){
-        skin = new Skin();
+    public Ship(TexturesLoader manager){
+        this.manager = manager;
+        skin = new Skin(manager);
         position = new Position();
-        bullets = new PlayerBullets();
-        statistics = new Statistics();
-        movement = new Movement();
+        //bullets = new PlayerBullets();
+        statistics = new Statistics(skin);
+        movement = new Movement(position, statistics);
     }
 
     public void draw(){
@@ -40,7 +43,7 @@ public class Ship {
         int y = position.getShipPositionY();
         int id = statistics.getId();
         int damage = statistics.getDamage();
-        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation());
+        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation(), manager);
         time = 0f;
         return bullet;
     }

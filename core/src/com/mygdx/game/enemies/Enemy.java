@@ -3,6 +3,7 @@ package com.mygdx.game.enemies;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.bullets.*;
+import com.mygdx.game.data.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 import java.util.ArrayList;
@@ -20,12 +21,14 @@ public class Enemy {
     private boolean isFocusedOnPlayer;
     int sizeX;
     int sizeY;
+    private TexturesLoader manager;
 
-    public Enemy(int x, int y, int id) {
+    public Enemy(int x, int y, int id, TexturesLoader manager) {
+        this.manager = manager;
         this.id = id;
         statistics = new Statistics(id);
         this.action = new Actions(statistics);
-        skin = new Skin(id);
+        skin = new Skin(id, manager);
         sizeX = skin.getShipWidth();
         sizeY = skin.getShipHeight();
         position = new Position(x, y);
@@ -36,11 +39,12 @@ public class Enemy {
         vector[1] = -1;
     }
 
-    public Enemy(int x, int y, int id, int rotation, boolean isFromTop, boolean isFocusedOnPlayer) {
+    public Enemy(int x, int y, int id, int rotation, boolean isFromTop, boolean isFocusedOnPlayer, TexturesLoader manager) {
         this.id = id;
+        this.manager = manager;
         statistics = new Statistics(id);
         this.action = new Actions(statistics);
-        skin = new Skin(id);
+        skin = new Skin(id, manager);
         position = new Position(x, y, rotation, isFromTop);
         movement = new Movement(position, statistics, sizeX, sizeY);
         timer = 0f;
@@ -70,9 +74,9 @@ public class Enemy {
         Bullet bullet;
         if(isAimed){
             int angle = calculateAngle(x, y);
-            bullet = new Bullet(x, y, damage, id, angle);
+            bullet = new Bullet(x, y, damage, id, angle, manager);
         } else{
-            bullet = new Bullet(x, y, damage, id, position.getRotation());
+            bullet = new Bullet(x, y, damage, id, position.getRotation(), manager);
         }
         timer = 0f;
         return bullet;

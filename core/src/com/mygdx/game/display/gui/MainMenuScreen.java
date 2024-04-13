@@ -45,7 +45,7 @@ public class MainMenuScreen extends Game implements Screen {
         this.manager = new TexturesLoader();
         background = new Background(manager);
         this.data = new Data();
-        ship = new Ship();
+        ship = new Ship(manager);
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         createInterface();
@@ -64,7 +64,7 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                game.setScreen(new GameScreen(game, background, ship));
+                game.setScreen(new GameScreen(game, background, ship, manager));
                 dispose();
                 return false;
             }

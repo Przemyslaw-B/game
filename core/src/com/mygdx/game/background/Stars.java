@@ -26,7 +26,7 @@ public class Stars {
     public Stars(){}
 
     public void setTexture(){
-        this.starTexture = manager.asset.get("star.png");
+        this.starTexture = manager.getStarAsset();
     }
 
     public Texture getStarTexture(){

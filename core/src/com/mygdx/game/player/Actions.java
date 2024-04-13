@@ -1,6 +1,11 @@
 package com.mygdx.game.player;
 
-public class Actions extends Ship{
+public class Actions{
+    private Statistics statistics;
+
+    public Actions(Statistics statistics){
+        this.statistics = statistics;
+    }
 
     public void reduceHp(int value){
         int userHealth = statistics.getHealth();

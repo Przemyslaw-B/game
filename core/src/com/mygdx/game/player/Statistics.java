@@ -2,7 +2,7 @@ package com.mygdx.game.player;
 import com.mygdx.game.interfaces.stats;
 import com.mygdx.game.data.*;
 
-public class Statistics extends Skin implements stats {
+public class Statistics implements stats {
     private static int id;
     private static int damage;
     private static int shipWidth;
@@ -11,11 +11,13 @@ public class Statistics extends Skin implements stats {
     private static float attackSpeed;
     private static int speedForward;
     private static int speedSideways;
+    private Skin skin;
 
 
-    public Statistics(){
-        shipWidth = super.getShipWidth();
-        shipHeight = super.getShipHeight();
+    public Statistics(Skin skin){
+        this.skin = skin;
+        shipWidth = skin.getShipWidth();
+        shipHeight = skin.getShipHeight();
         loadDefaultStatistics();
         //id = 1;
         //speedForward = 10; //default value

@@ -1,17 +1,21 @@
 package com.mygdx.game.levels;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.data.TexturesLoader;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class Level {
     int currentLevel;
+    private TexturesLoader manager;
     //Object loadedLevel;
     ArrayList loadedLevel;
     private EndlessLevel endlessLevel;
 
 
-    public Level(boolean isEndlessLevel){
+    public Level(boolean isEndlessLevel, TexturesLoader manager){
+        this.manager = manager;
         loadedLevel = new ArrayList();
         pickLevel(isEndlessLevel);
     }
@@ -45,7 +49,7 @@ public class Level {
     public void pickLevel(boolean isEndlessLevel){
     if(isEndlessLevel){
         currentLevel = 0;
-        endlessLevel = new EndlessLevel();
+        endlessLevel = new EndlessLevel(manager);
     } else {
         loadLevel();
     }
