@@ -8,7 +8,7 @@ import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.gui.health.DrawHealth;
 import com.mygdx.game.score.Score;
 
-public class BattleInterface {
+public class    BattleInterface {
 
     int heartX;
     int heartY;

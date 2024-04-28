@@ -15,6 +15,10 @@ public class TexturesLoader {
     private String userShipAsset = "ship.png";
     private String enemyShipAsset_2 = "enemy.png";
 
+    private String heartAsset = "health/heart.png";
+    private String scoreAsset = "score/score.png";
+    private String healthAsset = "health/x.png";
+
 
 
     private AssetManager asset;

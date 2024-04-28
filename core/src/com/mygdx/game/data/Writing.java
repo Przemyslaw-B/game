@@ -18,7 +18,7 @@ public class Writing {
 
     public void writeEntireJson(FileHandle file, String tekst){
         if(Data.create.fileCheck(file)){
-            file.writeString(tekst, false);
+            //file.writeString(tekst, false);
         } else{
             Data.create.makeFile(file);
             file.writeString(tekst, false);

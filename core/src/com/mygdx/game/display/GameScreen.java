@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
 import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.display.gui.DrawScore;
 import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
@@ -31,6 +32,8 @@ public class GameScreen implements Screen {
     private int backgroundSpeed = 200;
     private TexturesLoader manager;
 
+    private DrawScore drawScore;
+
 
     //Enemy enemy;
     //ArrayList<Enemy> enemyList;
@@ -46,6 +49,7 @@ public class GameScreen implements Screen {
         this.background = background;
         //this.ship=new Ship();
         this.combat = new Combat(ship, manager);
+        this.drawScore = new DrawScore(combat.score);
         //this.level = new Level(combat);
         //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();
@@ -92,6 +96,13 @@ public class GameScreen implements Screen {
         } else {    //press anywhere to quit level
             //System.out.println("~~~~BATTLE IS NOT ON!~~~~~");
             gameOver.drawGameOver();
+            if(combat.isNewTopScore){
+                //TODO show "NEW TOP SCORE"
+                drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
+            } else {
+                //TODO DRAW "TOP SCORE"
+                drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
+            }
             combat.endOfGameKillAll();
             if(gameOver.checkIfContinue()){
                 this.exitFlag = true;

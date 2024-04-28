@@ -22,14 +22,16 @@ public class Combat {
     private static ArrayList<Bullet>  bulletsArrayList;
     private Random rand;
     private BattleInterface battleInterface;
-    private Score score;
+    public Score score;
     private Level level;
     private int width;
     private int height;
     private TexturesLoader manager;
+    public boolean isNewTopScore;
 
     public Combat(Ship userShip, TexturesLoader manager){
         this.manager = manager;
+        this.isNewTopScore = false;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         score = new Score();
@@ -143,11 +145,14 @@ public class Combat {
         if(userShip.statistics.isAlive()){
             return true;
         }
+        finalScore();
         return false;
     }
 
     public void finalScore(){
-        //TODO podsumowanie punktów
+        if(score.isNewTopScore()){
+            isNewTopScore = true;
+        } else {isNewTopScore = false;}
     }
 
     private void enemyShoot(float delta){

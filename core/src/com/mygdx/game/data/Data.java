@@ -18,10 +18,12 @@ public class Data {
     public static final String enemyStats = "data/enemyStats.json";
     public static final String levelStats = "data/levelStats.json";
     public static final String upgradesStats = "data/upgradesStats.json";
+    public static final String bossesStats = "data/bossesStats.json";
     public static FileHandle filePlayerStats;
     public static FileHandle fileEnemyStats;
     public static FileHandle fileLevelStats;
     public static FileHandle fileUpgradesStats;
+    public static FileHandle fileBossesStats;
     JsonReader jsonReader;
     JsonValue jsonValue;
 
@@ -35,11 +37,14 @@ public class Data {
         this.fileEnemyStats = Gdx.files.local(enemyStats);
         this.fileLevelStats = Gdx.files.local(levelStats);
         this.fileUpgradesStats = Gdx.files.local(upgradesStats);
+        this.fileBossesStats = Gdx.files.local(bossesStats);
         this.jsonReader = new JsonReader();
+
         setDefault.setDefaultPlayerStats();
         setDefault.setDefaultEnemyStat();
         setDefault.setDefaultLevelStat();
         setDefault.setDefaultUprgradesStats();
+        setDefault.setDefaultBossestat();
         read.readJson(filePlayerStats);
         //write.updateJson(filePlayerStats, "damage", 1);
         //System.out.println("AFTER UPDATE!");

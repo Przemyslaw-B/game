@@ -22,6 +22,7 @@ import com.mygdx.game.display.Drop;
 import com.mygdx.game.background.Stars;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.player.*;
+import com.mygdx.game.score.Score;
 
 import java.io.IOException;
 
@@ -38,7 +39,7 @@ public class MainMenuScreen extends Game implements Screen {
     private Background background;
     private float time=0f;
     private TexturesLoader manager;
-
+    private DrawScore drawScore;
 
     public MainMenuScreen(final Drop game) {
         this.game=game;
@@ -48,18 +49,21 @@ public class MainMenuScreen extends Game implements Screen {
         ship = new Ship(manager);
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
+        drawScore = new DrawScore(new Score());
         createInterface();
     }
 
     private void createInterface(){
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
+        ///drawScore.drawTopScore(10, Gdx.graphics.getHeight()/20);
         playButton = new ImageButton(ship.skin.getShipMyTextureRegionDrawable());
         playButton.setWidth(Ship.skin.getShipWidth());
         playButton.setHeight(Ship.skin.getShipHeight());
         playButton.setPosition(Ship.position.getShipPositionX(),Ship.position.getShipPositionY(), Align.center);
         stage = new Stage(new ScreenViewport()); //Set up a stage for the ui
         stage.addActor(playButton); //Add the button to the stage to perform rendering and take input.
+
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
         playButton.addListener(new EventListener() {
             @Override
@@ -85,6 +89,7 @@ public class MainMenuScreen extends Game implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         background.draw();
+        drawScore.drawTopScore(10, Gdx.graphics.getHeight()*19/20);
         background.move(delta);
         game.batch.end();
         stage.draw(); //Draw the ui
