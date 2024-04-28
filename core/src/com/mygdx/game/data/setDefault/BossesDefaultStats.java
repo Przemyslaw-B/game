@@ -6,6 +6,7 @@ public class BossesDefaultStats {
 
     static String defaultBossStat = "EMPTY";
 
+
     public void setDefaultEnemyStat(){
         Data.write.writeEntireJson(Data.fileBossesStats, defaultBossStat);
     }
