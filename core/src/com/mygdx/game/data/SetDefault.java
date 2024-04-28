@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.data.setDefault.*;
 
 public class SetDefault {
     JsonReader jsonReader;
@@ -46,8 +47,14 @@ public class SetDefault {
         Data.write.updateJson(Data.fileEnemyStats, "speedForward", 5);
         Data.write.updateJson(Data.fileEnemyStats, "speedSideways", 5);
     }
-    public void setDefaultPlayerStats(){Data.write.writeEntireJson(Data.filePlayerStats, defaultPlayerStat);}
-    public void setDefaultEnemyStat(){Data.write.writeEntireJson(Data.fileEnemyStats, defaultEnemyStats);}
-    public void setDefaultLevelStat(){Data.write.writeEntireJson(Data.fileLevelStats, defaultLevelStats);}
-    public void setDefaultUprgradesStats(){Data.write.writeEntireJson(Data.fileUpgradesStats, defaultUprgradesStats);}
+
+    public void setDefaultPlayerStats(){Data.write.writeEntireJson(Data.filePlayerStats, PlayerDefaultStats.getStats());}
+    public void setDefaultEnemyStat(){Data.write.writeEntireJson(Data.fileEnemyStats, EnemiesDefaultStats.getStats());}
+    public void setDefaultLevelStat(){Data.write.writeEntireJson(Data.fileLevelStats, LevelStats.getStats());}
+    public void setDefaultUprgradesStats(){Data.write.writeEntireJson(Data.fileUpgradesStats, PowerupsDefaults.getStats());}
+
+    //public void setDefaultPlayerStats(){Data.write.writeEntireJson(Data.filePlayerStats, defaultPlayerStat);}
+    //public void setDefaultEnemyStat(){Data.write.writeEntireJson(Data.fileEnemyStats, defaultEnemyStats);}
+    //public void setDefaultLevelStat(){Data.write.writeEntireJson(Data.fileLevelStats, defaultLevelStats);}
+    //public void setDefaultUprgradesStats(){Data.write.writeEntireJson(Data.fileUpgradesStats, defaultUprgradesStats);}
 }
