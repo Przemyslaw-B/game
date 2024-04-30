@@ -19,6 +19,8 @@ public class TexturesLoader {
     private String scoreAsset = "score/score.png";
     private String healthAsset = "health/x.png";
 
+    private String healthUpAsset = "powerUps/healthUp.png";
+
 
 
     private AssetManager asset;
