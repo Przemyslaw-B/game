@@ -1,8 +1,6 @@
 package com.mygdx.game.levels;
-import com.mygdx.game.combat.Combat;
 import com.mygdx.game.data.Data;
-import com.mygdx.game.data.TexturesLoader;
-import org.w3c.dom.Text;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 
 import java.util.ArrayList;
 

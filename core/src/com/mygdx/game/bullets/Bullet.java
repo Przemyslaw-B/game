@@ -1,9 +1,8 @@
 package com.mygdx.game.bullets;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Bullet implements Bullets{

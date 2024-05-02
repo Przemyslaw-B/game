@@ -1,12 +1,10 @@
 package com.mygdx.game.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 
 public class Skin{
     private static Texture shipTexture;

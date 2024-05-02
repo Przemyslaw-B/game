@@ -1,12 +1,8 @@
 package com.mygdx.game.enemies;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.bullets.*;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
-
-import java.util.ArrayList;
 
 public class Enemy {
     public Statistics statistics;

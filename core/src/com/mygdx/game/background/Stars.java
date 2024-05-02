@@ -2,7 +2,7 @@ package com.mygdx.game.background;
 
 import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 
 public class Stars {
     private Texture starTexture;

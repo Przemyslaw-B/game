@@ -1,7 +1,7 @@
 package com.mygdx.game.player;
 
 import com.mygdx.game.bullets.Bullet;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Ship {

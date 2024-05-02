@@ -3,7 +3,7 @@ package com.mygdx.game.levels;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.data.Data;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.enemies.Enemy;
 import com.mygdx.game.interfaces.levelInterface;
 

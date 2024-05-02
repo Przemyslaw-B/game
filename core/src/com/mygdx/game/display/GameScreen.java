@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.background.Background;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.gui.DrawScore;
 import com.mygdx.game.display.gui.MainMenuScreen;
 import com.mygdx.game.levels.Level;

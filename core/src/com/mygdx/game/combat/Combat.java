@@ -1,8 +1,7 @@
 package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.data.TexturesLoader;
-import com.mygdx.game.display.GameScreen;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;

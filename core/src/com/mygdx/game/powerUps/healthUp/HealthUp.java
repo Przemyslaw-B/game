@@ -1,6 +1,6 @@
 package com.mygdx.game.powerUps.healthUp;
 
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.player.Ship;
 
 public class HealthUp {

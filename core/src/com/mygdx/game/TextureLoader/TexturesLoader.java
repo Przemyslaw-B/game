@@ -1,12 +1,11 @@
-package com.mygdx.game.data;
+package com.mygdx.game.TextureLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.background.Star;
-import com.mygdx.game.bullets.Bullet;
+import com.mygdx.game.TextureLoader.UILoader.HealthLoader;
+import com.mygdx.game.TextureLoader.UILoader.HealthNumbersLoader;
+import com.mygdx.game.TextureLoader.UILoader.ScoreLoader;
+import com.mygdx.game.TextureLoader.UILoader.ScoreNumbersLoader;
 
 public class TexturesLoader {
     private String starAsset = "star.png";
@@ -21,11 +20,20 @@ public class TexturesLoader {
 
     private String healthUpAsset = "powerUps/healthUp.png";
 
-
-
     private AssetManager asset;
+
+
+    HealthLoader healthLoader;
+    HealthNumbersLoader healthNumbersLoader;
+    ScoreLoader scoreLoader;
+    ScoreNumbersLoader scoreNumbersLoader;
+
     public TexturesLoader(){
          this.asset=new AssetManager();
+         this.scoreLoader = new ScoreLoader(asset);
+         this.scoreNumbersLoader = new ScoreNumbersLoader(asset);
+         this.healthLoader = new HealthLoader(asset);
+         this.healthNumbersLoader = new HealthNumbersLoader(asset);
     }
 
     public void disposeALLTextures(){

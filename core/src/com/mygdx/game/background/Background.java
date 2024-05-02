@@ -1,7 +1,7 @@
 package com.mygdx.game.background;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 import java.util.ArrayList;

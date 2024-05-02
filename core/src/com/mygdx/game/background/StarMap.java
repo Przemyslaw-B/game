@@ -1,7 +1,7 @@
 package com.mygdx.game.background;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.data.TexturesLoader;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 
 import java.util.ArrayList;
 import java.util.Random;
