@@ -2,6 +2,7 @@ package com.mygdx.game.TextureLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.TextureLoader.PowerUps.PowerUpsLoader;
 import com.mygdx.game.TextureLoader.UILoader.HealthLoader;
 import com.mygdx.game.TextureLoader.UILoader.HealthNumbersLoader;
 import com.mygdx.game.TextureLoader.UILoader.ScoreLoader;
@@ -27,6 +28,7 @@ public class TexturesLoader {
     HealthNumbersLoader healthNumbersLoader;
     ScoreLoader scoreLoader;
     ScoreNumbersLoader scoreNumbersLoader;
+    PowerUpsLoader powerUpsLoader;
 
     public TexturesLoader(){
          this.asset=new AssetManager();
@@ -34,7 +36,9 @@ public class TexturesLoader {
          this.scoreNumbersLoader = new ScoreNumbersLoader(asset);
          this.healthLoader = new HealthLoader(asset);
          this.healthNumbersLoader = new HealthNumbersLoader(asset);
+         this.powerUpsLoader = new PowerUpsLoader(asset);
     }
+
 
     public void disposeALLTextures(){
         asset.dispose();
