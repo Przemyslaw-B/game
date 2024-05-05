@@ -1,5 +1,7 @@
 package com.mygdx.game.display.gui.numbers;
 
+import com.mygdx.game.TextureLoader.TexturesLoader;
+
 import java.util.ArrayList;
 
 public class Numbers {
@@ -14,17 +16,17 @@ public class Numbers {
     private Eight eight;
     private Nine nine;
 
-    public Numbers(){
-        this.zero = new Zero();
-        this.one = new One();
-        this.two = new Two();
-        this.three = new Three();
-        this.four = new Four();
-        this.five = new Five();
-        this.six = new Six();
-        this.seven = new Seven();
-        this.eight = new Eight();
-        this.nine = new Nine();
+    public Numbers(TexturesLoader manager){
+        this.zero = new Zero(manager);
+        this.one = new One(manager);
+        this.two = new Two(manager);
+        this.three = new Three(manager);
+        this.four = new Four(manager);
+        this.five = new Five(manager);
+        this.six = new Six(manager);
+        this.seven = new Seven(manager);
+        this.eight = new Eight(manager);
+        this.nine = new Nine(manager);
     }
 
     public Zero getZero() {

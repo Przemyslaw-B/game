@@ -60,9 +60,42 @@ public class TexturesLoader {
         loadAll();
     }
 
-    public AssetManager getManager(){
-        return asset;
+    public PowerUpsLoader getPowerUpsLoader(){
+        return powerUpsLoader;
     }
+
+    public PlayerLoader getPlayerLoader(){
+        return playerLoader;
+    }
+
+    public HealthLoader getHealthLoader() {
+        return healthLoader;
+    }
+
+    public BulletsLoader getBulletsLoader() {
+        return bulletsLoader;
+    }
+
+    public EnemyLoader getEnemyLoader() {
+        return enemyLoader;
+    }
+
+    public HealthNumbersLoader getHealthNumbersLoader() {
+        return healthNumbersLoader;
+    }
+
+    public ScoreLoader getScoreLoader() {
+        return scoreLoader;
+    }
+
+    public MainMenuLoader getMainMenuLoader() {
+        return mainMenuLoader;
+    }
+
+    public ScoreNumbersLoader getScoreNumbersLoader() {
+        return scoreNumbersLoader;
+    }
+
 
     private void loadAll(){
         while(!checkIfAllIsLoaded(asset)){

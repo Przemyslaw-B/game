@@ -38,6 +38,10 @@ public class ScoreLoader {
         }
     }
 
+    public Texture getScoreTexture(){
+        return loader.get(score);
+    }
+
     private void loadNewWord(){
         if(!isLoaded(newWord)){
             loader.load(newWord, Texture.class);
@@ -46,12 +50,20 @@ public class ScoreLoader {
         }
     }
 
+    public Texture getNewWordTexture(){
+        return loader.get(newWord);
+    }
+
     private void loadTopScoreWord(){
         if(!isLoaded(topScore)){
             loader.load(topScore, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getTopScoreTexture(){
+        return loader.get(topScore);
     }
 
 

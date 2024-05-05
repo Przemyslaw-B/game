@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
         this.background = background;
         //this.ship=new Ship();
         this.combat = new Combat(ship, manager);
-        this.drawScore = new DrawScore(combat.score);
+        this.drawScore = new DrawScore(manager, combat.score);
         //this.level = new Level(combat);
         //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();

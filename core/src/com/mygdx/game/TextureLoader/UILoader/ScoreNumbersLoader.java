@@ -49,12 +49,20 @@ public class ScoreNumbersLoader {
         }
     }
 
+    public Texture getZeroTexture(){
+        return loader.get(zero);
+    }
+
     private void loadOne(){
         if (!isLoaded(one)) {
             loader.load(one, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getOneTexture(){
+        return loader.get(one);
     }
 
     private void loadTwo() {
@@ -65,12 +73,20 @@ public class ScoreNumbersLoader {
         }
     }
 
+    public Texture getTwoTexture(){
+        return loader.get(two);
+    }
+
     private void loadThree() {
         if (!isLoaded(three)) {
             loader.load(three, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getThreeTexture(){
+        return loader.get(three);
     }
 
     private void loadFour() {
@@ -81,12 +97,20 @@ public class ScoreNumbersLoader {
         }
     }
 
+    public Texture getFourTexture(){
+        return loader.get(four);
+    }
+
     private void loadFive() {
         if (!isLoaded(five)) {
             loader.load(five, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getFiveTexture(){
+        return loader.get(five);
     }
 
     private void loadSix() {
@@ -97,12 +121,20 @@ public class ScoreNumbersLoader {
         }
     }
 
+    public Texture getSixTexture(){
+        return loader.get(six);
+    }
+
     private void loadSeven() {
         if (!isLoaded(seven)) {
             loader.load(seven, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getSevenTexture(){
+        return loader.get(seven);
     }
 
     private void loadEight() {
@@ -113,12 +145,20 @@ public class ScoreNumbersLoader {
         }
     }
 
+    public Texture getEightTexture(){
+        return loader.get(eight);
+    }
+
     private void loadNine() {
         if (!isLoaded(nine)) {
             loader.load(nine, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getNineTexture(){
+        return loader.get(nine);
     }
 
 }

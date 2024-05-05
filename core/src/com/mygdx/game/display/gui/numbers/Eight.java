@@ -3,6 +3,7 @@ package com.mygdx.game.display.gui.numbers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Eight implements Number{
@@ -10,8 +11,8 @@ public class Eight implements Number{
     final Texture texture;
     final TextureRegion textureRegion;
 
-    public Eight(){
-        this.texture = new Texture(Gdx.files.internal(path));
+    public Eight(TexturesLoader manager){
+        this.texture = manager.getScoreNumbersLoader().getEightTexture();
         this.textureRegion = new TextureRegion(texture);
     }
 

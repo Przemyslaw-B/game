@@ -1,5 +1,6 @@
 package com.mygdx.game.display.gui.health;
 
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.gui.health.amount.*;
 
 public class Numbers {
@@ -15,18 +16,18 @@ public class Numbers {
     private Nine nine;
     private Max max;
 
-    public Numbers(){
-        this.zero = new Zero();
-        this.one = new One();
-        this.two = new Two();
-        this.three = new Three();
-        this.four = new Four();
-        this.five = new Five();
-        this.six = new Six();
-        this.seven = new Seven();
-        this.eight = new Eight();
-        this.nine = new Nine();
-        this.max = new Max();
+    public Numbers(TexturesLoader manager){
+        this.zero = new Zero(manager);
+        this.one = new One(manager);
+        this.two = new Two(manager);
+        this.three = new Three(manager);
+        this.four = new Four(manager);
+        this.five = new Five(manager);
+        this.six = new Six(manager);
+        this.seven = new Seven(manager);
+        this.eight = new Eight(manager);
+        this.nine = new Nine(manager);
+        this.max = new Max(manager);
     }
 
     public Zero getZero() {

@@ -40,7 +40,7 @@ public class Combat {
         this.time=0f;
         this.shotTimer = 0f;
         this.rand = new Random();
-        this.battleInterface = new BattleInterface(score);
+        this.battleInterface = new BattleInterface(manager, score);
         setLevel();
     }
 

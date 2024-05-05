@@ -23,12 +23,11 @@ public class Skin{
         setRotation(0);
     }
     public void setShipTexture(String shipTexture){
-        this.shipTexture = new Texture(shipTexture);
-        shipMyTextureRegion = new TextureRegion(this.shipTexture);
+
     }
 
     private void loadShipTexture(){
-        //this.shipTexture = new Texture(Gdx.files.internal("ship.png"));
+        /*
         if(manager.checkUserShipTexture()){
             this.shipTexture = manager.getUserShipTexture();
         } else {
@@ -37,6 +36,8 @@ public class Skin{
             manager.finishLoading();
             this.shipTexture = manager.getUserShipTexture();
         }
+         */
+        shipTexture = manager.getPlayerLoader().getPlayerShipTexture();
     }
 
     public int getShipWidth(){

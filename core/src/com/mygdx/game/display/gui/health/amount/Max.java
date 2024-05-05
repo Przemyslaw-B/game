@@ -3,6 +3,7 @@ package com.mygdx.game.display.gui.health.amount;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.gui.health.Number;
 
@@ -11,8 +12,8 @@ public class Max implements Number {
     final Texture texture;
     final TextureRegion textureRegion;
 
-    public Max() {
-        this.texture = new Texture(Gdx.files.internal(path));
+    public Max(TexturesLoader manager) {
+        this.texture = manager.getHealthNumbersLoader().getMaxTexture();
         this.textureRegion = new TextureRegion(texture);
     }
 

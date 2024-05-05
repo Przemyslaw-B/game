@@ -1,5 +1,6 @@
 package com.mygdx.game.display.gui;
 
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.gui.numbers.*;
 import com.mygdx.game.score.Score;
@@ -16,9 +17,9 @@ public class DrawScore {
 
     private ArrayList numbersArray;
 
-    public DrawScore(Score score){
+    public DrawScore(TexturesLoader manager, Score score){
         this.score = score;
-        this.numbers = new Numbers();
+        this.numbers = new Numbers(manager);
         numbersArray = new ArrayList<>();
     }
 

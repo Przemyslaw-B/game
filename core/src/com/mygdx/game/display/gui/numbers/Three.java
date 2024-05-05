@@ -3,14 +3,15 @@ package com.mygdx.game.display.gui.numbers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 
 public class Three implements Number{
     String path = "score/numbers/3.png";
     final Texture texture;
     final TextureRegion textureRegion;
-    public Three(){
-        this.texture = new Texture(Gdx.files.internal(path));
+    public Three(TexturesLoader manager){
+        this.texture = manager.getScoreNumbersLoader().getThreeTexture();
         this.textureRegion = new TextureRegion(texture);
     }
 

@@ -27,4 +27,8 @@ public class PlayerLoader {
         }
     }
 
+    public Texture getPlayerShipTexture() {
+        return loader.get(playerShip);
+    }
+
 }

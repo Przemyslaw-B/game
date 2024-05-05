@@ -1,5 +1,6 @@
 package com.mygdx.game.display.gui.health;
 
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.player.Ship;
 
 public class DrawHealth {
@@ -7,8 +8,8 @@ public class DrawHealth {
     int x;
     int y;
 
-    public DrawHealth(int x, int y){
-        this.numbers = new Numbers();
+    public DrawHealth(TexturesLoader manager, int x, int y){
+        this.numbers = new Numbers(manager);
         this.x = x;
         this.y = y;
     }

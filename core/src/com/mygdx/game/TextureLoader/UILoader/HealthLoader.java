@@ -35,12 +35,20 @@ public class HealthLoader {
         }
     }
 
+    public Texture getHeartTexture(){
+        return loader.get(heart);
+    }
+
     private void loadX(){
         if(!isLoaded(x)){
             loader.load(x, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getXTexture(){
+        return loader.get(x);
     }
 
 }

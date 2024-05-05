@@ -2,6 +2,7 @@ package com.mygdx.game.TextureLoader.UILoader;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import org.w3c.dom.Text;
 
 public class HealthNumbersLoader {
     private String zero = "health/numbers/0.png";
@@ -52,12 +53,20 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getZeroTexture() {
+        return loader.get(zero);
+    }
+
     private void loadOne(){
         if (!isLoaded(one)) {
             loader.load(one, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getOneTexture() {
+        return loader.get(one);
     }
 
     private void loadTwo() {
@@ -68,12 +77,20 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getTwoTexture() {
+        return loader.get(two);
+    }
+
     private void loadThree() {
         if (!isLoaded(three)) {
             loader.load(three, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getThreeTexture() {
+        return loader.get(three);
     }
 
     private void loadFour() {
@@ -84,12 +101,20 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getFourTexture() {
+        return loader.get(four);
+    }
+
     private void loadFive() {
         if (!isLoaded(five)) {
             loader.load(five, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getFiveTexture() {
+        return loader.get(five);
     }
 
     private void loadSix() {
@@ -100,12 +125,20 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getSixTexture(){
+        return loader.get(six);
+    }
+
     private void loadSeven() {
         if (!isLoaded(seven)) {
             loader.load(seven, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getSevenTexture(){
+        return loader.get(seven);
     }
 
     private void loadEight() {
@@ -116,6 +149,10 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getEightTexture(){
+        return loader.get(eight);
+    }
+
     private void loadNine() {
         if (!isLoaded(nine)) {
             loader.load(nine, Texture.class);
@@ -124,12 +161,20 @@ public class HealthNumbersLoader {
         }
     }
 
+    public Texture getNineTexture(){
+        return loader.get(nine);
+    }
+
     private void loadMax(){
         if (!isLoaded(max)){
             loader.load(max, Texture.class);
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getMaxTexture(){
+        return loader.get(max);
     }
 
 }

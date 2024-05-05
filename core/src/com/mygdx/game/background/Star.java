@@ -54,7 +54,6 @@ public class Star {
 
     public Texture getTexture(){
         //return texture;
-        System.out.println("Czy załadowane: Star.png: " + manager.getManager().isLoaded("star.png"));
         return manager.getBackgroundLoader().getStarLoader().getStar();
     }
 }
