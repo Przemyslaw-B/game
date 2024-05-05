@@ -1,6 +1,7 @@
 package com.mygdx.game.TextureLoader.BulletsLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.TextureLoader.BulletsLoader.EnemyBullets.EnemyDefaultBullet;
 import com.mygdx.game.TextureLoader.BulletsLoader.PlayerBullets.PlayerDefaultBullet;
 
@@ -15,11 +16,16 @@ public class BulletsLoader {
         this.enemyBullet = new EnemyDefaultBullet(loader);
     }
 
-    public PlayerDefaultBullet getPlayerBullet() {
-        return playerBullet;
-    }
+    public Texture getBulletTexture(int id) {
+        switch (id) {
+            case 1:
+                return playerBullet.getPlayerDefaultBullet();
 
-    public EnemyDefaultBullet getEnemyBullet(){
-        return enemyBullet;
+            case 2:
+                return enemyBullet.getEnemyDefaultBullet();
+
+            default:
+                return enemyBullet.getEnemyDefaultBullet();
+        }
     }
 }

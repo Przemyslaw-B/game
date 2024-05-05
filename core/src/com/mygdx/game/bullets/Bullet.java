@@ -194,10 +194,8 @@ public class Bullet implements Bullets{
 
 
     public void setBulletTexture(int id) {
-        this.texture = manager.getBulletTexture(id);
-
-        //this.texture = manager.getBulletsLoader().getEnemyBullet().getEnemyDefaultBullet();
-        //TODO wybór po ID ^^^
+        //this.texture = manager.getBulletTexture(id);
+        this.texture = manager.getBulletsLoader().getBulletTexture(id);
     }
 
 }

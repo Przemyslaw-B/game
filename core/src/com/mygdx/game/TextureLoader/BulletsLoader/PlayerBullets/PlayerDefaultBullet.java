@@ -26,7 +26,7 @@ public class PlayerDefaultBullet {
         }
     }
 
-    public Texture getPlayerBullet() {
+    public Texture getPlayerDefaultBullet() {
         return loader.get(bullet);
     }
 }
