@@ -1,4 +1,4 @@
-package com.mygdx.game.TextureLoader.BacgroundPlayer;
+package com.mygdx.game.TextureLoader.BacgroundLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
