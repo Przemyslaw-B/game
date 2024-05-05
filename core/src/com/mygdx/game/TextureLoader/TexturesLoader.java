@@ -2,6 +2,12 @@ package com.mygdx.game.TextureLoader;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.TextureLoader.BacgroundLoader.BackgroundLoader;
+import com.mygdx.game.TextureLoader.BulletsLoader.BulletsLoader;
+import com.mygdx.game.TextureLoader.BulletsLoader.EnemyBullets.EnemyDefaultBullet;
+import com.mygdx.game.TextureLoader.EnemyLoader.EnemyLoader;
+import com.mygdx.game.TextureLoader.MainMenuLoader.MainMenuLoader;
+import com.mygdx.game.TextureLoader.PlayerLoader.PlayerLoader;
 import com.mygdx.game.TextureLoader.PowerUps.PowerUpsLoader;
 import com.mygdx.game.TextureLoader.UILoader.HealthLoader;
 import com.mygdx.game.TextureLoader.UILoader.HealthNumbersLoader;
@@ -30,13 +36,52 @@ public class TexturesLoader {
     ScoreNumbersLoader scoreNumbersLoader;
     PowerUpsLoader powerUpsLoader;
 
+    BackgroundLoader backgroundLoader;
+    BulletsLoader bulletsLoader;
+    EnemyLoader enemyLoader;
+    MainMenuLoader mainMenuLoader;
+    PlayerLoader playerLoader;
+
+
+
     public TexturesLoader(){
-         this.asset=new AssetManager();
-         this.scoreLoader = new ScoreLoader(asset);
-         this.scoreNumbersLoader = new ScoreNumbersLoader(asset);
-         this.healthLoader = new HealthLoader(asset);
-         this.healthNumbersLoader = new HealthNumbersLoader(asset);
-         this.powerUpsLoader = new PowerUpsLoader(asset);
+        this.asset=new AssetManager();
+        this.scoreLoader = new ScoreLoader(asset);
+        this.scoreNumbersLoader = new ScoreNumbersLoader(asset);
+        this.healthLoader = new HealthLoader(asset);
+        this.healthNumbersLoader = new HealthNumbersLoader(asset);
+
+        this.powerUpsLoader = new PowerUpsLoader(asset);
+        this.backgroundLoader = new BackgroundLoader(asset);
+        this.bulletsLoader = new BulletsLoader(asset);
+        this.enemyLoader = new EnemyLoader(asset);
+        this.mainMenuLoader = new MainMenuLoader(asset);
+        this.playerLoader = new PlayerLoader(asset);
+        loadAll();
+    }
+
+    public AssetManager getManager(){
+        return asset;
+    }
+
+    private void loadAll(){
+        while(!checkIfAllIsLoaded(asset)){
+            System.out.println("Nie załadowano jeszcze wszystkich tekstur!");
+        }
+        System.out.println("Wszystko załadowane!");
+    }
+
+    private boolean checkIfAllIsLoaded(AssetManager assetManager){
+        assetManager.update();
+        if(assetManager.isFinished()){
+            return true;
+        }
+        return false;
+    }
+
+
+    public BackgroundLoader getBackgroundLoader(){
+        return backgroundLoader;
     }
 
 
@@ -44,9 +89,7 @@ public class TexturesLoader {
         asset.dispose();
     }
 
-    public void disposeAtEndOfLevel(){
-
-    }
+    public void disposeAtEndOfLevel(){}
 
     public void update(){
         asset.update();

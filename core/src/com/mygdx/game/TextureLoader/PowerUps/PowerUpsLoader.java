@@ -21,6 +21,14 @@ public class PowerUpsLoader {
         this.damageUpLoader = new DamageUpLoader(loader);
     }
 
+    public HealthUpLoader getHealthUpLoader() {
+        return healthUpLoader;
+    }
+
+    public DamageUpLoader getDamageUpLoader() {
+        return damageUpLoader;
+    }
+
 
 
 

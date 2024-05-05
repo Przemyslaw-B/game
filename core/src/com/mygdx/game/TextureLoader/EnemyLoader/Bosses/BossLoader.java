@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class BossLoader {
     private AssetManager loader;
-    private String boss = "boss.png";
+    private String boss = "enemy.png";
 
     public BossLoader(AssetManager loader) {
         this.loader = loader;
@@ -24,6 +24,10 @@ public class BossLoader {
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getBossTexture(){
+        return loader.get(boss);
     }
 
 }

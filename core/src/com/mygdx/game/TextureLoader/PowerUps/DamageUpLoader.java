@@ -26,4 +26,8 @@ public class DamageUpLoader {
             loader.finishLoading();
         }
     }
+
+    public Texture getDamageUpsTexture(){
+        return loader.get(damageUp);
+    }
 }

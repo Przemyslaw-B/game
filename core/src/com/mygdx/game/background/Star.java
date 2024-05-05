@@ -14,7 +14,7 @@ public class Star {
         this.x = x;
         this.y = y;
         this.manager = manager;
-        setDefaultTexture();
+        //setDefaultTexture();
     }
 
     private void setDefaultTexture(){
@@ -42,6 +42,7 @@ public class Star {
     public void setTexture(Texture texture){
         this.texture = texture;
     }
+
     public void setTexture(String texture){
         if(manager.checkStarAsset()){
             this.texture = manager.getStarAsset();
@@ -50,7 +51,10 @@ public class Star {
             setDefaultTexture();
         }
     }
+
     public Texture getTexture(){
-        return texture;
+        //return texture;
+        System.out.println("Czy załadowane: Star.png: " + manager.getManager().isLoaded("star.png"));
+        return manager.getBackgroundLoader().getStarLoader().getStar();
     }
 }

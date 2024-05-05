@@ -25,4 +25,8 @@ public class SimpleEnemyLoader {
             loader.finishLoading();
         }
     }
+
+    public Texture getEnemyTexture(){
+        return loader.get(enemy);
+    }
 }

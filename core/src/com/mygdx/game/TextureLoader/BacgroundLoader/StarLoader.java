@@ -9,6 +9,7 @@ public class StarLoader {
 
     public StarLoader(AssetManager loader) {
         this.loader = loader;
+        loadStar();
     }
 
     private boolean isLoaded(String filename) {
@@ -24,5 +25,9 @@ public class StarLoader {
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getStar(){
+        return loader.get(star);
     }
 }

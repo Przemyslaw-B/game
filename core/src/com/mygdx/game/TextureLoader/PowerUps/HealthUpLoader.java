@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class HealthUpLoader {
 
-    private final String healthUp = "healthUp.png";
+    private final String healthUp = "powerUps/healthUp.png";
     AssetManager loader;
 
     public HealthUpLoader(AssetManager loader) {
@@ -26,5 +26,9 @@ public class HealthUpLoader {
             loader.update();
             loader.finishLoading();
         }
+    }
+
+    public Texture getHealthUpTexture() {
+        return loader.get(healthUp);
     }
 }
