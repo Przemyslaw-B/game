@@ -189,13 +189,15 @@ public class Bullet implements Bullets{
 
     private void loadBulletTexture(int id){
         //SHIP ID!
-      manager.loadBulletTexture(id);
+      //manager.loadBulletTexture(id);
     }
 
 
     public void setBulletTexture(int id) {
-        //TODO wczytywanie textury z bazy
         this.texture = manager.getBulletTexture(id);
+
+        //this.texture = manager.getBulletsLoader().getEnemyBullet().getEnemyDefaultBullet();
+        //TODO wybór po ID ^^^
     }
 
 }

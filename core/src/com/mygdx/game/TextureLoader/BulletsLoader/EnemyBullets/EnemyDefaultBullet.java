@@ -26,7 +26,7 @@ public class EnemyDefaultBullet {
         }
     }
 
-    public Texture getEnemyBullet(){
+    public Texture getEnemyDefaultBullet(){
         return loader.get(bullet);
     }
 }
