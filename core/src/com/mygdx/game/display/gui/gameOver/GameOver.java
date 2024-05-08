@@ -32,9 +32,14 @@ public class GameOver {
     private Stage stage;
     private DrawScoreAtTheEnd drawScoreAtTheEnd;
     private DrawTopScoreAtTheEnd drawTopScoreAtTheEnd;
+    private DrawNewTopScoreAtTheEnd drawNewTopScoreAtTheEnd;
     private TexturesLoader manager;
+    boolean topScoreFlag;
+    boolean wasDisplayed;
 
     public GameOver(TexturesLoader manager){
+        this.topScoreFlag = false;
+        this.wasDisplayed = false;
         this.manager = manager;
         setGameOverText();
         setTexture();
@@ -44,6 +49,7 @@ public class GameOver {
         setStage();
         drawScoreAtTheEnd = new DrawScoreAtTheEnd(manager);
         drawTopScoreAtTheEnd = new DrawTopScoreAtTheEnd(manager);
+        drawNewTopScoreAtTheEnd = new DrawNewTopScoreAtTheEnd(manager);
     }
 
     private void setGameOverText(){
@@ -99,23 +105,23 @@ public class GameOver {
 
     private void drawButton(){
         continueButton.setVisible(true);
-        //Drop.batch.draw(buttonTexture, x-buttonMyTextureRegion.getRegionWidth()/2, y-buttonMyTextureRegion.getRegionHeight()/2);
         stage.act(Gdx.graphics.getDeltaTime()); //Perform ui logic
         stage.draw(); //Draw the ui
     }
 
+
+
     private void drawScoreTable(){
         int tempY = Gdx.graphics.getHeight()/3;
-        if(Score.isNewTopScore()){
+
+        if(Score.checkIsNewTopScore()){
             //TODO show "NEW TOP SCORE"
-            drawScoreAtTheEnd.draw(x,tempY);
-            tempY -= Gdx.graphics.getHeight()/12;
-            drawTopScoreAtTheEnd.draw(x, tempY);
+            drawNewTopScoreAtTheEnd.draw(tempY);
             //drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
         } else {
-            drawScoreAtTheEnd.draw(x, tempY);
+            drawScoreAtTheEnd.draw(tempY);
             tempY -= 70;
-            drawTopScoreAtTheEnd.draw(x, tempY);
+            drawTopScoreAtTheEnd.draw(tempY);
             //TODO DRAW "TOP SCORE"
             //drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
         }

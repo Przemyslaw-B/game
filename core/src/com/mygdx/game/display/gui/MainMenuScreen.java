@@ -42,7 +42,7 @@ public class MainMenuScreen extends Game implements Screen {
         ship = new Ship(manager);
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
-        drawScore = new DrawScore(manager, Score.getScore());
+        drawScore = new DrawScore(manager);
         createInterface();
     }
 
@@ -61,6 +61,7 @@ public class MainMenuScreen extends Game implements Screen {
         playButton.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
+                Score.reset();
                 game.setScreen(new GameScreen(game, background, ship, manager));
                 dispose();
                 return false;

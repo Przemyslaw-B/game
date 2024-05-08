@@ -1,5 +1,6 @@
 package com.mygdx.game.display.gui;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.gui.numbers.*;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 
 public class DrawScore {
 
-    private int score;
     Numbers numbers;
     private int x;
     private int y;
@@ -17,8 +17,7 @@ public class DrawScore {
 
     private ArrayList numbersArray;
 
-    public DrawScore(TexturesLoader manager,  int score){
-        this.score = score;
+    public DrawScore(TexturesLoader manager){
         this.numbers = new Numbers(manager);
         numbersArray = new ArrayList<>();
     }
@@ -94,6 +93,7 @@ public class DrawScore {
     }
 
     public void drawTopScore(int x, int y){
+        clearNumbersArray();
         checkTopScore(Score.getTopScore());
         int positionX = x;
         for(int i = 0; i < numbersArray.size(); i++){
@@ -143,8 +143,7 @@ public class DrawScore {
             }
             positionX += 5;
         }
-        numbersArray.clear();
-
+        clearNumbersArray();
     }
 
     private void checkScore(){
@@ -172,6 +171,57 @@ public class DrawScore {
 
     private void addToArray(int numberToAdd){
         numbersArray.add(numberToAdd);
+    }
+
+    private void clearNumbersArray(){
+        numbersArray.clear();
+    }
+
+    public int getScoreWidth(boolean isTopScore){
+        int width=0;
+        if(isTopScore){
+            checkScore();
+        } else {
+            checkTopScore(Score.getTopScore());
+        }
+        for(int i = 0; i < numbersArray.size(); i++){
+            switch ((int) numbersArray.get(i)){
+                case 0:
+                    width += numbers.getZero().getWidth();
+                    break;
+                case 1:
+                    width += numbers.getOne().getWidth();
+                    break;
+                case 2:
+                    width += numbers.getTwo().getWidth();
+                    break;
+                case 3:
+                    width += numbers.getThree().getWidth();
+                    break;
+                case 4:
+                    width += numbers.getFour().getWidth();
+                    break;
+                case 5:
+                    width += numbers.getFive().getWidth();
+                    break;
+                case 6:
+                    width += numbers.getSix().getWidth();
+                    break;
+                case 7:
+                    width += numbers.getSeven().getWidth();
+                    break;
+                case 8:
+                    width += numbers.getEight().getWidth();
+                    break;
+                case 9:
+                    width += numbers.getNine().getWidth();
+                    break;
+                default:
+                    break;
+            }
+        }
+        clearNumbersArray();
+        return width;
     }
 
 

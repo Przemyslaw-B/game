@@ -23,4 +23,13 @@ public class Zero implements Number{
         int x = valueX + textureRegion.getRegionWidth()/2;
         Drop.batch.draw(texture, x, valueY);
     }
+
+    public int getWidth(){
+        return textureRegion.getRegionWidth();
+    }
+
+    public int getHeight(){
+        return textureRegion.getRegionHeight();
+    }
+
 }
