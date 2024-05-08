@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TextureLoader.TexturesLoader;
+import com.mygdx.game.data.Data;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.player.Ship;
@@ -133,6 +134,12 @@ public class GameOver {
         System.out.println("| Ilość zdobytych punktów: " + Score.getScore());
         System.out.println("| Czy zdobyto właśnie najlepszy wynik: " + Score.isNewTopScore());
         System.out.println("| Najlepszy wynik gracza: " + Score.getTopScore());
+        int temp = Data.read.getFromFile(Data.fileLevelStats, "topScore");
+        System.out.println("~~~ TEMP ~~~");
+        System.out.println("| player top score: " + temp);
+        Data.write.updateJson(Data.fileLevelStats,"topScore", 1);
+        temp = Data.read.getFromFile(Data.fileLevelStats, "topScore");
+        System.out.println("| NEW! player top score: " + temp);
         System.out.println("~~~ KONIEC RAPORTU ~~~");
     }
 

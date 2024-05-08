@@ -19,9 +19,9 @@ public class Data {
     public static final String levelStats = "data/levelStats.json";
     public static final String upgradesStats = "data/upgradesStats.json";
     public static final String bossesStats = "data/bossesStats.json";
-    public static FileHandle filePlayerStats;
+    public static FileHandle filePlayerStats = Gdx.files.local(playerStats);;
     public static FileHandle fileEnemyStats;
-    public static FileHandle fileLevelStats;
+    public static FileHandle fileLevelStats = Gdx.files.local(levelStats);
     public static FileHandle fileUpgradesStats;
     public static FileHandle fileBossesStats;
     JsonReader jsonReader;
