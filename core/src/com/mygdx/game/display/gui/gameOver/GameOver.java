@@ -11,9 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.GameScreen;
 import com.mygdx.game.player.Ship;
+import com.mygdx.game.score.Score;
 
 public class GameOver {
     private static Texture buttonTexture;
@@ -27,14 +29,20 @@ public class GameOver {
     private int x;
     private int y;
     private Stage stage;
-    public GameOver(){
+    private DrawScoreAtTheEnd drawScoreAtTheEnd;
+    private DrawTopScoreAtTheEnd drawTopScoreAtTheEnd;
+    private TexturesLoader manager;
+
+    public GameOver(TexturesLoader manager){
+        this.manager = manager;
         setGameOverText();
         setTexture();
         continueButton = new ImageButton(buttonMyTextureRegionDrawable);
         setPosition();
         setButton();
         setStage();
-
+        drawScoreAtTheEnd = new DrawScoreAtTheEnd(manager);
+        drawTopScoreAtTheEnd = new DrawTopScoreAtTheEnd(manager);
     }
 
     private void setGameOverText(){
@@ -95,8 +103,37 @@ public class GameOver {
         stage.draw(); //Draw the ui
     }
 
+    private void drawScoreTable(){
+        int tempY = Gdx.graphics.getHeight()/3;
+        if(Score.isNewTopScore()){
+            //TODO show "NEW TOP SCORE"
+            drawScoreAtTheEnd.draw(x,tempY);
+            tempY -= Gdx.graphics.getHeight()/12;
+            drawTopScoreAtTheEnd.draw(x, tempY);
+            //drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
+        } else {
+            drawScoreAtTheEnd.draw(x, tempY);
+            tempY -= 70;
+            drawTopScoreAtTheEnd.draw(x, tempY);
+            //TODO DRAW "TOP SCORE"
+            //drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
+        }
+    }
+
     public void drawGameOver(){
         drawText();
+        drawScoreTable();
         drawButton();
+
+        check();
     }
+
+    private void check(){
+        System.out.println("~~~ GAME OVER ~~~");
+        System.out.println("| Ilość zdobytych punktów: " + Score.getScore());
+        System.out.println("| Czy zdobyto właśnie najlepszy wynik: " + Score.isNewTopScore());
+        System.out.println("| Najlepszy wynik gracza: " + Score.getTopScore());
+        System.out.println("~~~ KONIEC RAPORTU ~~~");
+    }
+
 }

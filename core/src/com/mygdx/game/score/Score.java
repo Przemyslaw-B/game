@@ -3,19 +3,19 @@ package com.mygdx.game.score;
 import com.mygdx.game.data.Data;
 
 public class Score {
-    private int score;
-    private double multiplier;
-    private int topScore;
+    private static int score;
+    private static double multiplier = 1.0;
+    private static int topScore;
     public Score(){
-        reset();
+        //reset();
         getTopScore();
     }
 
-    public void addToScore(int value){
-        this.score += value * multiplier;
+    public static void addToScore(int value){
+        score += value * multiplier;
     }
-    public int getScore(){
-        return this.score;
+    public static int getScore(){
+        return score;
     }
 
     public void setMultiplier(double value){
@@ -26,8 +26,8 @@ public class Score {
         this.multiplier = 1.0;
     }
 
-    public void resetScore(){
-        this.score = 0;
+    public static void resetScore(){
+        score = 0;
     }
 
     public void reset(){
@@ -35,17 +35,17 @@ public class Score {
         resetScore();
     }
 
-    public int getTopScore(){
+    public static int getTopScore(){
         return Data.read.getFromFile(Data.fileLevelStats, "topScore");
     }
 
-    private void setNewTopScore(int newScore){
+    private static void setNewTopScore(int newScore){
         Data.write.updateJson(Data.fileLevelStats, "topScore", newScore);
         topScore = newScore;
     }
 
-    public boolean isNewTopScore(){
-        if(score > topScore){
+    public static boolean isNewTopScore(){
+        if(score > getTopScore()){
             setNewTopScore(score);
             return true;
         }

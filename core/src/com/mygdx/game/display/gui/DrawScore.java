@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DrawScore {
 
-    Score score;
+    private int score;
     Numbers numbers;
     private int x;
     private int y;
@@ -17,7 +17,7 @@ public class DrawScore {
 
     private ArrayList numbersArray;
 
-    public DrawScore(TexturesLoader manager, Score score){
+    public DrawScore(TexturesLoader manager,  int score){
         this.score = score;
         this.numbers = new Numbers(manager);
         numbersArray = new ArrayList<>();
@@ -94,7 +94,7 @@ public class DrawScore {
     }
 
     public void drawTopScore(int x, int y){
-        checkTopScore(score.getTopScore());
+        checkTopScore(Score.getTopScore());
         int positionX = x;
         for(int i = 0; i < numbersArray.size(); i++){
             switch ((int) numbersArray.get(i)){
@@ -148,7 +148,8 @@ public class DrawScore {
     }
 
     private void checkScore(){
-        String scoreTxt = String.valueOf(this.score.getScore());
+        //System.out.println("Value of SCORE: " + Score.getScore());
+        String scoreTxt = String.valueOf(Score.getScore());
         for(int i=0; i< scoreTxt.length(); i++){
             char sign = scoreTxt.charAt(i);
             int number = (int) sign - 48;

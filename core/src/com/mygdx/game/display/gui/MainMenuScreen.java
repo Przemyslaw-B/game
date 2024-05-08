@@ -42,7 +42,7 @@ public class MainMenuScreen extends Game implements Screen {
         ship = new Ship(manager);
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
-        drawScore = new DrawScore(manager, new Score());
+        drawScore = new DrawScore(manager, Score.getScore());
         createInterface();
     }
 

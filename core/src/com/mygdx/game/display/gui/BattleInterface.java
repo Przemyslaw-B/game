@@ -23,7 +23,7 @@ public class BattleInterface{
 
     DrawHealth drawHealth;
 
-    Score score;
+    //Score score;
     DrawScore drawScore;
     private static Texture heartTexture;
     private static TextureRegion heartTextureRegion;
@@ -39,9 +39,9 @@ public class BattleInterface{
 
 
 
-    public BattleInterface(TexturesLoader manager, Score score){
-        this.score = score;
-        this.drawScore = new DrawScore(manager, score);
+    public BattleInterface(TexturesLoader manager){
+        //this.score = score;
+        this.drawScore = new DrawScore(manager, Score.getScore());
         //heartTexture = new Texture(Gdx.files.internal("health/heart.png"));
         heartTexture = manager.getHealthLoader().getHeartTexture();
         heartTextureRegion = new TextureRegion(heartTexture);

@@ -12,6 +12,7 @@ import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.combat.Combat;
 import com.mygdx.game.display.gui.gameOver.GameOver;
+import com.mygdx.game.score.Score;
 
 public class GameScreen implements Screen {
 
@@ -40,7 +41,7 @@ public class GameScreen implements Screen {
     public GameScreen(final Drop game, Background background, Ship ship, TexturesLoader manager) {
         this.game=game;
         this.manager=manager;
-        this.gameOver = new GameOver();
+        this.gameOver = new GameOver(manager);
         this.exitFlag = false;
         this.ship = ship;
         this.time=0f;
@@ -49,7 +50,7 @@ public class GameScreen implements Screen {
         this.background = background;
         //this.ship=new Ship();
         this.combat = new Combat(ship, manager);
-        this.drawScore = new DrawScore(manager, combat.score);
+        this.drawScore = new DrawScore(manager, Score.getScore());
         //this.level = new Level(combat);
         //this.enemyList = new ArrayList<Enemy>();
         this.touchPoint = new Vector3();
@@ -96,13 +97,7 @@ public class GameScreen implements Screen {
         } else {    //press anywhere to quit level
             //System.out.println("~~~~BATTLE IS NOT ON!~~~~~");
             gameOver.drawGameOver();
-            if(combat.isNewTopScore){
-                //TODO show "NEW TOP SCORE"
-                drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
-            } else {
-                //TODO DRAW "TOP SCORE"
-                drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
-            }
+
             combat.endOfGameKillAll();
             if(gameOver.checkIfContinue()){
                 this.exitFlag = true;

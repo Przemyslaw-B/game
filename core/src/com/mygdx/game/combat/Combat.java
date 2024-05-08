@@ -21,7 +21,7 @@ public class Combat {
     private static ArrayList<Bullet>  bulletsArrayList;
     private Random rand;
     private BattleInterface battleInterface;
-    public Score score;
+    //public Score score;
     private Level level;
     private int width;
     private int height;
@@ -33,14 +33,16 @@ public class Combat {
         this.isNewTopScore = false;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
-        score = new Score();
+        //score = new Score();
+        //score.reset
+        Score.resetScore();
         this.enemyArrayList = new ArrayList<Enemy>();
         this.bulletsArrayList = new ArrayList<Bullet>();
         this.userShip = userShip;
         this.time=0f;
         this.shotTimer = 0f;
         this.rand = new Random();
-        this.battleInterface = new BattleInterface(manager, score);
+        this.battleInterface = new BattleInterface(manager);
         setLevel();
     }
 
@@ -149,7 +151,7 @@ public class Combat {
     }
 
     public void finalScore(){
-        if(score.isNewTopScore()){
+        if(Score.isNewTopScore()){
             isNewTopScore = true;
         } else {isNewTopScore = false;}
     }
@@ -325,7 +327,8 @@ public class Combat {
                             pickedEnemy.action.reduceHp(pickedBullet.getDamage());
                             if(pickedEnemy.statistics.getHealth() <= 0){
                                 int tempScore = pickedEnemy.statistics.getScore();
-                                score.addToScore(tempScore);
+                                Score.addToScore(tempScore);
+                                System.out.println("Punkty za przeciwnika: " + tempScore);
                             }
                             bulletsArrayList.remove(pickedBullet);
                             flag = true;
