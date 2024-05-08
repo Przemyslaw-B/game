@@ -126,7 +126,7 @@ public class GameOver {
         drawScoreTable();
         drawButton();
 
-        check();
+        //check();
     }
 
     private void check(){
@@ -134,12 +134,6 @@ public class GameOver {
         System.out.println("| Ilość zdobytych punktów: " + Score.getScore());
         System.out.println("| Czy zdobyto właśnie najlepszy wynik: " + Score.isNewTopScore());
         System.out.println("| Najlepszy wynik gracza: " + Score.getTopScore());
-        int temp = Data.read.getFromFile(Data.fileLevelStats, "topScore");
-        System.out.println("~~~ TEMP ~~~");
-        System.out.println("| player top score: " + temp);
-        Data.write.updateJson(Data.fileLevelStats,"topScore", 1);
-        temp = Data.read.getFromFile(Data.fileLevelStats, "topScore");
-        System.out.println("| NEW! player top score: " + temp);
         System.out.println("~~~ KONIEC RAPORTU ~~~");
     }
 
