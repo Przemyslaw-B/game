@@ -17,10 +17,10 @@ public class DrawNewTopScoreAtTheEnd {
         this.drawScore = new DrawScore(manager);
     }
 
-    public void draw(int y){
+    public void draw(int y, int spaceLeft){
         int defaultPosition = getMiddleOfTheScreen();
 
-        int newWordHeight  =getNewWordHeight();
+        int newWordHeight  = getNewWordHeight();
         int newWordWidth = getNewWordWidth();
         int topScoreWordWidth = getTopScoreWordWidth();
         int topScoreWordHeight = getTopScoreWordHeight();

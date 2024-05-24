@@ -51,5 +51,11 @@ public class DrawTopScoreAtTheEnd {
         return Gdx.graphics.getWidth()/2;
     }
 
+    public int getTopScoreWordHeight(){
+        Texture topScoreWord = manager.getScoreLoader().getTopScoreTexture();
+        TextureRegion topScoreWordRegion = new TextureRegion(topScoreWord);
+        return topScoreWordRegion.getRegionHeight();
+    }
+
 
 }

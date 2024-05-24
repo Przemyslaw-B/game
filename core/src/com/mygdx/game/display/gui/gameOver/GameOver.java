@@ -25,8 +25,12 @@ public class GameOver {
     private static TextureRegion buttonMyTextureRegion;
     private static TextureRegionDrawable buttonMyTextureRegionDrawable;
     private ImageButton continueButton;
-    private int gameOverTextX;
-    private int gameOverTextY;
+    //private int gameOverTextX;
+    //private int gameOverTextY;
+    private int width;
+    private int height;
+    private int tempX;
+    private int tempY;
     private int x;
     private int y;
     private Stage stage;
@@ -41,6 +45,8 @@ public class GameOver {
         this.topScoreFlag = false;
         this.wasDisplayed = false;
         this.manager = manager;
+        this.width = Gdx.graphics.getWidth();
+        this.height = Gdx.graphics.getHeight();
         setGameOverText();
         setTexture();
         continueButton = new ImageButton(buttonMyTextureRegionDrawable);
@@ -53,13 +59,13 @@ public class GameOver {
     }
 
     private void setGameOverText(){
-        gameOverText = new Texture("gameOver.png");
+        gameOverText = new Texture("gameOver.png");  //TODO GET IT FROM LOADER!
         gameOverTextureRegion = new TextureRegion(gameOverText);
-        gameOverTextX = Gdx.graphics.getWidth()/2 - gameOverTextureRegion.getRegionWidth()/2;
-        gameOverTextY = (int) (2*Gdx.graphics.getHeight())/3 - gameOverTextureRegion.getRegionHeight()/2;
+        //gameOverTextX = Gdx.graphics.getWidth()/2 - gameOverTextureRegion.getRegionWidth()/2;
+        //gameOverTextY = (int) (2*Gdx.graphics.getHeight())/3 - gameOverTextureRegion.getRegionHeight()/2;
     }
     private void drawText(){
-        Drop.batch.draw(gameOverText, gameOverTextX,gameOverTextY);
+        Drop.batch.draw(gameOverText, tempX - gameOverTextureRegion.getRegionWidth()/2, tempY);
     }
 
     private void setStage(){
@@ -76,8 +82,11 @@ public class GameOver {
     private void setButton(){
         continueButton.setWidth(buttonMyTextureRegion.getRegionWidth());
         continueButton.setHeight(buttonMyTextureRegion.getRegionHeight());
-        int height = gameOverTextY - gameOverTextureRegion.getRegionHeight()/2 - (Gdx.graphics.getHeight()/10);
-        continueButton.setPosition(x, height, Align.center);
+        //int height = gameOverTextY - gameOverTextureRegion.getRegionHeight()/2 - (Gdx.graphics.getHeight()/10);
+        //int height = tempY - gameOverTextureRegion.getRegionHeight()/2 - (Gdx.graphics.getHeight()/10);
+        int buttonY = Math.round(height * 0.1f) + buttonMyTextureRegion.getRegionHeight()/2;
+        int buttonX = width/2;
+        continueButton.setPosition(buttonX, buttonY, Align.center);
         continueButton.setVisible(false);
 
         continueButton.addListener(new EventListener() {
@@ -104,6 +113,7 @@ public class GameOver {
     }
 
     private void drawButton(){
+        continueButton.setPosition(tempX, tempY, Align.center);
         continueButton.setVisible(true);
         stage.act(Gdx.graphics.getDeltaTime()); //Perform ui logic
         stage.draw(); //Draw the ui
@@ -111,14 +121,16 @@ public class GameOver {
 
 
 
-    private void drawScoreTable(){
-        int tempY = Gdx.graphics.getHeight()/3;
+    private void drawScoreTable(int spaceLeft){
+        //int tempY = Gdx.graphics.getHeight()/3;
 
         if(Score.checkIsNewTopScore()){
             //TODO show "NEW TOP SCORE"
-            drawNewTopScoreAtTheEnd.draw(tempY);
+            drawNewTopScoreAtTheEnd.draw(tempY, spaceLeft);
             //drawScore.drawTopScore(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3);
         } else {
+            //int size = drawScoreAtTheEnd.getScoreWordHeight() + drawTopScoreAtTheEnd.getTopScoreWordHeight();
+
             drawScoreAtTheEnd.draw(tempY);
             tempY -= 70;
             drawTopScoreAtTheEnd.draw(tempY);
@@ -127,10 +139,38 @@ public class GameOver {
         }
     }
 
+    private void setDefaultTemps(){
+        tempX = width/2;
+        tempY = Math.round(height*0.8f) - gameOverTextureRegion.getRegionWidth()/2;
+    }
+
+    private int spaceLeft(int localY){
+        int spaceLeft =  height - (height - localY);
+        spaceLeft -= (tempY + buttonMyTextureRegion.getRegionHeight()/2);
+        return spaceLeft;
+    }
+
+    private void setTempsForScoreTable(int spaceLeft, int localY){
+        tempY = localY - Math.round(spaceLeft/2);
+    }
+
+    private void setTempsForButton(){
+        tempY = Math.round(height * 0.1f) + buttonMyTextureRegion.getRegionHeight()/2;
+    }
+
+
+
     public void drawGameOver(){
-        drawText();
-        drawScoreTable();
+        setDefaultTemps();  //tempX = middle of the screen, tempY reset for drawing GameOver text
+        drawText(); //draw Game Over Text
+        int localY = tempY;
+
+        setTempsForButton();
         drawButton();
+
+        int spaceLeft = spaceLeft(localY);
+        setTempsForScoreTable(spaceLeft, localY);
+        drawScoreTable(spaceLeft);
 
         //check();
     }

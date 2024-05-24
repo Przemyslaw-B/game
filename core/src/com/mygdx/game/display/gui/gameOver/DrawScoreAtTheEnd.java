@@ -47,5 +47,11 @@ public class DrawScoreAtTheEnd {
         return Gdx.graphics.getWidth()/2;
     }
 
+    public int getScoreWordHeight(){
+        Texture scoreWord = manager.getScoreLoader().getScoreTexture();
+        TextureRegion scoreWordRegion = new TextureRegion(scoreWord);
+        return scoreWordRegion.getRegionHeight();
+    }
+
 
 }
