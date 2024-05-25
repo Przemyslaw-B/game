@@ -3,10 +3,12 @@ package com.mygdx.game.combat;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.gui.BattleInterface;
+import com.mygdx.game.levels.EndlessLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
+import com.mygdx.game.powerUps.PowerUp;
 import com.mygdx.game.score.Score;
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,6 +29,7 @@ public class Combat {
     private int height;
     private TexturesLoader manager;
     public boolean isNewTopScore;
+    private PowerUp powerUp;
 
     public Combat(Ship userShip, TexturesLoader manager){
         this.manager = manager;
@@ -44,6 +47,7 @@ public class Combat {
         this.rand = new Random();
         this.battleInterface = new BattleInterface(manager);
         setLevel();
+        powerUp = new PowerUp(manager, userShip);
     }
 
     private void setLevel(){
@@ -329,6 +333,23 @@ public class Combat {
                                 int tempScore = pickedEnemy.statistics.getScore();
                                 Score.addToScore(tempScore);
                                 System.out.println("Punkty za przeciwnika: " + tempScore);
+                                //System.out.println("~~~ DROP: " + EndlessLevel.powerUpDrop() + " ~~~");
+                                String roll = EndlessLevel.powerUpDrop();
+                                switch(roll){
+                                    case "healthUp":
+                                        powerUp.dropHealthUp(pickedEnemy.position.getX(), pickedEnemy.position.getY());
+                                        break;
+
+                                    case "addBullet":
+                                        powerUp.dropAdditionalBullet(pickedEnemy.position.getX(), pickedEnemy.position.getY());
+                                        break;
+
+                                    case "damageUp":
+                                        powerUp.dropDamageUp(pickedEnemy.position.getX(), pickedEnemy.position.getY());
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                             bulletsArrayList.remove(pickedBullet);
                             flag = true;

@@ -44,6 +44,24 @@ public class EndlessLevel implements levelInterface {
         return roll;
     }
 
+    public static String powerUpDrop(){
+        int min = 0;
+        int max = 1000;
+        Random rand = new Random();
+        int roll = rand.nextInt(max - min) + min;
+
+        System.out.println("Wylosowany drop w pkt: " + roll);
+
+        if(roll<5){
+            return "damageUp";
+        } else if(roll < 20){
+            return "addBullet";
+        } else if(roll < 50){
+            return "healthUp";
+        }
+        return "healthUp";
+    }
+
     private void spawnEnemy(int x, int y, int enemyId,int rotation, boolean isFromTop, boolean isFocusedOnPlayer){
         Combat.spawnEnemy(enemyId, x,y, rotation, isFromTop, isFocusedOnPlayer, manager);
     }

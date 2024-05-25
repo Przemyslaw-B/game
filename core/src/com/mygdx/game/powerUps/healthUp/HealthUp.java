@@ -14,6 +14,20 @@ public class HealthUp {
         this.position = new Position(x,y);
         this.movement = new Movement(position);
         this.action = new Action(player);
+    }
 
+    public Skin getSkin(){
+        return skin;
+    }
+
+    public Position getPosition(){
+        return position;
+    }
+
+    public Movement getMovement(){
+        return movement;
+    }
+    public Action getAction(){
+        return action;
     }
 }
