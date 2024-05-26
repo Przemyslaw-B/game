@@ -28,7 +28,7 @@ public class HealthUpLoader {
         }
     }
 
-    public Texture getHealthUpTexture() {
+    public Texture getTexture() {
         if(!isLoaded(healthUp)){
             loadHealthUp();
         }

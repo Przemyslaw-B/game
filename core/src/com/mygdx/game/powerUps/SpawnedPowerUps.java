@@ -11,4 +11,10 @@ public class SpawnedPowerUps {
     public static ArrayList<HealthUp> healthUpArray = new ArrayList<HealthUp>();
     public static ArrayList<DamageUp> damageUpArray = new ArrayList<DamageUp>();
     public static ArrayList<AdditionalBullet> additionalBulletsArray = new ArrayList<AdditionalBullet>();
+
+    public static void resetAllPowerUpsArrays(){
+        healthUpArray.clear();
+        damageUpArray.clear();
+        additionalBulletsArray.clear();
+    }
 }

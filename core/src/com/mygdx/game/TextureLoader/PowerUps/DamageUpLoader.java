@@ -27,7 +27,10 @@ public class DamageUpLoader {
         }
     }
 
-    public Texture getDamageUpsTexture(){
+    public Texture getTexture(){
+        if(!isLoaded(damageUp)){
+            loadDamageUp();
+        }
         return loader.get(damageUp);
     }
 }

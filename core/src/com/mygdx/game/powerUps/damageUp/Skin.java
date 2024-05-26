@@ -11,7 +11,7 @@ public class Skin {
 
     public Skin(TexturesLoader manager){
     this.manager = manager;
-    texture = manager.getPowerUpsLoader().getDamageUpLoader().getDamageUpsTexture();
+    texture = manager.getPowerUpsLoader().getDamageUpLoader().getTexture();
     textureRegion = new TextureRegion(texture);
     }
 

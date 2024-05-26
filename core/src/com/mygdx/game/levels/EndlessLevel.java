@@ -59,7 +59,7 @@ public class EndlessLevel implements levelInterface {
         } else if(roll < 50){
             return "healthUp";
         }
-        return "healthUp";
+        return "none";
     }
 
     private void spawnEnemy(int x, int y, int enemyId,int rotation, boolean isFromTop, boolean isFocusedOnPlayer){

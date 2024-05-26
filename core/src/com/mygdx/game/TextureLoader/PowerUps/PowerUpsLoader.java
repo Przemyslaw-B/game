@@ -9,6 +9,7 @@ public class PowerUpsLoader {
     private AssetManager loader;
     private HealthUpLoader healthUpLoader;
     private DamageUpLoader damageUpLoader;
+    private AdditionalBulletLoader additionalBulletLoader;
 
     public PowerUpsLoader(AssetManager loader) {
         this.loader = loader;
@@ -19,6 +20,7 @@ public class PowerUpsLoader {
     private void loadAllPowerUps(){
         this.healthUpLoader = new HealthUpLoader(loader);
         this.damageUpLoader = new DamageUpLoader(loader);
+        this.additionalBulletLoader = new AdditionalBulletLoader(loader);
     }
 
     public HealthUpLoader getHealthUpLoader() {
@@ -28,6 +30,8 @@ public class PowerUpsLoader {
     public DamageUpLoader getDamageUpLoader() {
         return damageUpLoader;
     }
+
+    public AdditionalBulletLoader getAdditionalBulletLoader() {return additionalBulletLoader;}
 
 
 

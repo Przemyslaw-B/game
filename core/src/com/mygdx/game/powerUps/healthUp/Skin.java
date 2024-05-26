@@ -12,7 +12,7 @@ public class Skin {
 
     public Skin(TexturesLoader manager){
         this.manager = manager;
-        texture = manager.getPowerUpsLoader().getHealthUpLoader().getHealthUpTexture();
+        texture = manager.getPowerUpsLoader().getHealthUpLoader().getTexture();
         textureRegion = new TextureRegion(texture);
     }
 

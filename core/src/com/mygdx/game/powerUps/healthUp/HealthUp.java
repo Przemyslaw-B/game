@@ -8,11 +8,13 @@ public class HealthUp {
     private Position position;
     private Movement movement;
     private Action action;
+    private Statistics statistics;
 
     public HealthUp(TexturesLoader manager, Ship player, int x, int y){
+        this.statistics = new Statistics();
         this.skin = new Skin(manager);
         this.position = new Position(x,y);
-        this.movement = new Movement(position);
+        this.movement = new Movement(position, statistics);
         this.action = new Action(player);
     }
 

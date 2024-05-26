@@ -12,12 +12,10 @@ public class   PowerUp {
     private TexturesLoader manager;
     private HealthUp healthUp;
     private SpawnedPowerUps spawnedPowerUps;
-    private Drawing drawing;
 
     public PowerUp(TexturesLoader manager, Ship player){
         this.player = player;
         this.manager = manager;
-        this.drawing = new Drawing(manager);
     }
 
     public void dropHealthUp(int x, int y){
@@ -32,7 +30,7 @@ public class   PowerUp {
         SpawnedPowerUps.additionalBulletsArray.add(new AdditionalBullet(manager, player, x, y));
     }
 
-    public void draw(){
 
-    }
+
+
 }

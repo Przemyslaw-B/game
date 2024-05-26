@@ -3,12 +3,15 @@ package com.mygdx.game.combat;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.TextureLoader.TexturesLoader;
 import com.mygdx.game.display.gui.BattleInterface;
+import com.mygdx.game.display.powerUps.DrawAllPowerups;
 import com.mygdx.game.levels.EndlessLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
+import com.mygdx.game.powerUps.MoveAllPowerUps;
 import com.mygdx.game.powerUps.PowerUp;
+import com.mygdx.game.powerUps.SpawnedPowerUps;
 import com.mygdx.game.score.Score;
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,7 +32,9 @@ public class Combat {
     private int height;
     private TexturesLoader manager;
     public boolean isNewTopScore;
+    private DrawAllPowerups drowAllPowerups;
     private PowerUp powerUp;
+    private MoveAllPowerUps moveAllPowerUps;
 
     public Combat(Ship userShip, TexturesLoader manager){
         this.manager = manager;
@@ -48,6 +53,9 @@ public class Combat {
         this.battleInterface = new BattleInterface(manager);
         setLevel();
         powerUp = new PowerUp(manager, userShip);
+        drowAllPowerups = new DrawAllPowerups();
+        moveAllPowerUps = new MoveAllPowerUps();
+        SpawnedPowerUps.resetAllPowerUpsArrays();   //Remove all spawned powerUps
     }
 
     private void setLevel(){
@@ -125,6 +133,10 @@ public class Combat {
 
         moveBullet(delta);
         enemyMove(delta);
+
+        drowAllPowerups.draw();
+        moveAllPowerUps.move(delta);
+
         if(Gdx.input.isTouched()){
             userShoot();
         }
