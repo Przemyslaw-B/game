@@ -48,4 +48,7 @@ public class Ship {
         return bullet;
     }
 
+    public Position getPosition(){return position;}
+    public Skin getSkin(){return skin;}
+
 }
