@@ -7,4 +7,8 @@ public class Action {
     public Action (Ship player){
         this.player = player;
     }
+
+    public void addDamage(){
+        player.getStatistics().increaseDamage();
+    }
 }

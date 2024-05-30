@@ -50,5 +50,6 @@ public class Ship {
 
     public Position getPosition(){return position;}
     public Skin getSkin(){return skin;}
+    public Statistics getStatistics(){return statistics;}
 
 }

@@ -20,58 +20,44 @@ public class PickingAllUp {
     private int boxX;
     private int boxY;
 
+    private int playerMaxLeftX;
+    private int playerMaxRightX;
+    private int playerMaxTopY;
+    private int playerMaxBottomY;
+
+    private int boxMaxLeftX;
+    private int boxMaxRightX;
+    private int boxMaxTopY;
+    private int boxMaxBottomY;
+
     public PickingAllUp(Ship player) {
         this.player = player;
-        this.pickingUpHealthUp = new PickingUpHealthUp();
-        this.pickingUpDamageUp = new PickingUpDamageUp();
-        this.pickingUpAdditionalBullet = new PickingUpAdditionalBullet();
+        this.pickingUpHealthUp = new PickingUpHealthUp(player);
+        this.pickingUpDamageUp = new PickingUpDamageUp(player);
+        this.pickingUpAdditionalBullet = new PickingUpAdditionalBullet(player);
     }
 
     public void checkAndPickUp(){
-
+        checkHealthUp();
+        checkDamageUp();
+        checkAdditionalBullet();
     }
 
 
 
 
     private void checkDamageUp(){
-
+        pickingUpDamageUp.checkAndPickUp();
     }
 
     private void checkAdditionalBullet(){
-
-
+        pickingUpAdditionalBullet.checkAndPickUp();
 
     }
 
-    private void setPlayerParameters(){
-        this.playerX = player.getPosition().getShipPositionX();
-        this.playerY = player.getPosition().getShipPositionY();
+    private void checkHealthUp(){
+        pickingUpHealthUp.checkAndPickUp();
     }
 
-    private void setBoxParameters(HealthUp picked){
-        this.boxX = picked.getPosition().getX();
-        this.boxY = picked.getPosition().getY();
-    }
-    private void setBoxParameters(DamageUp picked){
-        this.boxX = picked.getPosition().getX();
-        this.boxY = picked.getPosition().getY();
-    }
-    private void setBoxParameters(AdditionalBullet picked){
-        this.boxX = picked.getPosition().getX();
-        this.boxY = picked.getPosition().getY();
-    }
-
-    private boolean comparePosition(HealthUp picked){
-        return false;
-    }
-
-    private boolean comparePosition(DamageUp picked){
-        return false;
-    }
-
-    private boolean comparePosition(AdditionalBullet picked){
-        return false;
-    }
 
 }

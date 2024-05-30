@@ -10,6 +10,7 @@ import com.mygdx.game.player.Ship;
 import com.mygdx.game.bullets.Bullet;
 import com.mygdx.game.enemies.*;
 import com.mygdx.game.powerUps.MoveAllPowerUps;
+import com.mygdx.game.powerUps.PickingAllUp;
 import com.mygdx.game.powerUps.PowerUp;
 import com.mygdx.game.powerUps.SpawnedPowerUps;
 import com.mygdx.game.score.Score;
@@ -35,6 +36,7 @@ public class Combat {
     private DrawAllPowerups drowAllPowerups;
     private PowerUp powerUp;
     private MoveAllPowerUps moveAllPowerUps;
+    private PickingAllUp pickingUpPowerUps;
 
     public Combat(Ship userShip, TexturesLoader manager){
         this.manager = manager;
@@ -55,6 +57,7 @@ public class Combat {
         powerUp = new PowerUp(manager, userShip);
         drowAllPowerups = new DrawAllPowerups();
         moveAllPowerUps = new MoveAllPowerUps();
+        pickingUpPowerUps = new PickingAllUp(userShip);
         SpawnedPowerUps.resetAllPowerUpsArrays();   //Remove all spawned powerUps
     }
 
@@ -136,6 +139,7 @@ public class Combat {
 
         drowAllPowerups.draw();
         moveAllPowerUps.move(delta);
+        pickingUpPowerUps.checkAndPickUp();
 
         if(Gdx.input.isTouched()){
             userShoot();

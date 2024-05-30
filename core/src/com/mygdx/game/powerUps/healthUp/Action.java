@@ -9,7 +9,9 @@ public class Action {
         this.player = player;
     }
 
-    public void doYourJob(){
-
+    public void increaseHealth(){
+        player.getStatistics().increaseHealth();
     }
+
+
 }

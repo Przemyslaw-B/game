@@ -8,4 +8,13 @@ public class Action {
     public Action(Ship player) {
         this.player = player;
     }
+
+
+    public void addMainBullet(){
+
+    }
+
+    public void addDiagonalBullet(){
+
+    }
 }

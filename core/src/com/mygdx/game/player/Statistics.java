@@ -44,6 +44,10 @@ public class Statistics implements stats {
         }
     }
 
+    public void increaseDamage(){
+        damage += 1;
+    }
+
     private boolean isHealthMax(){
         if(health >= 10){
             health =10;

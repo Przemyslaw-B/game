@@ -12,6 +12,7 @@ public class Skin {
     public Skin(TexturesLoader manager) {
         this.manager = manager;
         this.texture = manager.getPowerUpsLoader().getAdditionalBulletLoader().getTexture();
+        this.textureRegion = new TextureRegion(texture);
     }
 
     public Texture getTexture() {return this.texture;}

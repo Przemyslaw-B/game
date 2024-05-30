@@ -52,11 +52,11 @@ public class EndlessLevel implements levelInterface {
 
         System.out.println("Wylosowany drop w pkt: " + roll);
 
-        if(roll<5){
+        if(roll<7){
             return "damageUp";
-        } else if(roll < 20){
+        } else if(roll < 30){
             return "addBullet";
-        } else if(roll < 50){
+        } else if(roll < 80){
             return "healthUp";
         }
         return "none";

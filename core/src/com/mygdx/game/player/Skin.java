@@ -55,6 +55,8 @@ public class Skin{
     public TextureRegionDrawable getShipMyTextureRegionDrawable(){
         return shipMyTextureRegionDrawable;
     }
+
+    public TextureRegion getShipMyTextureRegion(){return shipMyTextureRegion;}
     public int getRotation(){
         return 360-(int) sprite.getRotation();
     }
