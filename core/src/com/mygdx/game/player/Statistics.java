@@ -11,6 +11,8 @@ public class Statistics implements stats {
     private static float attackSpeed;
     private static int speedForward;
     private static int speedSideways;
+    private int bulletAmount;
+    private int diagonalBulletAmount;
     private Skin skin;
 
 
@@ -19,12 +21,36 @@ public class Statistics implements stats {
         shipWidth = skin.getShipWidth();
         shipHeight = skin.getShipHeight();
         loadDefaultStatistics();
+        this.diagonalBulletAmount = 0;
+        this.bulletAmount = 1;
         //id = 1;
         //speedForward = 10; //default value
         //speedSideways = 10; //default value
         //health = 1; //default value
         //attackSpeed = 1; //default value
     }
+
+    public int getBulletAmount(){return bulletAmount;}
+    public void setBulletAmount(int bulletAmount){
+        this.bulletAmount = bulletAmount;
+        if(bulletAmount > 11){
+            bulletAmount = 11;
+        }
+    }
+    public void addMainBullet(){
+        if(bulletAmount < 11){
+            bulletAmount++;
+        }
+    }
+
+    public void addDiagonalBullet(){
+        if(diagonalBulletAmount < 5){
+            diagonalBulletAmount++;
+        }
+    }
+
+    public int getDiagonalBulletAmount(){return diagonalBulletAmount;}
+    public void setDiagonalBulletAmount(int diagonalBulletAmount){this.diagonalBulletAmount = diagonalBulletAmount;}
 
     public int getHealth() {
         return health;

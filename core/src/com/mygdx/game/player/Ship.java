@@ -13,6 +13,7 @@ public class Ship {
     private float time;
     int[] vector;
     private TexturesLoader manager;
+    private PlayerBullets playerBullets;
 
     public Ship(TexturesLoader manager){
         this.manager = manager;
@@ -21,6 +22,7 @@ public class Ship {
         //bullets = new PlayerBullets();
         statistics = new Statistics(skin);
         movement = new Movement(position, statistics);
+        this.playerBullets = new PlayerBullets(statistics, position, skin, manager);
     }
 
     public void draw(){
@@ -38,14 +40,11 @@ public class Ship {
         return false;
     }
 
-    public Bullet shot(){
-        int x = position.getShipPositionX();
-        int y = position.getShipPositionY();
-        int id = statistics.getId();
-        int damage = statistics.getDamage();
-        Bullet bullet = new Bullet(x, y, damage, id, skin.getRotation(), manager);
-        time = 0f;
-        return bullet;
+    public boolean shot(float shotTimer){
+        if(playerBullets.shot(shotTimer)){
+            return true;
+        }
+        return false;
     }
 
     public Position getPosition(){return position;}

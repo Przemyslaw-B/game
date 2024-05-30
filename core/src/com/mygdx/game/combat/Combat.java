@@ -2,6 +2,8 @@ package com.mygdx.game.combat;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.TextureLoader.TexturesLoader;
+import com.mygdx.game.bullets.SpawnedBullets;
+import com.mygdx.game.display.Drop;
 import com.mygdx.game.display.gui.BattleInterface;
 import com.mygdx.game.display.powerUps.DrawAllPowerups;
 import com.mygdx.game.levels.EndlessLevel;
@@ -90,12 +92,21 @@ public class Combat {
 
     public void moveBullet(float delta){
         //System.out.println("Ilość pocisków na mapie: " + bulletsArrayList.size());
+        /*
         if(bulletsArrayList.size() > 0) {
             for (Bullet pickedBullet : bulletsArrayList) {
                 pickedBullet.moveBullet(delta);
                 //System.out.println("Bullet X: " + pickedBullet.getBulletX() + "Y: " + pickedBullet.getBulletY());
             }
         }
+         */
+        if(SpawnedBullets.bulletsArrayList.size() > 0) {
+            for (Bullet pickedBullet : SpawnedBullets.bulletsArrayList) {
+                pickedBullet.moveBullet(delta);
+                //System.out.println("Bullet X: " + pickedBullet.getBulletX() + "Y: " + pickedBullet.getBulletY());
+            }
+        }
+
     }
 
     public void enemyBullets(float delta , Enemy enemy){
@@ -107,9 +118,13 @@ public class Combat {
     }
 
     public void drawAllBullets(){
-        for(Bullet pickedBullet : bulletsArrayList){
-            pickedBullet.drawBullet();
-            //System.out.println("Rysuję pocisk!");
+        System.out.println("Ilość POCISKÓW na mapie: " + SpawnedBullets.bulletsArrayList.size());
+        if(SpawnedBullets.bulletsArrayList.size() > 0){
+            for(Bullet picked : SpawnedBullets.bulletsArrayList){
+                Drop.batch.draw(picked.getTexture(), picked.getBulletX(), picked.getBulletY());
+                //pickedBullet.drawBullet();
+                //System.out.println("Rysuję pocisk!");
+            }
         }
     }
 
@@ -142,7 +157,7 @@ public class Combat {
         pickingUpPowerUps.checkAndPickUp();
 
         if(Gdx.input.isTouched()){
-            userShoot();
+            userShoot(delta);
         }
         removeBulletNotInView();
         removeEnemyNotInView();
@@ -180,7 +195,7 @@ public class Combat {
         if(enemyArrayList.size() > 0){
             for(Enemy pickedEnemy : enemyArrayList){
                 if(pickedEnemy.canShoot(delta)){
-                    bulletsArrayList.add(pickedEnemy.shoot(pickedEnemy.getIsFocusedOnPlayer()));
+                    SpawnedBullets.bulletsArrayList.add(pickedEnemy.shoot(pickedEnemy.getIsFocusedOnPlayer()));
                 }
             }
         }
@@ -197,15 +212,23 @@ public class Combat {
         }
     }
 
-    private void userShoot(){
-        if(userShip.canShoot(shotTimer)){
+    private void userShoot(float delta){
+        if(userShip.shot(delta)){
             shotTimer = 0;
-            Bullet newBullet = userShip.shot();
-            bulletsArrayList.add(newBullet);
         }
     }
 
     private void removeBulletNotInView(){
+        if(SpawnedBullets.bulletsArrayList.size() > 0){
+            for(int i = SpawnedBullets.bulletsArrayList.size()-1; i>=0; i--){
+                Bullet picked = SpawnedBullets.bulletsArrayList.get(i);
+                if(!checkBulletInView(picked)){
+                    SpawnedBullets.bulletsArrayList.remove(i);
+                }
+            }
+        }
+
+        /*
         if(bulletsArrayList.size() > 0){
             for(int i=bulletsArrayList.size()-1; i>=0; i--){
                 if(!checkBulletInView(bulletsArrayList.get(i))){
@@ -213,6 +236,9 @@ public class Combat {
                 }
             }
         }
+
+         */
+
     }
 
      private boolean checkBulletInView(Bullet pickedBullet){
@@ -329,12 +355,12 @@ public class Combat {
     }
      */
     private void checkHit(){
-        for(int i = bulletsArrayList.size()-1; i >=0; i--){
-            Bullet pickedBullet = bulletsArrayList.get(i);
+        for(int i = SpawnedBullets.bulletsArrayList.size()-1; i >=0; i--){
+            Bullet pickedBullet = SpawnedBullets.bulletsArrayList.get(i);
             if(pickedBullet.getFriendlyFire()){
                 if(checkIsUserDamagedByBullet(pickedBullet)){
                     userShip.statistics.reduceHealth(pickedBullet.getDamage());
-                    bulletsArrayList.remove(pickedBullet);
+                    SpawnedBullets.bulletsArrayList.remove(pickedBullet);
                 }
             } else{
                 if(!enemyArrayList.isEmpty()){
@@ -367,7 +393,7 @@ public class Combat {
                                         break;
                                 }
                             }
-                            bulletsArrayList.remove(pickedBullet);
+                            SpawnedBullets.bulletsArrayList.remove(pickedBullet);
                             flag = true;
                         }
                         counter--;
@@ -377,7 +403,7 @@ public class Combat {
         }
     }
 
-    private boolean checkIsEnemyDamagedByBullet(Enemy pickedEnemy, Bullet  pickedBullet){
+    private boolean checkIsEnemyDamagedByBullet(Enemy pickedEnemy, Bullet pickedBullet){
         if(pickedBullet.getFriendlyFire()){
 
             return false;
@@ -431,7 +457,7 @@ public class Combat {
     }
 
     public void endOfGameKillAll(){
-        bulletsArrayList.clear();
+        SpawnedBullets.bulletsArrayList.clear();
         enemyArrayList.clear();
     }
 

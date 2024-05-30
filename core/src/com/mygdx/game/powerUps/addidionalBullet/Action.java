@@ -11,10 +11,11 @@ public class Action {
 
 
     public void addMainBullet(){
-
+        player.getStatistics().addMainBullet();
+        addDiagonalBullet();
     }
 
     public void addDiagonalBullet(){
-
+        player.getStatistics().addDiagonalBullet();
     }
 }

@@ -32,9 +32,9 @@ public class Bullet implements Bullets{
         speedY = 600;    //TODO TEST VALUE
         speed = 600;
         this.shipId = id;
-        System.out.println("Loading BULLET TEXTURE: 1");
+        //System.out.println("Loading BULLET TEXTURE: 1");
         loadBulletTexture(id);
-        System.out.println("Setting BULLET TEXTURE");
+        //System.out.println("Setting BULLET TEXTURE");
         setBulletTexture(id);
         setFriendlyFire(id);
         this.damage = damage;
@@ -104,6 +104,7 @@ public class Bullet implements Bullets{
     public Texture getBulletTexture() {
         return texture;
     }
+    public Texture getTexture() {return texture;}
 
 
 
@@ -183,8 +184,11 @@ public class Bullet implements Bullets{
         }
     }
 
-    public void drawBullet(){
-        Drop.batch.draw(texture, x, y);
+    public void drawAllBullets(){
+        for(Bullet picked : SpawnedBullets.bulletsArrayList){
+            Drop.batch.draw(picked.getTexture(), picked.getBulletX(), picked.getBulletY());
+        }
+        //Drop.batch.draw(texture, x, y);
     }
 
     private void loadBulletTexture(int id){
