@@ -12,7 +12,7 @@ public class Action {
 
     public void addMainBullet(){
         player.getStatistics().addMainBullet();
-        addDiagonalBullet();
+        //addDiagonalBullet();
     }
 
     public void addDiagonalBullet(){
