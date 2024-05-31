@@ -160,9 +160,9 @@ public class Bullet implements Bullets{
             a = Math.sqrt(a);
         }else if (rotation < 360 && rotation > 270){
             int val = rotation - 270;
-            b = c * Math.sin(Math.toRadians(val));
-            a =  Math.pow(c,2) - Math.pow(b,2);
-            a = Math.sqrt(a);
+            a = c * Math.sin(Math.toRadians(val));
+            b =  Math.pow(c,2) - Math.pow(a,2);
+            b = Math.sqrt(b);
         }
         searched[0] = (int) b;
         searched[1] = (int) a;

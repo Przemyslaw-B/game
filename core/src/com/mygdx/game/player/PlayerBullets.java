@@ -59,8 +59,7 @@ public class PlayerBullets {
         if(amountToSpawn == 1){
             addBullet(playerX, playerY, rotation);
             amountToSpawn--;
-        }
-        if(amountToSpawn > 0){
+        } else if(amountToSpawn > 0){
             if(amountToSpawn % 2 != 0){
                 addBullet(playerX, playerY, rotation);
                 amountToSpawn--;
@@ -91,14 +90,16 @@ public class PlayerBullets {
             //Right
             while(amountToSpawn > 0){
                 rotation += spacer;
-                addBullet(playerX, playerY, rotation);
+                addBullet(playerX, playerY, 15);
+                amountToSpawn--;
             }
             //left
             amountToSpawn = statistics.getDiagonalBulletAmount();
-            rotation = 0;
+            rotation = 360;
             while(amountToSpawn > 0){
                 rotation -= spacer;
-                addBullet(playerX, playerY, rotation);
+                addBullet(playerX, playerY, 345);
+                amountToSpawn--;
             }
         }
     }
