@@ -68,16 +68,16 @@ public class PickingUpAdditionalBullet {
     private boolean compareHeight(){
         if(playerMaxTopY == boxMaxTopY || playerMaxTopY == boxMaxBottomY){return true;}
         if(playerMaxBottomY == boxMaxTopY || playerMaxBottomY == boxMaxBottomY){return true;}
-        if(playerMaxTopY < boxMaxTopY && playerMaxTopY > boxMaxBottomY){return true;}
-        if(playerMaxBottomY < boxMaxTopY && playerMaxBottomY > boxMaxBottomY){return true;}
+        if(playerMaxTopY <= boxMaxTopY && playerMaxTopY >= boxMaxBottomY){return true;}
+        if(playerMaxBottomY <= boxMaxTopY && playerMaxBottomY >= boxMaxBottomY){return true;}
         return false;
     }
 
     private boolean compareWidth(){
         if(playerMaxLeftX == boxMaxLeftX || playerMaxLeftX == boxMaxRightX){return true;}
         if(playerMaxRightX == boxMaxRightX || playerMaxRightX == boxMaxLeftX){return true;}
-        if(playerMaxLeftX > boxMaxLeftX && playerMaxLeftX < boxMaxRightX){return true;}
-        if(playerMaxRightX < boxMaxRightX && playerMaxRightX > boxMaxLeftX){return true;}
+        if(playerMaxLeftX >= boxMaxLeftX && playerMaxLeftX <= boxMaxRightX){return true;}
+        if(playerMaxRightX <= boxMaxRightX && playerMaxRightX >= boxMaxLeftX){return true;}
         return false;
     }
 
