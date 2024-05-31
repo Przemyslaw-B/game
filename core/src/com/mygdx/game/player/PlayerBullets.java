@@ -90,7 +90,7 @@ public class PlayerBullets {
             //Right
             while(amountToSpawn > 0){
                 rotation += spacer;
-                addBullet(playerX, playerY, 15);
+                addBullet(playerX, playerY, rotation);
                 amountToSpawn--;
             }
             //left
@@ -98,7 +98,7 @@ public class PlayerBullets {
             rotation = 360;
             while(amountToSpawn > 0){
                 rotation -= spacer;
-                addBullet(playerX, playerY, 345);
+                addBullet(playerX, playerY, rotation);
                 amountToSpawn--;
             }
         }
